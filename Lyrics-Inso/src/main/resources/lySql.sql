@@ -3,41 +3,44 @@ USE lyrics;
 
 CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER(50) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(50) NULL,
-    password VARCHAR(50) NULL,
-    grade FLOAT not null,
-    fecha_nacimiento date not null,
+    name VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    grade FLOAT not null DEFAULT 0.0,
+    fecha_nacimiento datetime not null,
     role BIT(1) not null,
-    PRIMARY KEY(user_id)
+    PRIMARY KEY(user_id),
+    UNIQUE(name)
 );
 CREATE TABLE IF NOT EXISTS styles(
 	style_id INTEGER(50) not null AUTO_INCREMENT,
-    name varchar(50) null,
+    name varchar(50) not null,
     characteristics varchar(500) null,
-    PRIMARY KEY(style_id)
+    PRIMARY KEY(style_id),
+    UNIQUE(name)
 );
 CREATE TABLE IF NOT EXISTS instruments(
 	instrument_id INTEGER(50) not null AUTO_INCREMENT,
     style INTEGER(50) not null,
-    name varchar(50) null,
-    price float null,
+    name varchar(50) not null,
+    price float null DEFAULT 0.0,
     PRIMARY KEY(instrument_id),
-    FOREIGN KEY(style) REFERENCES styles(style_id) ON DELETE CASCADE
+    FOREIGN KEY(style) REFERENCES styles(style_id) ON DELETE CASCADE,
+    UNIQUE(name)
 );
 
 CREATE TABLE IF NOT EXISTS groups1(
 	group_id INTEGER(50) not null AUTO_INCREMENT,
-    name varchar(50) null,
-    style INTEGER(50) not null,
+    name varchar(50) not null,
     PRIMARY KEY(group_id),
-    FOREIGN KEY(style) REFERENCES styles(style_id) ON DELETE CASCADE
+    UNIQUE(name)
 );
 CREATE TABLE IF NOT EXISTS artists (
 	artist_id INTEGER(50) not null AUTO_INCREMENT,
     name varchar(50) NOT NULL,
     group_id INTEGER(50) not null,
     PRIMARY KEY(artist_id),
-    FOREIGN KEY(group_id) REFERENCES groups1(group_id) ON DELETE CASCADE
+    FOREIGN KEY(group_id) REFERENCES groups1(group_id) ON DELETE CASCADE,
+    UNIQUE(name)
 );
 
 CREATE TABLE IF NOT EXISTS songs (
@@ -46,10 +49,10 @@ CREATE TABLE IF NOT EXISTS songs (
     group_id INTEGER(50) NOT NULL ,
     style INTEGER(50) NOT NULL ,
     original bit(1) not null,
-    visit_counter INTEGER not null,
-    name varchar(50) not null,
-    lyrics varchar(1000) not null,
-    grade float not null,
+    visit_counter INTEGER not null DEFAULT 0,
+    name varchar(100) not null,
+    lyrics varchar(1000) null,
+    grade float null DEFAULT 0.0,
     PRIMARY KEY(song_id),
     FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY(group_id) REFERENCES groups1(group_id) ON DELETE CASCADE,
@@ -86,6 +89,7 @@ CREATE TABLE IF NOT EXISTS comments(
     user_id INTEGER(50) not null ,
     foro_id INTEGER(50) not null ,
     commentContent varchar(500) null,
+    fecha_creacion datetime not null DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(comment_id),
     FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY(foro_id) REFERENCES foros(foro_id) ON DELETE CASCADE
