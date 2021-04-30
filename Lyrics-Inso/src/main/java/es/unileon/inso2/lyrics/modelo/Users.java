@@ -27,8 +27,6 @@ public class Users implements Serializable{
     private int user_id;
     @Column (name="name")
     private String name;
-    @Column (name="email")
-    private String email;
     @Column (name="password")
     private String password;
     @Column (name="grade")
@@ -38,20 +36,11 @@ public class Users implements Serializable{
     @Column (name="role")
     private boolean role;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + this.user_id;
         hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Objects.hashCode(this.email);
         hash = 97 * hash + Objects.hashCode(this.password);
         hash = 97 * hash + Float.floatToIntBits(this.grade);
         hash = 97 * hash + Objects.hashCode(this.fecha_nacimiento);
@@ -81,9 +70,6 @@ public class Users implements Serializable{
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {
