@@ -19,6 +19,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>forwardToJSF.jsp</welcome-file>
+        <welcome-file>index.lyrics</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -6,17 +6,17 @@ and open the template in the editor.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"   
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      >
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Registro usuario</title>
+        <title>Registro usuario  </title>
         <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
     </h:head>
     <h:body>
 
-            <h:form>
+        <h:form>
+            <h:panelGrid id="grid" columns="2">
                 <p:outputLabel value="Introduzca nombre de usuario"/>
                 <p:inputText value="#{usuariosController.user.name}"/>
                 <p:outputLabel value="Introduzca contraseña"/>
@@ -35,7 +35,8 @@ and open the template in the editor.
                 <p:outputLabel value="Puntuacion"/>
                 <p:inputText value="#{usuariosController.user.grade}"/>
                 <p:commandButton value="insertar" action="#{usuariosController.registrar()}"/>    
-            </h:form>
-
+            </h:panelGrid>
+        </h:form>
+            
     </h:body>
 </html>
