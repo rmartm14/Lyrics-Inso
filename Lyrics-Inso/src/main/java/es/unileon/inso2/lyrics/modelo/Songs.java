@@ -1,0 +1,184 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package es.unileon.inso2.lyrics.modelo;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+/**
+ *
+ * @author alwop
+ */
+
+@Entity 
+@Table (name="songs")
+public class Songs implements Serializable {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private int song_id;
+    
+    @JoinColumn(name="users")
+    @ManyToOne
+    private Users user;
+    
+    @JoinColumn(name="groups1")
+    @ManyToOne
+    private Group group;
+    
+    @JoinColumn(name="style")
+    @ManyToOne
+    private Styles style;
+    
+    @Column (name="original")
+    private boolean original;
+    @Column (name="visit_counter")
+    private int visit_counter;
+    @Column (name="name")
+    private String name;
+    @Column (name="lyrics")
+    private String lyrics;
+    @Column (name="grade")
+    private float grade;  
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + this.song_id;
+        hash = 89 * hash + Objects.hashCode(this.user);
+        hash = 89 * hash + Objects.hashCode(this.group);
+        hash = 89 * hash + Objects.hashCode(this.style);
+        hash = 89 * hash + (this.original ? 1 : 0);
+        hash = 89 * hash + this.visit_counter;
+        hash = 89 * hash + Objects.hashCode(this.name);
+        hash = 89 * hash + Objects.hashCode(this.lyrics);
+        hash = 89 * hash + Float.floatToIntBits(this.grade);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Songs other = (Songs) obj;
+        if (this.song_id != other.song_id) {
+            return false;
+        }
+        if (this.original != other.original) {
+            return false;
+        }
+        if (this.visit_counter != other.visit_counter) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.grade) != Float.floatToIntBits(other.grade)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.lyrics, other.lyrics)) {
+            return false;
+        }
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
+        if (!Objects.equals(this.group, other.group)) {
+            return false;
+        }
+        if (!Objects.equals(this.style, other.style)) {
+            return false;
+        }
+        return true;
+    }
+
+    public void setSong_id(int song_id) {
+        this.song_id = song_id;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public void setStyle(Styles style) {
+        this.style = style;
+    }
+
+    public void setOriginal(boolean original) {
+        this.original = original;
+    }
+
+    public void setVisit_counter(int visit_counter) {
+        this.visit_counter = visit_counter;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLyrics(String lyrics) {
+        this.lyrics = lyrics;
+    }
+
+    public void setGrade(float grade) {
+        this.grade = grade;
+    }
+
+    public int getSong_id() {
+        return song_id;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public Styles getStyle() {
+        return style;
+    }
+
+    public boolean isOriginal() {
+        return original;
+    }
+
+    public int getVisit_counter() {
+        return visit_counter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLyrics() {
+        return lyrics;
+    }
+
+    public float getGrade() {
+        return grade;
+    }
+    
+}
