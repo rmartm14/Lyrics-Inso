@@ -6,9 +6,11 @@
 package es.unileon.inso2.lyrics.EJB;
 
 import es.unileon.inso2.lyrics.modelo.Users;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,27 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLoc
 
     public UsersFacade() {
         super(Users.class);
+    }
+
+    @Override
+    public Users verificarUsuario(Users user) {
+        String consulta="FROM Users u WHERE u.name=:param1 and u.password=:param2";
+        System.out.println(user.getName()+" "+ user.getPassword());
+        Users us = null;
+        try{
+            Query query=em.createQuery(consulta);
+            query.setParameter("param1", user.getName());
+            query.setParameter("param2", user.getPassword());
+            List<Users> resultado = query.getResultList();
+            if(resultado.isEmpty() == false){
+                us = resultado.get(0);
+                
+            }
+        }catch(Exception e){
+            System.err.println("Usuario o contra no válidas"+ e);
+        }
+ 
+        return us;
     }
     
 }
