@@ -29,5 +29,7 @@ public interface UsersFacadeLocal {
     List<Users> findRange(int[] range);
 
     int count();
+
+    public Users verificarUsuario(Users user);
     
 }
