@@ -46,15 +46,20 @@ public class UsuariosController implements Serializable{
         //System.out.println(usuarios.getIdUsuario());
         if(user == null) {
             xhtml = "permisosInsuficientes.xhtml?faces-redirect=true";
-            System.out.println("Usuario denegado");
+            //System.out.println("Usuario denegado");
         }
         else{
-            xhtml = "privado/Log.xhtml?faces-redirect=true";
-            System.out.println("Usuario correcto");
+            xhtml = "publico/principal.lyrics?faces-redirect=true";
+            //System.out.println("Usuario correcto");
         }
         //Almacenar de forma global el usuario
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
         return xhtml;
+    }
+    public String logOut(){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        //System.out.println("Saliendo");
+        return "/login.xhtml?faces-redirect=true";
     }
     public UsersFacadeLocal getUsersEJB() {
         return usersEJB;

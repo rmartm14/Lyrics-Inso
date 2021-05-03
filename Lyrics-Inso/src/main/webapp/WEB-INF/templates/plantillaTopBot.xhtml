@@ -21,7 +21,7 @@
                     <p:growl id="messages"/>
 
                     <p:menubar>
-                        <p:menuitem value="Home" icon="home" url="./publico/principal.xhtml"></p:menuitem>
+                        <p:menuitem value="Home" icon="home" url="/Lyrics-Inso/publico/principal.lyrics"></p:menuitem>
                         <p:submenu label="Canciones" icon="pi pi-folder-open">
                             <p:menuitem value="Mis canciones" icon="pi pi-star"/>
 
@@ -37,7 +37,8 @@
                                 <i class="pi pi-fw pi-search" />
                                 <p:inputText placeholder="Busca una canción nueva"/>
                             </div>
-                            <p:button value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
+                            <p:commandButton value ="Salir" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" action="#{usuariosController.logOut()}"/>
+                            
                         </f:facet>
                     </p:menubar>
                 </h:form>
