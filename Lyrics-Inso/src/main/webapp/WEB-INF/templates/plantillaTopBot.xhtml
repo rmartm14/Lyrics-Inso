@@ -8,6 +8,8 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
         <title>Lyrics</title>
     </h:head>
 
@@ -19,50 +21,21 @@
                     <p:growl id="messages"/>
 
                     <p:menubar>
-                        <p:submenu label="File" icon="pi pi-fw pi-file">
-                            <p:submenu label="New" icon="pi pi-fw pi-plus">
-                                <p:menuitem value="Bookmark" icon="pi pi-fw pi-bookmark"/>
-                                <p:menuitem value="Video" icon="pi pi-fw pi-video"/>
-                            </p:submenu>
-                            <p:menuitem value="Delete" icon="pi pi-fw pi-trash"/>
-                            <p:divider />
-                            <p:menuitem value="Export" icon="pi pi-fw pi-external-link"/>
+                        <p:menuitem value="Home" icon="home" url="./publico/principal.xhtml"></p:menuitem>
+                        <p:submenu label="Canciones" icon="pi pi-folder-open">
+                            <p:menuitem value="Mis canciones" icon="pi pi-star"/>
+
                         </p:submenu>
 
-                        <p:submenu label="Edit" icon="pi pi-fw pi-pencil">
-                            <p:menuitem value="Left" icon="pi pi-fw pi-align-left"/>
-                            <p:menuitem value="Right" icon="pi pi-fw pi-align-right"/>
-                            <p:menuitem value="Center" icon="pi pi-fw pi-align-center"/>
-                            <p:menuitem value="Justify" icon="pi pi-fw pi-align-justify"/>
+                        <p:submenu label="Mi cuenta" icon="pi pi-fw pi-user">
+                            <p:menuitem value="Mis canciones" icon="pi pi-folder-open"/>
+                            <p:menuitem value="Ajustes" icon="pi pi-cog"/>
                         </p:submenu>
-
-                        <p:submenu label="Users" icon="pi pi-fw pi-user">
-                            <p:menuitem value="New" icon="pi pi-fw pi-user-plus"/>
-                            <p:menuitem value="Delete" icon="pi pi-fw pi-user-minus"/>
-                            <p:submenu label="Search" icon="pi pi-fw pi-users">
-                                <p:submenu label="Filter" icon="pi pi-fw pi-filter">
-                                    <p:menuitem value="Print" icon="pi pi-fw pi-print"/>
-                                </p:submenu>
-                                <p:menuitem value="List" icon="pi pi-fw pi-bars"/>
-                            </p:submenu>
-                        </p:submenu>
-
-                        <p:submenu label="Events" icon="pi pi-fw pi-calendar">
-                            <p:submenu label="Edit" icon="pi pi-fw pi-pencil">
-                                <p:menuitem value="Save" icon="pi pi-fw pi-calendar-plus"/>
-                                <p:menuitem value="Delete" icon="pi pi-fw pi-calendar-minus"/>
-                            </p:submenu>
-                            <p:submenu label="Archieve" icon="pi pi-fw pi-calendar-times">
-                                <p:menuitem value="Remove" icon="pi pi-fw pi-calendar-minus"/>
-                            </p:submenu>
-                        </p:submenu>
-
-                        <p:divider layout="vertical"/>
 
                         <f:facet name="options">
                             <div class="ui-input-icon-left p-mr-2">
                                 <i class="pi pi-fw pi-search" />
-                                <p:inputText placeholder="Search"/>
+                                <p:inputText placeholder="Busca una canción nueva"/>
                             </div>
                             <p:button value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
                         </f:facet>
@@ -70,7 +43,7 @@
                 </h:form>
             </div>
         </div>
-        <div>
+        <div >
             <div id="left">
                 <ui:insert name="left">Left1</ui:insert>
             </div>
@@ -83,8 +56,16 @@
                 </div>
             </div>
         </div>
-        <div id="bottom">
-            <ui:insert name="bottom">Bottom1</ui:insert>
+        <div id="bottom" >
+            <div class="center_content">
+                <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-github">GitHub</i> </a>
+                <p:spacer width="20"/>
+                <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-facebook">Facebook</i></a>
+                <p:spacer width="20"/>
+                <i class="pi pi-phone">+34654852621</i>
+                <p:spacer width="20"/>
+                <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-envelope">lyrics@lyrics.com</i></a>
+            </div>
             
         </div>
 

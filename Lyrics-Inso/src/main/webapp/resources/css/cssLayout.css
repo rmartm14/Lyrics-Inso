@@ -1,7 +1,7 @@
 
 #top {
     position: relative;
-    background-color: #036fab;
+
     color: white;
     padding: 5px;
     margin: 0px 0px 10px 0px;
@@ -29,8 +29,10 @@
 }
 
 .center_content {
+    
     position: relative;
-    background-color: #dddddd;
+    text-align: center;
+    background-color: #c2dfef;
     padding: 5px;
 }
 
