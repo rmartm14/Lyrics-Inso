@@ -5,12 +5,14 @@
  */
 package es.unileon.inso2.lyrics.modelo;
 
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,11 +29,15 @@ class Group {
     @Column (name="name")
     private String name;
 
+    @ManyToMany(mappedBy = "groups")
+    private List<Styles> styles;
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + this.group_id;
-        hash = 43 * hash + Objects.hashCode(this.name);
+        int hash = 3;
+        hash = 89 * hash + this.group_id;
+        hash = 89 * hash + Objects.hashCode(this.name);
+        hash = 89 * hash + Objects.hashCode(this.styles);
         return hash;
     }
 
@@ -53,6 +59,9 @@ class Group {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
+        if (!Objects.equals(this.styles, other.styles)) {
+            return false;
+        }
         return true;
     }
 
@@ -64,12 +73,20 @@ class Group {
         this.name = name;
     }
 
+    public void setStyles(List<Styles> styles) {
+        this.styles = styles;
+    }
+
     public int getGroup_id() {
         return group_id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public List<Styles> getStyles() {
+        return styles;
     }
     
     

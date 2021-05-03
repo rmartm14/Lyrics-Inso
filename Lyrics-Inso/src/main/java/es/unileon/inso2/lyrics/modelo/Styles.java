@@ -6,13 +6,17 @@
 package es.unileon.inso2.lyrics.modelo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -30,40 +34,21 @@ public class Styles implements Serializable{
     @Column (name="characteristics")
     private String characteristics;
 
-    
-    
-    public int getStyle_id() {
-        return style_id;
-    }
+     @JoinTable(
+        name = "stylesgroups",
+        joinColumns = @JoinColumn(name = "styles", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="groups1", nullable = false)
+    )
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Group> groups;
 
-    public void setStyle_id(int style_id) {
-        this.style_id = style_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCharacteristics() {
-        return characteristics;
-    }
-
-    public void setCharacteristics(String characteristics) {
-        this.characteristics = characteristics;
-    }
-
-    
-    
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + this.style_id;
-        hash = 13 * hash + Objects.hashCode(this.name);
-        hash = 13 * hash + Objects.hashCode(this.characteristics);
+        hash = 29 * hash + this.style_id;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.characteristics);
+        hash = 29 * hash + Objects.hashCode(this.groups);
         return hash;
     }
 
@@ -88,9 +73,43 @@ public class Styles implements Serializable{
         if (!Objects.equals(this.characteristics, other.characteristics)) {
             return false;
         }
+        if (!Objects.equals(this.groups, other.groups)) {
+            return false;
+        }
         return true;
+    }
+
+    public void setStyle_id(int style_id) {
+        this.style_id = style_id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCharacteristics(String characteristics) {
+        this.characteristics = characteristics;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
+
+    public int getStyle_id() {
+        return style_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCharacteristics() {
+        return characteristics;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
     }
     
     
-
 }

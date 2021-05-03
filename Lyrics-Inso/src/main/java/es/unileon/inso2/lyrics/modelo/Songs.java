@@ -7,13 +7,17 @@ package es.unileon.inso2.lyrics.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -52,18 +56,27 @@ public class Songs implements Serializable {
     @Column (name="grade")
     private float grade;  
 
+    @JoinTable(
+        name = "songinstr",
+        joinColumns = @JoinColumn(name = "songs", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="instruments", nullable = false)
+    )
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Instruments> instrumentos;
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + this.song_id;
-        hash = 89 * hash + Objects.hashCode(this.user);
-        hash = 89 * hash + Objects.hashCode(this.group);
-        hash = 89 * hash + Objects.hashCode(this.style);
-        hash = 89 * hash + (this.original ? 1 : 0);
-        hash = 89 * hash + this.visit_counter;
-        hash = 89 * hash + Objects.hashCode(this.name);
-        hash = 89 * hash + Objects.hashCode(this.lyrics);
-        hash = 89 * hash + Float.floatToIntBits(this.grade);
+        int hash = 7;
+        hash = 79 * hash + this.song_id;
+        hash = 79 * hash + Objects.hashCode(this.user);
+        hash = 79 * hash + Objects.hashCode(this.group);
+        hash = 79 * hash + Objects.hashCode(this.style);
+        hash = 79 * hash + (this.original ? 1 : 0);
+        hash = 79 * hash + this.visit_counter;
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.lyrics);
+        hash = 79 * hash + Float.floatToIntBits(this.grade);
+        hash = 79 * hash + Objects.hashCode(this.instrumentos);
         return hash;
     }
 
@@ -106,9 +119,13 @@ public class Songs implements Serializable {
         if (!Objects.equals(this.style, other.style)) {
             return false;
         }
+        if (!Objects.equals(this.instrumentos, other.instrumentos)) {
+            return false;
+        }
         return true;
     }
 
+    
     public void setSong_id(int song_id) {
         this.song_id = song_id;
     }
@@ -145,6 +162,11 @@ public class Songs implements Serializable {
         this.grade = grade;
     }
 
+    public void setInstrumentos(List<Instruments> instrumentos) {
+        this.instrumentos = instrumentos;
+    }
+
+    
     public int getSong_id() {
         return song_id;
     }
@@ -180,5 +202,10 @@ public class Songs implements Serializable {
     public float getGrade() {
         return grade;
     }
+
+    public List<Instruments> getInstrumentos() {
+        return instrumentos;
+    }
+    
     
 }
