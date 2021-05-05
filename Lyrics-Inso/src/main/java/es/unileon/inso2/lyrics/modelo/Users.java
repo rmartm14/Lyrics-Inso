@@ -38,13 +38,13 @@ public class Users implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + this.user_id;
-        hash = 41 * hash + Objects.hashCode(this.name);
-        hash = 41 * hash + Objects.hashCode(this.password);
-        hash = 41 * hash + Float.floatToIntBits(this.grade);
-        hash = 41 * hash + Objects.hashCode(this.fecha_nacimiento);
-        hash = 41 * hash + (this.role ? 1 : 0);
+        int hash = 3;
+        hash = 97 * hash + this.user_id;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.password);
+        hash = 97 * hash + Float.floatToIntBits(this.grade);
+        hash = 97 * hash + Objects.hashCode(this.fecha_nacimiento);
+        hash = 97 * hash + (this.role ? 1 : 0);
         return hash;
     }
 
@@ -80,6 +80,8 @@ public class Users implements Serializable{
         }
         return true;
     }
+
+    
 
     public int getUser_id() {
         return user_id;
