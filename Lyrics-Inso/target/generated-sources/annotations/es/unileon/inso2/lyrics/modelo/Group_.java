@@ -6,9 +6,9 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-05-06T18:59:32")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-05-07T14:15:07")
 @StaticMetamodel(Group.class)
- class Group_ { 
+public class Group_ { 
 
     public static volatile SingularAttribute<Group, Integer> group_id;
     public static volatile SingularAttribute<Group, String> name;

@@ -5,9 +5,9 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-05-06T18:59:32")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-05-07T14:15:07")
 @StaticMetamodel(Foros.class)
- class Foros_ { 
+public class Foros_ { 
 
     public static volatile SingularAttribute<Foros, Songs> song;
     public static volatile SingularAttribute<Foros, Integer> foro_id;
