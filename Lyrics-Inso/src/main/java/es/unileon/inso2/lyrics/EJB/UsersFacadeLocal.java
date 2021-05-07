@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Sam
+ * @author alwop
  */
 @Local
 public interface UsersFacadeLocal {
