@@ -20,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table (name="foros")
-class Foros {
+public class Foros {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int foro_id;

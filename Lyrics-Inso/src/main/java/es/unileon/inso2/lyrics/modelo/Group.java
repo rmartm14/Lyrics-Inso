@@ -21,7 +21,7 @@ import javax.persistence.Table;
  */
 @Entity 
 @Table (name="groups1")
-class Group {
+ public class Group {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int group_id;
