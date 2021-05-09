@@ -8,6 +8,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css"/>
         <title>Lyrics</title>
@@ -21,10 +22,16 @@
                 <h:form>
                     <p:growl id="messages"/>
                     
-                    <p:menubar style="background-color:#3e206d; color: white !important;">
+                    <p:menubar style="background-color:white; color: white !important;">
                         <p:menuitem icon="pi pi-home"  url="/Lyrics-Inso/publico/principal.lyrics" />
                         <p:submenu label="Canciones" icon="pi pi-folder-open">
                             <p:menuitem value="Mis canciones" icon="pi pi-star"/>
+                        </p:submenu>
+                        <p:submenu label="Grupos" icon="fa fa-guitar">
+                            <p:menuitem value="Mis grupos favoritos" icon="pi pi-star"/>
+                            <p:menuitem value="Crear Nuevo Grupo" icon="pi pi-star"/>
+                            <p:menuitem value="Editar Grupo" icon="pi pi-star"/>
+                            <p:menuitem value="Eliminar Grupo" icon="pi pi-star"/>
                         </p:submenu>
                         <p:submenu label="Mi cuenta" icon="pi pi-fw pi-user" style="position: absolute; right: 6px;">
                             <p:menuitem value="Mis canciones" icon="pi pi-folder-open"/>
