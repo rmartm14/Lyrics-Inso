@@ -5,50 +5,46 @@
  */
 package es.unileon.inso2.lyrics.modelo;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  *
- * @author rafam
+ * @author alwop
  */
-@Entity
-@Table(name="styles")
-public class Styles implements Serializable{
+@Entity 
+@Table (name="artists")
+public class Artists {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int style_id;
+    private int artist_id;
+    
     @Column (name="name")
     private String name;
-    @Column (name="characteristics")
-    private String characteristics;
-
-     @JoinTable(
-        name = "stylesgroups",
-        joinColumns = @JoinColumn(name = "styles", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="groups1", nullable = false)
-    )
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Group> groups;
+    
+    @JoinColumn(name="groups1")
+    @ManyToOne
+    private Group group;
+    
+    @ManyToMany(mappedBy = "artists")
+    private List<Instruments> instruments;
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.style_id;
+        int hash = 3;
+        hash = 29 * hash + this.artist_id;
         hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Objects.hashCode(this.characteristics);
-        hash = 29 * hash + Objects.hashCode(this.groups);
+        hash = 29 * hash + Objects.hashCode(this.group);
+        hash = 29 * hash + Objects.hashCode(this.instruments);
         return hash;
     }
 
@@ -63,53 +59,52 @@ public class Styles implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Styles other = (Styles) obj;
-        if (this.style_id != other.style_id) {
+        final Artists other = (Artists) obj;
+        if (this.artist_id != other.artist_id) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.characteristics, other.characteristics)) {
+        if (!Objects.equals(this.group, other.group)) {
             return false;
         }
-        if (!Objects.equals(this.groups, other.groups)) {
+        if (!Objects.equals(this.instruments, other.instruments)) {
             return false;
         }
         return true;
     }
 
-    public void setStyle_id(int style_id) {
-        this.style_id = style_id;
+    public void setArtist_id(int artist_id) {
+        this.artist_id = artist_id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setCharacteristics(String characteristics) {
-        this.characteristics = characteristics;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
+    public void setInstruments(List<Instruments> instruments) {
+        this.instruments = instruments;
     }
 
-    public int getStyle_id() {
-        return style_id;
+    public int getArtist_id() {
+        return artist_id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getCharacteristics() {
-        return characteristics;
+    public Group getGroup() {
+        return group;
     }
 
-    public List<Group> getGroups() {
-        return groups;
+    public List<Instruments> getInstruments() {
+        return instruments;
     }
-    
-    
+        
 }

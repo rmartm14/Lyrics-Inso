@@ -1,3 +1,4 @@
+
 <?xml version='1.0' encoding='UTF-8'?>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -14,7 +15,8 @@ and open the template in the editor.
         <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>  
-	<link rel="stylesheet" href="./styles/mystyles.css" />    
+	<link rel="stylesheet" href="./styles/mystyles.css" />
+        <link rel="icon" href="./favicon-16x16.png"/>
     </h:head>
     <h:body>
 	<div class="container h-100 card center_card" >
@@ -53,28 +55,9 @@ and open the template in the editor.
 						</div>
                 				<p:calendar id="fecha" value="#{usuariosController.user.fecha_nacimiento}" required="true" placeholder="Fecha de nacimiento" />
 						</div>
-                                                Rol
-						<div class="input-group mb-3">
-                                                  
-						<div class="input-group-append">
-							<span class="input-group-text"><i class="pi pi-id-card"></i></span>
-						</div>
-                                                    <p:selectOneButton value="#{usuariosController.user.role}" id="txtRol" required="true" style="background-color: #AAAAAA" >
-                    							<f:selectItem itemLabel="Administrador" itemValue="0"  />
-                    							<f:selectItem itemLabel="Normal" itemValue="1" />
-                						</p:selectOneButton>
-						</div>
-
-						<div class="input-group mb-3">
-                				
-						<div class="input-group-append">
-							<span class="input-group-text"><i class="pi pi-chart-bar"></i></span>
-						</div>
-                                                    <p:inputText value="#{usuariosController.user.grade}" placeholder="Puntuación"/>
-						</div>
 
 						<div class="d-flex justify-content-center mt-3 login_container">
-                                                    <p:commandButton value="Register" action="#{usuariosController.registrar()}"  style="background-color: #AAAAAA"/>    
+                                                    <p:commandButton value="Register" action="#{usuariosController.registrar()}" class="enter" />    
                                                 </div>
 					</h:form>
 				</div>
