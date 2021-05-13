@@ -1,3 +1,4 @@
+
 <?xml version='1.0' encoding='UTF-8'?>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -10,33 +11,60 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Registro usuario  </title>
+        <title> Registro usuario  </title>
         <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+              integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>  
+	<link rel="stylesheet" href="./styles/mystyles.css" />
+        <link rel="icon" href="./favicon-16x16.png"/>
     </h:head>
     <h:body>
+	<div class="container h-100 card center_card" >
+		<div class="d-flex justify-content-center h-100">
+			<div class="card-body">
+				<div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+                                            <img src="logo.png" class="brand_logo" alt="Logo"> </img>
+					</div>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+					<h:form>
+						<div class="input-group mb-3">
+						
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="pi pi-user"></i></span>
+							</div>
+                                                    
+                                                <p:inputText type="text"  class="form-control input_user" value="#{usuariosController.user.name}" placeholder="Username" autocomplete="username"/>
+						</div>
+						<div class="input-group mb-3">
+							
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="pi pi-key"></i></span>
+							</div>
+						 	<p:password id= "turkishFeedback" required="true" feedback="true"
+                            				promptLabel="Ingresa tu contraseña" weakLabel="Débil"
+                            				goodLabel="Buena" strongLabel="Fuerte"
+                            				value="#{usuariosController.user.password}"
+							class="form-control input_pass" placeholder="Password"/>
+						</div>
+						<div class="input-group mb-3">
+                                                        
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="pi pi-calendar"></i></span>
+						</div>
+                				<p:calendar id="fecha" value="#{usuariosController.user.fecha_nacimiento}" required="true" placeholder="Fecha de nacimiento" />
+						</div>
 
-        <h:form>
-            <h:panelGrid id="grid" columns="2">
-                <p:outputLabel value="Introduzca nombre de usuario"/>
-                <p:inputText value="#{usuariosController.user.name}"/>
-                <p:outputLabel value="Introduzca contraseña"/>
-                <p:password id= "turkishFeedback" required="true" feedback="true"
-                            promptLabel="Ingresa tu contraseña" weakLabel="Débil"
-                            goodLabel="Buena" strongLabel="Fuerte"
-                            value="#{usuariosController.user.password}"
-                            />
-                <p:outputLabel value="Fecha de nacimiento:" for="fecha"/>
-                <p:calendar id="fecha" value="#{usuariosController.user.fecha_nacimiento}" required="true" />
-                <p:outputLabel value="Rol:" for="txtRol"/>
-                <p:selectOneButton value="#{usuariosController.user.role}" id="txtRol" required="true" >
-                    <f:selectItem itemLabel="Admin" itemValue="0"/>
-                    <f:selectItem itemLabel="Normal" itemValue="1"/>
-                </p:selectOneButton>
-                <p:outputLabel value="Puntuacion"/>
-                <p:inputText value="#{usuariosController.user.grade}"/>
-                <p:commandButton value="insertar" action="#{usuariosController.registrar()}"/>    
-            </h:panelGrid>
-        </h:form>
+						<div class="d-flex justify-content-center mt-3 login_container">
+                                                    <p:commandButton value="Register" action="#{usuariosController.registrar()}" class="enter" />    
+                                                </div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</div>
+       
             
     </h:body>
 </html>
