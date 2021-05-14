@@ -3,11 +3,11 @@ body{
                 font-family: verdana;
             }
             .enter{
-                background-color: #916dd5;
+                background-color: #916dd5 !important;
                 color:white ;
             }
             .enter:hover{
-                background-color: #f0e3ff;
+                background-color: #f0e3ff !important;
                 color:black;
             }
             .enterCommand{

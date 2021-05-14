@@ -30,8 +30,9 @@ public class UsuariosController implements Serializable{
         user = new Users();
         System.out.println("Usuario inicializado");
     }
-    public void registrar(){
+    public String registrar(){
         usersEJB.create(user);
+        return "publico/principal.lyrics?faces-redirect=true";
     }
     
     public String validar(){
