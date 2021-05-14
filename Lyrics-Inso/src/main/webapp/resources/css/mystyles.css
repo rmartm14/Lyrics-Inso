@@ -16,7 +16,7 @@ body{
             .center_card{
                 height: 400px;
                 width: 450px;
-                margin-top: 15%;
+                margin-top: 15% !important;
                 margin-bottom: auto;
                 background: #3e206d;
                 position: relative;

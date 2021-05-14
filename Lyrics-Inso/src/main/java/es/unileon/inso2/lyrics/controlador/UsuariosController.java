@@ -11,6 +11,8 @@ import es.unileon.inso2.lyrics.modelo.Users;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -25,6 +27,7 @@ public class UsuariosController implements Serializable{
     @EJB
     private UsersFacadeLocal usersEJB;
     private Users user;
+    
     @PostConstruct
     public void init(){
         user = new Users();
@@ -46,7 +49,9 @@ public class UsuariosController implements Serializable{
         }
         //System.out.println(usuarios.getIdUsuario());
         if(user == null) {
-            xhtml = "permisosInsuficientes.xhtml?faces-redirect=true";
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la entrada de datos", "El nombre de usuario o la contraseña son incorrectos"));
+        //System.out.println("Saliendo");
+        return "/permisosInsuficientes.xhtml";
             //System.out.println("Usuario denegado");
         }
         else{

@@ -5,19 +5,20 @@ WebInfography: https://bootsnipp.com/snippets/3522X
 using bootstrap
 -->
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"   
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <title>Login</title>
-       
+
+    <h:head>
+        <title> Login  </title>
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>  
 	<link rel="stylesheet" href="./resources/css/mystyles.css" />
         <link rel="icon" href="./favicon-16x16.png"/>
-    </head>
+    </h:head>
     <h:body>
         	<div class="container h-100 card center_card" >
 		<div class="d-flex justify-content-center h-100">
@@ -27,20 +28,23 @@ using bootstrap
                                             <img src="logo.png" class="brand_logo" alt="Logo"> </img>
 					</div>
 				</div>
+
 				<div class="d-flex justify-content-center form_container">
 					<h:form>
-						<div class="input-group mb-3">
+						<div class="input-group mb-1">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="pi pi-user"></i></span>
 							</div>
-                                                    <p:inputText type="text"  class="form-control input_user" value="#{usuariosController.user.name}" placeholder="Username" autocomplete="username"/>
-						</div>
+                                                    <p:inputText type="text" id="nameInput" class="form-control input_user" value="#{usuariosController.user.name}" placeholder="Username" autocomplete="username"/>
+                                                    <p:message for="nameInput"/>
+                                                </div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="pi pi-key"></i></span>
 							</div>
-                                                    <p:inputText type="password"  class="form-control input_pass" value="#{usuariosController.user.password}" placeholder="Password" autocomplete="password"/>
-						</div>
+                                                    <p:inputText type="password" id="passInput"  class="form-control input_pass" value="#{usuariosController.user.password}" placeholder="Password" autocomplete="password"/>
+						<p:message for="passInput"/>
+                                                </div>
 						<div class="form-group">
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input" id="customControlInline"/>
@@ -52,6 +56,9 @@ using bootstrap
                                                     <p:commandButton value ="Acceder" type="button" class="btn enter" action=""/> type no permite que funcione-->
                                                     <p:commandButton value ="Acceder" class="btn enter" action="#{usuariosController.validar()}"/>
                                                 </div>
+                                                    <p:messages id="messages" showDetail="true" closable="true">
+                                                    <p:autoUpdate/>
+                                                </p:messages>
 					</h:form>
 				</div>
 		
@@ -62,6 +69,7 @@ using bootstrap
 					<div class="d-flex justify-content-center links">
 						<a href="#">Olvidaste tu contraseña?</a>
 					</div>
+                                    
 				</div>
 			</div>
 		</div>
