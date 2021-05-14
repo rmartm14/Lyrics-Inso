@@ -40,21 +40,21 @@
                     <p:menubar style="background-color:white; color: white !important;">
                         <p:menuitem icon="pi pi-home"  url="/Lyrics-Inso/publico/principal.lyrics" />
                         <p:submenu label="Canciones" icon="pi pi-folder-open">
-                            <p:menuitem value="Mis canciones" icon="pi pi-star"/>
-                            <p:menuitem value="Crear Nueva Canción" icon="fas fa-plus"/>
-                            <p:menuitem value="Editar Canción" icon="fas fa-edit" action="privado/normal/editCancion.lyrics" />
-                            <p:menuitem value="Eliminar Canción" icon="fas fa-trash-alt"/>
+                            <p:menuitem value="Mis canciones" icon="pi pi-star" url="/Lyrics-Inso/privado/normal/cancion/misCanciones.lyrics"/>
+                            <p:menuitem value="Crear Nueva Canción" icon="fas fa-plus" url="/Lyrics-Inso/privado/normal/cancion/FormularioCancion.lyrics"/>
+                            <p:menuitem value="Editar Canción" icon="fas fa-edit" url="/Lyrics-Inso/privado/normal/cancion/editCancion.lyrics" />
+                            <p:menuitem value="Eliminar Canción" icon="fas fa-trash-alt" url="/Lyrics-Inso/privado/normal/cancion/eliminarCancion.lyrics"/>
                         </p:submenu>
                         <p:submenu label="Grupos" icon="fa fa-guitar">
-                            <p:menuitem value="Mis grupos favoritos" icon="pi pi-star"/>
-                            <p:menuitem value="Crear Nuevo Grupo" icon="fas fa-plus"/>
-                            <p:menuitem value="Editar Grupo" icon="fas fa-edit"/>
-                            <p:menuitem value="Eliminar Grupo" icon="fas fa-trash-alt"/>
+                            <p:menuitem value="Mis grupos favoritos" icon="pi pi-star" />
+                            <p:menuitem value="Crear Nuevo Grupo" icon="fas fa-plus" url="/Lyrics-Inso/privado/normal/grupo/FormularioGrupo.lyrics"/>
+                            <p:menuitem value="Editar Grupo" icon="fas fa-edit" url="/Lyrics-Inso/privado/normal/grupo/editGrupo.lyrics"/>
+                            <p:menuitem value="Eliminar Grupo" icon="fas fa-trash-alt" url="/Lyrics-Inso/privado/normal/grupo/eliminarGrupo.lyrics"/>
                         </p:submenu>
                         <p:submenu label="Artistas" icon="fas fa-microphone-alt">
-                            <p:menuitem value="Crear Nuevo Artista" icon="fas fa-plus"/>
-                            <p:menuitem value="Editar Artista" icon="fas fa-edit"/>
-                            <p:menuitem value="Eliminar Artista" icon="fas fa-trash-alt"/>
+                            <p:menuitem value="Crear Nuevo Artista" icon="fas fa-plus" url="/Lyrics-Inso/privado/normal/artista/FormularioArtist.lyrics"/>
+                            <p:menuitem value="Editar Artista" icon="fas fa-edit" url="/Lyrics-Inso/privado/normal/artista/editArtist.lyrics"/>
+                            <p:menuitem value="Eliminar Artista" icon="fas fa-trash-alt" url="/Lyrics-Inso/privado/normal/artista/eliminarArtist.lyrics"/>
                         </p:submenu>
                         <p:menuitem value="Ranking" icon="fas fa-list" /> 
                         <p:submenu label="Mi cuenta" icon="pi pi-fw pi-user" style="position: absolute; right: 6px;">
