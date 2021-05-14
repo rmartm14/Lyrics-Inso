@@ -26,6 +26,9 @@
                         <p:menuitem icon="pi pi-home"  url="/Lyrics-Inso/publico/principal.lyrics" />
                         <p:submenu label="Canciones" icon="pi pi-folder-open">
                             <p:menuitem value="Mis canciones" icon="pi pi-star"/>
+                            <p:menuitem value="Crear Nueva Canción" icon="fas fa-plus"/>
+                            <p:menuitem value="Editar Canción" icon="fas fa-edit" action="privado/normal/editCancion.lyrics" />
+                            <p:menuitem value="Eliminar Canción" icon="fas fa-trash-alt"/>
                         </p:submenu>
                         <p:submenu label="Grupos" icon="fa fa-guitar">
                             <p:menuitem value="Mis grupos favoritos" icon="pi pi-star"/>
@@ -38,7 +41,7 @@
                             <p:menuitem value="Editar Artista" icon="fas fa-edit"/>
                             <p:menuitem value="Eliminar Artista" icon="fas fa-trash-alt"/>
                         </p:submenu>
-                        <p:menuitem value="Ranking" icon="fas fa-list"/ > 
+                        <p:menuitem value="Ranking" icon="fas fa-list" /> 
                         <p:submenu label="Mi cuenta" icon="pi pi-fw pi-user" style="position: absolute; right: 6px;">
                             <p:menuitem value="Mis canciones" icon="pi pi-folder-open"/>
                             <p:menuitem value="Ajustes" icon="pi pi-cog"/>
