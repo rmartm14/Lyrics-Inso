@@ -20,17 +20,17 @@
             </ui:define>
 
             <ui:define name="content">
-                <div class="d-flex justify-content-center form_container">
+                <div class=" estiloBody">
                     <h:form>
                         <h:panelGrid id="grid" columns="2">
                                 <div class="input-group-append">
                                     
-                                    <span class="input-group-text"><i class="pi pi-play"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-music"></i></span>
                                     <p:inputText type="text"  class="form-control input_user" value="#{usuariosController.user.name}" placeholder="Nombre de la canción" autocomplete="Grupo"/>
                                 </div>
 
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="pi pi-user"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-users"></i></span>
                                 </div>
 
                                 <p:inputText type="text"  class="form-control input_user" value="#{usuariosController.user.name}" placeholder="Grupo" autocomplete="Grupo"/>
@@ -38,12 +38,12 @@
            
 
                                 <div class="input-group-append">
-                                    <span class="input-group-text"><i class="pi pi-palette"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-compact-disc"></i></span>
                                 </div>
                                 <p:inputText type="text"  class="form-control input_user" value="#{usuariosController.user.name}" placeholder="Estilo musical" autocomplete="Grupo"/>
 
                         </h:panelGrid>
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3 "  >
                                                         
                             <p:outputLabel value="¿Es original?"/>
                             <p:selectOneRadio id="console" value="#{radioView.console}" unselectable="true">
@@ -54,10 +54,10 @@
                             
                         </div>
                         <p> Letra </p>
-                         <p:inputTextarea rows="20" cols="177" maxlength="1000" counter="display" counterTemplate="Quedan {0} carácteres."/>
+                         <p:inputTextarea rows="20" cols="177" maxlength="1000" counter="display" counterTemplate="Quedan {0} carácteres." style="width: 100%"/>
                           <h:outputText id="display" class="p-d-block" />
                         <div class="d-flex justify-content-center mt-3 login_container">
-                            <p:commandButton value="Ingresar nueva canción" action="#{usuariosController.registrar()}"  style="background-color: #AAAAAA"/>    
+                            <p:commandButton value="Ingresar nueva canción" action="#{usuariosController.registrar()}" />    
                         </div>
                     </h:form>
 		</div>

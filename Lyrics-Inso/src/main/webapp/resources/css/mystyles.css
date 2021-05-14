@@ -18,7 +18,7 @@ body{
                 width: 450px;
                 margin-top: 15%;
                 margin-bottom: auto;
-                background: #3e206d;
+                background: #3e206d ;
                 position: relative;
                 display: flex;
                 justify-content: center;
@@ -28,6 +28,11 @@ body{
                 -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 border-radius: 5px;
+                color:white;
+            }
+            .estiloBody{
+                background: #3e206d;
+                padding: 20px;
                 color:white;
             }
             .brand_logo_container {
