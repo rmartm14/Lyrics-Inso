@@ -7,13 +7,22 @@ package es.unileon.inso2.lyrics.controlador;
 
 import es.unileon.inso2.lyrics.EJB.GroupFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.SongsFacadeLocal;
+import es.unileon.inso2.lyrics.EJB.StylesFacadeLocal;
+import es.unileon.inso2.lyrics.EJB.UsersFacadeLocal;
 import es.unileon.inso2.lyrics.modelo.Group;
 import es.unileon.inso2.lyrics.modelo.Songs;
+import es.unileon.inso2.lyrics.modelo.Styles;
+import es.unileon.inso2.lyrics.modelo.Users;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -26,22 +35,86 @@ public class SongsController implements Serializable{
     private SongsFacadeLocal songEJB;
     @EJB
     private GroupFacadeLocal groupEJB;
+    @EJB
+    private StylesFacadeLocal styleEJB;
+    @EJB
+    private UsersFacadeLocal usersEJB;
+    
     private Songs song;
     private Group group;
+
+    private List<Songs> allSongs;
+    
+    private List<Styles> allStyles;
+    private String selectedStyle;
+    private List<String> nameStyles;
+    
+    private List<Group> allGroups;
+    private String selectedGroup;
+    private List<String> nameGroups;
     
     @PostConstruct
     public void ini(){
         song = new Songs();
+        group = new Group();
+   
+        selectedStyle = "";
+        selectedGroup = "";
+        
+        allStyles = this.styleEJB.findAll();
+        allGroups = this.groupEJB.findAll();
+        allSongs = this.songEJB.findAll();
+        
+        nameStyles = new ArrayList<String>();
+        nameGroups = new ArrayList<String>();
+        
+        this.initNameGroups();
+        this.initNameStyles();
+    }
+    public void initNameStyles() {
+        for(Styles s: this.allStyles){
+            nameStyles.add(s.getName());
+        }
     }
     
-    public void registrar(){
+    public void initNameGroups() {
+        for(Group s: this.allGroups){
+            nameGroups.add(s.getName());
+        }
+    }
+    
+    public Styles getStyleByName(String name){
+        for(Styles s:this.allStyles){
+            if(s.getName().equals(name)){
+                return s;
+            }
+         
+        }
+        return null;
+    }
+    
+        
+    public Group getGroupByName(String name){
+        for(Group s:this.allGroups){
+            if(s.getName().equals(name)){
+                return s;
+            }
+         
+        }
+        return null;
+    }
+    public String registrar(){
 
         try {
-            this.group = groupEJB.find(group.getName());
-            this.song.setGroup(group);
+            this.song.setGroup(this.getGroupByName(selectedGroup));
+            this.song.setStyle(this.getStyleByName(selectedStyle));
+            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("rafa"));
+            this.song.setUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("rafa"));
             songEJB.create(song);
+            
         } catch (Exception e) {
         }
+        return "publico/principal.lyrics?faces-redirect=true";
     }
     
     public String editarCancion() {
@@ -54,8 +127,96 @@ public class SongsController implements Serializable{
         }
         return "public/principal.lyrics?faces-redirect=true";
     }
+
+    public UsersFacadeLocal getUsersEJB() {
+        return usersEJB;
+    }
+
+    public void setUsersEJB(UsersFacadeLocal usersEJB) {
+        this.usersEJB = usersEJB;
+    }
+
+    public List<Songs> getAllSongs() {
+        return allSongs;
+    }
+
+    public void setAllSongs(List<Songs> allSongs) {
+        this.allSongs = allSongs;
+    }
     
+    public List<Group> getAllGroups() {
+        return allGroups;
+    }
+
+    public void setAllGroups(List<Group> allGroups) {
+        this.allGroups = allGroups;
+    }
+
+    public String getSelectedGroup() {
+        return selectedGroup;
+    }
+
+    public void setSelectedGroup(String selectedGroup) {
+        this.selectedGroup = selectedGroup;
+    }
+
+    public List<String> getNameGroups() {
+        return nameGroups;
+    }
+
+    public void setNameGroups(List<String> nameGroups) {
+        this.nameGroups = nameGroups;
+    }
+
+    
+    public List<String> getNameStyles() {
+        return nameStyles;
+    }
+
+    public void setNameStyles(List<String> nameStyles) {
+        this.nameStyles = nameStyles;
+    }
+    
+    public String getSelectedStyle() {
+        return selectedStyle;
+    }
+
+    public void setSelectedStyle(String selectedStyle) {
+        this.selectedStyle = selectedStyle;
+    }
+
+    public GroupFacadeLocal getGroupEJB() {
+        return groupEJB;
+    }
+
+    public void setGroupEJB(GroupFacadeLocal groupEJB) {
+        this.groupEJB = groupEJB;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public StylesFacadeLocal getStyleEJB() {
+        return styleEJB;
+    }
+
+    public void setStyleEJB(StylesFacadeLocal styleEJB) {
+        this.styleEJB = styleEJB;
+    }
+
+    public List<Styles> getAllStyles() {
+        return allStyles;
+    }
+
     //Getters y Setters
+    public void setAllStyles(List<Styles> allStyles) {
+        this.allStyles = allStyles;
+    }
 
     public SongsFacadeLocal getSongEJB() {
         return songEJB;
