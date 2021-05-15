@@ -31,7 +31,6 @@ public class UsuariosController implements Serializable{
     @PostConstruct
     public void init(){
         user = new Users();
-        System.out.println("Usuario inicializado");
     }
     public String registrar(){
         usersEJB.create(user);
@@ -40,6 +39,7 @@ public class UsuariosController implements Serializable{
     
     public String validar(){
         String xhtml="";
+        Users copiaUser = user;
         try{
             user = usersEJB.verificarUsuario(user);
         }
@@ -49,9 +49,10 @@ public class UsuariosController implements Serializable{
         }
         //System.out.println(usuarios.getIdUsuario());
         if(user == null) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la entrada de datos", "El nombre de usuario o la contraseña son incorrectos"));
-        //System.out.println("Saliendo");
-        return "/permisosInsuficientes.xhtml";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la entrada de datos.", "El nombre de usuario y/o la contraseña son incorrectos"));
+            //System.out.println("Saliendo");
+            user = copiaUser;
+        return "";
             //System.out.println("Usuario denegado");
         }
         else{
