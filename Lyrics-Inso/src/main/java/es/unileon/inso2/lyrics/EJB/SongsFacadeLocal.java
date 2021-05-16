@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author alwop
+ * @author Sam
  */
 @Local
 public interface SongsFacadeLocal {

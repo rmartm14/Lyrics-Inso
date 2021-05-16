@@ -108,8 +108,8 @@ public class SongsController implements Serializable{
         try {
             this.song.setGroup(this.getGroupByName(selectedGroup));
             this.song.setStyle(this.getStyleByName(selectedStyle));
-            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("rafa"));
-            this.song.setUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("rafa"));
+            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
+            this.song.setUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
             songEJB.create(song);
             
         } catch (Exception e) {

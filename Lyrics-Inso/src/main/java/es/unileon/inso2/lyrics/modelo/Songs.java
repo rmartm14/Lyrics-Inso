@@ -33,13 +33,13 @@ public class Songs implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int song_id;
     
-    @JoinColumn(name="users")
+    @JoinColumn(name="user_id")
     @ManyToOne
-    private Users user;
+    private Users user_id;
     
-    @JoinColumn(name="groups1")
+    @JoinColumn(name="group_id")
     @ManyToOne
-    private Group group;
+    private Group group_id;
     
     @JoinColumn(name="style")
     @ManyToOne
@@ -68,8 +68,8 @@ public class Songs implements Serializable {
     public int hashCode() {
         int hash = 7;
         hash = 79 * hash + this.song_id;
-        hash = 79 * hash + Objects.hashCode(this.user);
-        hash = 79 * hash + Objects.hashCode(this.group);
+        hash = 79 * hash + Objects.hashCode(this.user_id);
+        hash = 79 * hash + Objects.hashCode(this.group_id);
         hash = 79 * hash + Objects.hashCode(this.style);
         hash = 79 * hash + (this.original ? 1 : 0);
         hash = 79 * hash + this.visit_counter;
@@ -110,10 +110,10 @@ public class Songs implements Serializable {
         if (!Objects.equals(this.lyrics, other.lyrics)) {
             return false;
         }
-        if (!Objects.equals(this.user, other.user)) {
+        if (!Objects.equals(this.user_id, other.user_id)) {
             return false;
         }
-        if (!Objects.equals(this.group, other.group)) {
+        if (!Objects.equals(this.group_id, other.group_id)) {
             return false;
         }
         if (!Objects.equals(this.style, other.style)) {
@@ -131,11 +131,11 @@ public class Songs implements Serializable {
     }
 
     public void setUser(Users user) {
-        this.user = user;
+        this.user_id = user;
     }
 
     public void setGroup(Group group) {
-        this.group = group;
+        this.group_id = group;
     }
 
     public void setStyle(Styles style) {
@@ -172,11 +172,11 @@ public class Songs implements Serializable {
     }
 
     public Users getUser() {
-        return user;
+        return user_id;
     }
 
     public Group getGroup() {
-        return group;
+        return group_id;
     }
 
     public Styles getStyle() {

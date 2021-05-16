@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author alwop
+ * @author Sam
  */
 @Stateless
 public class SongsFacade extends AbstractFacade<Songs> implements SongsFacadeLocal {
