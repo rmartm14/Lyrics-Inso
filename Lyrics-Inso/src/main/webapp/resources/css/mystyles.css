@@ -16,7 +16,7 @@ body{
             .center_card{
                 height: 400px;
                 width: 450px;
-                margin-top: 15%;
+                margin-top: 15% !important;
                 margin-bottom: auto;
                 background: #3e206d;
                 position: relative;
@@ -29,6 +29,7 @@ body{
                 -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 border-radius: 5px;
                 color:white;
+                text-align: center;
             }
             .brand_logo_container {
 			position: absolute;
@@ -40,13 +41,13 @@ body{
 			padding: 10px;
 			text-align: center;
 		}
-		.brand_logo {
+            .brand_logo {
 			height: 150px;
 			width: 150px;
 			border-radius: 50%;
 			border: 2px solid white;
 		}
-           		.brand_logo_container {
+            .brand_logo_container {
 			position: absolute;
 			height: 170px;
 			width: 170px;
@@ -56,7 +57,7 @@ body{
 			padding: 10px;
 			text-align: center;
 		}
-		.brand_logo {
+            .brand_logo {
 			height: 150px;
 			width: 150px;
 			border-radius: 50%;
