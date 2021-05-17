@@ -52,7 +52,6 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLoc
         return us;
     }
 
-    @Override
     public Users getUser(String name) {
        String consulta="FROM Users u WHERE u.name=:param1";
         Users us = null;
@@ -69,15 +68,6 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLoc
         }
  
         return us;
-    }
-    
-    @Override
-    public Users getUserByName(String name){
-        String consulta = "FROM Users u WHERE u.name=:param1";
-        Users us = null;
-        Query query = em.createQuery(consulta);
-        query.setParameter("param1", name);
-        return (Users) query.getResultList().get(0);
     }
     
 }
