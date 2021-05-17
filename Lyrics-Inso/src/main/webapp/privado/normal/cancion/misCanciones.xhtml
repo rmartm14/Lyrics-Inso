@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../../WEB-INF/templates/plantillaTopBot.xhtml">
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="right">
+                right
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="estiloBody">
+                    <h:form>
+                    <div class="product card">
+                        <h5>Basic</h5>
+                        <p:dataList value="#{songsController.allSongs}" var="product" type="ordered">
+                            <div class="product-list-item">
+                            
+                                <div class="product-list-detail">
+                                    <div class="product-name">#{product.name}</div>
+                                    <div class="product-description">#{product.group.name}</div>
+                                    <i class="pi pi-tag product-category-icon"/><span
+                                        class="product-category">#{product.style.name}</span>
+                                </div>
+                                <div class="product-list-action">
+                                    <p:commandButton value="Edit" icon="fas fa-edit"/>
+                                   
+                                </div>
+                            </div>
+                        </p:dataList>
+                    </div>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

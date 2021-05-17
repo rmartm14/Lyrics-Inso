@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Sam
+ * @author alwop
  */
 @Stateless
 public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLocal {
@@ -51,5 +51,25 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeLoc
  
         return us;
     }
+
+
+    public Users getUser(String name) {
+       String consulta="FROM Users u WHERE u.name=:param1";
+        Users us = null;
+        try{
+            Query query=em.createQuery(consulta);
+            query.setParameter("param1", name);
+            List<Users> resultado = query.getResultList();
+            if(resultado.isEmpty() == false){
+                us = resultado.get(0);
+                
+            }
+        }catch(Exception e){
+            System.err.println("Usuario no encontrado"+ e);
+        }
+ 
+        return us;
+    }
+    
     
 }

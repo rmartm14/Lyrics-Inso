@@ -7,13 +7,17 @@ package es.unileon.inso2.lyrics.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -31,10 +35,64 @@ public class Instruments implements Serializable{
     private String name;
     @Column (name="price")
     private float price;
+    @Column (name="intrument_style")
+    private String instrumentstyle;
     
-    @JoinColumn(name="style")
-    @ManyToOne
-    private Styles style;
+    @JoinTable(
+        name = "instruartist",
+        joinColumns = @JoinColumn(name = "instrument_id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="artist_id", nullable = false)
+    )
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Artists> artists;          
+
+    @ManyToMany(mappedBy = "instrumentos")
+    private List<Songs> songs;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.instrument_id;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Float.floatToIntBits(this.price);
+        hash = 97 * hash + Objects.hashCode(this.instrumentstyle);
+        hash = 97 * hash + Objects.hashCode(this.artists);
+        hash = 97 * hash + Objects.hashCode(this.songs);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Instruments other = (Instruments) obj;
+        if (this.instrument_id != other.instrument_id) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.price) != Float.floatToIntBits(other.price)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.instrumentstyle, other.instrumentstyle)) {
+            return false;
+        }
+        if (!Objects.equals(this.artists, other.artists)) {
+            return false;
+        }
+        if (!Objects.equals(this.songs, other.songs)) {
+            return false;
+        }
+        return true;
+    }
 
     public int getInstrument_id() {
         return instrument_id;
@@ -60,52 +118,31 @@ public class Instruments implements Serializable{
         this.price = price;
     }
 
-    public Styles getStyle() {
-        return style;
+    public String getInstrumentstyle() {
+        return instrumentstyle;
     }
 
-    public void setStyle(Styles style) {
-        this.style = style;
+    public void setInstrumentstyle(String instrumentstyle) {
+        this.instrumentstyle = instrumentstyle;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.instrument_id;
-        hash = 79 * hash + Objects.hashCode(this.name);
-        hash = 79 * hash + Float.floatToIntBits(this.price);
-        hash = 79 * hash + Objects.hashCode(this.style);
-        return hash;
+    public List<Artists> getArtists() {
+        return artists;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Instruments other = (Instruments) obj;
-        if (this.instrument_id != other.instrument_id) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.price) != Float.floatToIntBits(other.price)) {
-            return false;
-        }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.style, other.style)) {
-            return false;
-        }
-        return true;
+    public void setArtists(List<Artists> artists) {
+        this.artists = artists;
     }
+
+    public List<Songs> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Songs> songs) {
+        this.songs = songs;
+    }
+
     
     
-            
-
+    
 }

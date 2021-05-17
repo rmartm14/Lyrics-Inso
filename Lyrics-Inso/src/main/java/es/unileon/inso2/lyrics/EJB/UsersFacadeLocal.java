@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Sam
+ * @author alwop
  */
 @Local
 public interface UsersFacadeLocal {
@@ -32,4 +32,6 @@ public interface UsersFacadeLocal {
 
     public Users verificarUsuario(Users user);
     
+    public Users getUser(String name);
+   
 }
