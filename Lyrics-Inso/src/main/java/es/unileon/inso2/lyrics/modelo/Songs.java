@@ -58,8 +58,8 @@ public class Songs implements Serializable {
 
     @JoinTable(
         name = "songinstr",
-        joinColumns = @JoinColumn(name = "songs", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="instruments", nullable = false)
+        joinColumns = @JoinColumn(name = "song_id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="instrument_id", nullable = false)
     )
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Instruments> instrumentos;

@@ -35,11 +35,13 @@ public class Instruments implements Serializable{
     private String name;
     @Column (name="price")
     private float price;
+    @Column (name="intrument_style")
+    private String instrumentstyle;
     
     @JoinTable(
         name = "instruartist",
-        joinColumns = @JoinColumn(name = "instruments", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="artists", nullable = false)
+        joinColumns = @JoinColumn(name = "instrument_id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="artist_id", nullable = false)
     )
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Artists> artists;          
@@ -50,11 +52,12 @@ public class Instruments implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + this.instrument_id;
-        hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Float.floatToIntBits(this.price);
-        hash = 29 * hash + Objects.hashCode(this.artists);
-        hash = 29 * hash + Objects.hashCode(this.songs);
+        hash = 97 * hash + this.instrument_id;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Float.floatToIntBits(this.price);
+        hash = 97 * hash + Objects.hashCode(this.instrumentstyle);
+        hash = 97 * hash + Objects.hashCode(this.artists);
+        hash = 97 * hash + Objects.hashCode(this.songs);
         return hash;
     }
 
@@ -79,6 +82,9 @@ public class Instruments implements Serializable{
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
+        if (!Objects.equals(this.instrumentstyle, other.instrumentstyle)) {
+            return false;
+        }
         if (!Objects.equals(this.artists, other.artists)) {
             return false;
         }
@@ -88,46 +94,54 @@ public class Instruments implements Serializable{
         return true;
     }
 
-    public void setInstrument_id(int instrument_id) {
-        this.instrument_id = instrument_id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public void setArtists(List<Artists> artists) {
-        this.artists = artists;
-    }
-
-    public void setSongs(List<Songs> songs) {
-        this.songs = songs;
-    }
-
     public int getInstrument_id() {
         return instrument_id;
+    }
+
+    public void setInstrument_id(int instrument_id) {
+        this.instrument_id = instrument_id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public float getPrice() {
         return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getInstrumentstyle() {
+        return instrumentstyle;
+    }
+
+    public void setInstrumentstyle(String instrumentstyle) {
+        this.instrumentstyle = instrumentstyle;
     }
 
     public List<Artists> getArtists() {
         return artists;
     }
 
+    public void setArtists(List<Artists> artists) {
+        this.artists = artists;
+    }
+
     public List<Songs> getSongs() {
         return songs;
     }
-    
+
+    public void setSongs(List<Songs> songs) {
+        this.songs = songs;
+    }
+
     
     
     
