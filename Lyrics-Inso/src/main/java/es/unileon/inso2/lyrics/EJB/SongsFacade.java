@@ -6,13 +6,15 @@
 package es.unileon.inso2.lyrics.EJB;
 
 import es.unileon.inso2.lyrics.modelo.Songs;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
- * @author alwop
+ * @author Sam
  */
 @Stateless
 public class SongsFacade extends AbstractFacade<Songs> implements SongsFacadeLocal {
@@ -28,5 +30,21 @@ public class SongsFacade extends AbstractFacade<Songs> implements SongsFacadeLoc
     public SongsFacade() {
         super(Songs.class);
     }
-    
+    public Songs getSong(String name) {
+       String consulta="FROM Songs u WHERE u.name=:param1";
+        Songs song = null;
+        try{
+            Query query=em.createQuery(consulta);
+            query.setParameter("param1", name);
+            List<Songs> resultado = query.getResultList();
+            if(resultado.isEmpty() == false){
+                song = resultado.get(0);
+
+            }
+        }catch(Exception e){
+            System.err.println("Usuario no encontrado"+ e);
+        }
+
+        return song;
+    }
 }

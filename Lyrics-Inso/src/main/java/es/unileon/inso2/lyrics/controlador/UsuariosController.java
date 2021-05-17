@@ -65,7 +65,7 @@ public class UsuariosController implements Serializable{
             //System.out.println("Usuario denegado");
         }
         else{
-            xhtml = "publico/principal.lyrics?faces-redirect=true";
+            xhtml = "privado/normal/paginaInitial.lyrics?faces-redirect=true";
             //System.out.println("Usuario correcto");
         }
         //Almacenar de forma global el usuario

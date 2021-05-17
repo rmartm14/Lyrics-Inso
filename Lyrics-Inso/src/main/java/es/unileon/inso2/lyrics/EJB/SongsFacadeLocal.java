@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author alwop
+ * @author Sam
  */
 @Local
 public interface SongsFacadeLocal {
@@ -30,4 +30,5 @@ public interface SongsFacadeLocal {
 
     int count();
     
+    public Songs getSong(String name);
 }

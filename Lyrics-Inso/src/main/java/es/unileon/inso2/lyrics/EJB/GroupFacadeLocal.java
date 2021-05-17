@@ -30,4 +30,6 @@ public interface GroupFacadeLocal {
 
     int count();
     
+    Group find(String name);
+    
 }

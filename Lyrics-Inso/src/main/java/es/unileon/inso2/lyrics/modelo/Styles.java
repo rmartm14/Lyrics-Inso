@@ -36,19 +36,19 @@ public class Styles implements Serializable{
 
      @JoinTable(
         name = "stylesgroups",
-        joinColumns = @JoinColumn(name = "styles", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="groups1", nullable = false)
+        joinColumns = @JoinColumn(name = "style_id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="group_id", nullable = false)
     )
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Group> groups;
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.style_id;
-        hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Objects.hashCode(this.characteristics);
-        hash = 29 * hash + Objects.hashCode(this.groups);
+        int hash = 3;
+        hash = 13 * hash + this.style_id;
+        hash = 13 * hash + Objects.hashCode(this.name);
+        hash = 13 * hash + Objects.hashCode(this.characteristics);
+        hash = 13 * hash + Objects.hashCode(this.groups);
         return hash;
     }
 
@@ -79,37 +79,37 @@ public class Styles implements Serializable{
         return true;
     }
 
-    public void setStyle_id(int style_id) {
-        this.style_id = style_id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCharacteristics(String characteristics) {
-        this.characteristics = characteristics;
-    }
-
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
-    }
-
     public int getStyle_id() {
         return style_id;
+    }
+
+    public void setStyle_id(int style_id) {
+        this.style_id = style_id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getCharacteristics() {
         return characteristics;
+    }
+
+    public void setCharacteristics(String characteristics) {
+        this.characteristics = characteristics;
     }
 
     public List<Group> getGroups() {
         return groups;
     }
-    
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
+ 
     
 }

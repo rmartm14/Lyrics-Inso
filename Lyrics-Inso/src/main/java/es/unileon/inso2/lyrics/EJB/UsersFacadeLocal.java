@@ -32,6 +32,6 @@ public interface UsersFacadeLocal {
 
     public Users verificarUsuario(Users user);
     
-    public Users getUser(String name);
+    public Users getUserByName(String name);
     
 }

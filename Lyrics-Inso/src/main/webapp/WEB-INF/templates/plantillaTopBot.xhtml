@@ -9,10 +9,25 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+              integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>  
+	<link rel="stylesheet" href="./styles/mystyles.css" />
+        <link rel="icon" href="./favicon-16x16.png"/>
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputStylesheet library="css" name="mystyles.css"/>
         <title>Lyrics</title>
-        <style>.affaires .ui-menuitem-text{color:white !important;}</style>
+        <style>.affaires .ui-menuitem-text{color:white !important;} 
+                        img {
+				max-width:350px;
+				max-height:450px;
+				width:auto;
+				height:auto;
+			}
+			body{
+				background-color:#d89cf6;
+                        }
+        </style>
     </h:head>
 
     <h:body style="background-color: #d89cf6">
@@ -23,20 +38,23 @@
                     <p:growl id="messages"/>
                     
                     <p:menubar style="background-color:white; color: white !important;">
-                        <p:menuitem icon="pi pi-home"  url="/Lyrics-Inso/publico/principal.lyrics" />
+                        <p:menuitem icon="pi pi-home"  url="/Lyrics-Inso/privado/normal/paginaInitial.lyrics" />
                         <p:submenu label="Canciones" icon="pi pi-folder-open">
-                            <p:menuitem value="Mis canciones" icon="pi pi-star"/>
+                            <p:menuitem value="Mis canciones" icon="pi pi-star" url="/Lyrics-Inso/privado/normal/cancion/misCanciones.lyrics"/>
+                            <p:menuitem value="Crear Nueva Canción" icon="fas fa-plus" url="/Lyrics-Inso/privado/normal/cancion/FormularioCancion.lyrics"/>
+                            <p:menuitem value="Editar Canción" icon="fas fa-edit" url="/Lyrics-Inso/privado/normal/cancion/editCancion.lyrics" />
+                            <p:menuitem value="Eliminar Canción" icon="fas fa-trash-alt" url="/Lyrics-Inso/privado/normal/cancion/eliminarCancion.lyrics"/>
                         </p:submenu>
                         <p:submenu label="Grupos" icon="fa fa-guitar">
-                            <p:menuitem value="Mis grupos favoritos" icon="pi pi-star"/>
-                            <p:menuitem value="Crear Nuevo Grupo" icon="fas fa-plus"/>
-                            <p:menuitem value="Editar Grupo" icon="fas fa-edit"/>
-                            <p:menuitem value="Eliminar Grupo" icon="fas fa-trash-alt"/>
+                            <p:menuitem value="Mis grupos favoritos" icon="pi pi-star" />
+                            <p:menuitem value="Crear Nuevo Grupo" icon="fas fa-plus" url="/Lyrics-Inso/privado/normal/grupo/FormularioGrupo.lyrics"/>
+                            <p:menuitem value="Editar Grupo" icon="fas fa-edit" url="/Lyrics-Inso/privado/normal/grupo/editGrupo.lyrics"/>
+                            <p:menuitem value="Eliminar Grupo" icon="fas fa-trash-alt" url="/Lyrics-Inso/privado/normal/grupo/eliminarGrupo.lyrics"/>
                         </p:submenu>
                         <p:submenu label="Artistas" icon="fas fa-microphone-alt">
-                            <p:menuitem value="Crear Nuevo Artista" icon="fas fa-plus"/>
-                            <p:menuitem value="Editar Artista" icon="fas fa-edit"/>
-                            <p:menuitem value="Eliminar Artista" icon="fas fa-trash-alt"/>
+                            <p:menuitem value="Crear Nuevo Artista" icon="fas fa-plus" url="/Lyrics-Inso/privado/normal/artista/FormularioArtist.lyrics"/>
+                            <p:menuitem value="Editar Artista" icon="fas fa-edit" url="/Lyrics-Inso/privado/normal/artista/editArtist.lyrics"/>
+                            <p:menuitem value="Eliminar Artista" icon="fas fa-trash-alt" url="/Lyrics-Inso/privado/normal/artista/eliminarArtist.lyrics"/>
                         </p:submenu>
                         <p:menuitem value="Ranking" icon="fas fa-list" /> 
                         <p:submenu label="Mi cuenta" icon="pi pi-fw pi-user" style="position: absolute; right: 6px;">
@@ -65,7 +83,7 @@
                     <ui:insert name="right">Right1</ui:insert>
                 </div>
                 <div id="content" class="right_content">
-                    <ui:include src="paginaInitial.xhtml" />
+                    <ui:insert name="content">Content1</ui:insert>
                 </div>
             </div>
         </div>
