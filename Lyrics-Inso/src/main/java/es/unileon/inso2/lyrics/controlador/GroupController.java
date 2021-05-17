@@ -6,8 +6,12 @@
 package es.unileon.inso2.lyrics.controlador;
 
 import es.unileon.inso2.lyrics.EJB.GroupFacadeLocal;
+import es.unileon.inso2.lyrics.modelo.Artists;
 import es.unileon.inso2.lyrics.modelo.Group;
+import es.unileon.inso2.lyrics.modelo.Instruments;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -24,9 +28,14 @@ public class GroupController implements Serializable{
     private GroupFacadeLocal groupEJB;
     private Group group;
     
+    private List<Artists> artistas;
+    
     @PostConstruct
     public void ini(){
         group = new Group();
+        artistas = new ArrayList<Artists>();
+        this.addArtistIntoList();
+        this.addArtistIntoList();
     }
     
     public void registrar(){
@@ -35,7 +44,12 @@ public class GroupController implements Serializable{
         } catch (Exception e) {
         }
     }
-    
+    public void addArtistIntoList(){
+        System.out.println("Metiendo un nuevo artist");
+        Artists artista = new Artists();
+        artista.setName("Introduzca un nombre de artista");
+        artistas.add(artista);
+    }
     //Getters y Setters
 
     public GroupFacadeLocal getGroupEJB() {
@@ -53,5 +67,11 @@ public class GroupController implements Serializable{
     public void setGroup(Group group) {
         this.group = group;
     }
-    
+    public List<Artists> getArtistas() {
+        return artistas;
+    }
+
+    public void setArtistas(List<Artists> artistas) {
+        this.artistas = artistas;
+    }
 }

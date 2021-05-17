@@ -70,7 +70,7 @@ public class SongsController implements Serializable {
         allStyles = this.styleEJB.findAll();
         allGroups = this.groupEJB.findAll();
         allSongs = this.songEJB.findAll();
-
+        
         nameStyles = new ArrayList<String>();
         nameGroups = new ArrayList<String>();
 
@@ -127,6 +127,7 @@ public class SongsController implements Serializable {
             else{
                 throw new Exception("Nombre de canción ya existe.");
             }
+            
         } catch (Exception e) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar canción", "Campos incorrectos. Asegurese de que todos los campos están rellenos o cambie el nombre de la canción.");
             FacesContext.getCurrentInstance().addMessage(null, message);
