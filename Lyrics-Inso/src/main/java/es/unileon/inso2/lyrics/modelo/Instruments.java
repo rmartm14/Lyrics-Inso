@@ -46,18 +46,14 @@ public class Instruments implements Serializable{
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Artists> artists;          
 
-    @ManyToMany(mappedBy = "instrumentos")
-    private List<Songs> songs;
-
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.instrument_id;
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Float.floatToIntBits(this.price);
-        hash = 97 * hash + Objects.hashCode(this.instrumentstyle);
-        hash = 97 * hash + Objects.hashCode(this.artists);
-        hash = 97 * hash + Objects.hashCode(this.songs);
+        int hash = 3;
+        hash = 61 * hash + this.instrument_id;
+        hash = 61 * hash + Objects.hashCode(this.name);
+        hash = 61 * hash + Float.floatToIntBits(this.price);
+        hash = 61 * hash + Objects.hashCode(this.instrumentstyle);
+        hash = 61 * hash + Objects.hashCode(this.artists);
         return hash;
     }
 
@@ -88,12 +84,10 @@ public class Instruments implements Serializable{
         if (!Objects.equals(this.artists, other.artists)) {
             return false;
         }
-        if (!Objects.equals(this.songs, other.songs)) {
-            return false;
-        }
         return true;
     }
-
+    
+    
     public int getInstrument_id() {
         return instrument_id;
     }
@@ -133,16 +127,5 @@ public class Instruments implements Serializable{
     public void setArtists(List<Artists> artists) {
         this.artists = artists;
     }
-
-    public List<Songs> getSongs() {
-        return songs;
-    }
-
-    public void setSongs(List<Songs> songs) {
-        this.songs = songs;
-    }
-
-    
-    
-    
+   
 }

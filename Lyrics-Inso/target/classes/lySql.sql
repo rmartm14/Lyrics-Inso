@@ -111,18 +111,6 @@ INSERT INTO `stylesGroups` (`style_id`, `group_id`) VALUES
 	(2, 1),
 	(3, 2),
 	(2, 3);
-CREATE TABLE IF NOT EXISTS songInstr(
-	song_id INTEGER(50) not null ,
-    instrument_id INTEGER(50) not null ,
-    FOREIGN KEY(song_id) REFERENCES songs(song_id) ON DELETE CASCADE,
-    FOREIGN KEY(instrument_id) REFERENCES instruments(instrument_id) ON DELETE CASCADE
-);
-DELETE FROM `songInstr`;
-INSERT INTO `songInstr` (`song_id`, `instrument_id`) VALUES
-	(1, 2),
-	(2, 1),
-	(3, 3),
-	(4, 1);
 CREATE TABLE IF NOT EXISTS foros(
 	foro_id INTEGER(50) not null AUTO_INCREMENT,
     song_id INTEGER(50) not null,
