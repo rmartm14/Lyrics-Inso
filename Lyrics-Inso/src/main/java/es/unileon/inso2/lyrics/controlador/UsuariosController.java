@@ -11,6 +11,8 @@ import es.unileon.inso2.lyrics.modelo.Users;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -25,17 +27,28 @@ public class UsuariosController implements Serializable{
     @EJB
     private UsersFacadeLocal usersEJB;
     private Users user;
+    
     @PostConstruct
     public void init(){
         user = new Users();
-        System.out.println("Usuario inicializado");
     }
-    public void registrar(){
-        usersEJB.create(user);
+    public String registrar(){
+        Users user2 = usersEJB.getUser(user.getName());
+        if(user2 != null){//Usuario ya existe
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario ya existe.", "Por favor introduzca otro nombre de usuario"));
+            user = user2;
+            return "";
+        }
+        else{//no existe el usuario
+            usersEJB.create(user);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
+            return "publico/principal.lyrics?faces-redirect=true";
+        }
     }
     
     public String validar(){
         String xhtml="";
+        Users copiaUser = user;
         try{
             user = usersEJB.verificarUsuario(user);
         }
@@ -45,7 +58,10 @@ public class UsuariosController implements Serializable{
         }
         //System.out.println(usuarios.getIdUsuario());
         if(user == null) {
-            xhtml = "permisosInsuficientes.xhtml?faces-redirect=true";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la entrada de datos.", "El nombre de usuario y/o la contraseña son incorrectos"));
+            //System.out.println("Saliendo");
+            user = copiaUser;
+        return "";
             //System.out.println("Usuario denegado");
         }
         else{
