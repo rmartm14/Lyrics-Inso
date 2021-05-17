@@ -22,6 +22,7 @@
             <ui:define name="content">
                 <div class=" estiloBody">
                     <h:form id="formCancion">
+                        <p:growl id="message" showDetail="true"/>
                         <h:panelGrid id="grid" columns="2">
                             <div class="input-group-append">
 
@@ -55,7 +56,8 @@
                                     </p:panelGrid>
                                     <div class="text-center justyify-content-center">
                                         <p:commandButton value="Crear nuevo estilo" styleClass="dialogbutton enter" action="#{songsController.reloadStyles}" 
-                                                         onclick="PF('dig').hide()" update=":formCancion:style"/>
+                                                         onclick="PF('dig').hide()" update=":formCancion:style :formCancion:message"/>
+                                            
                                     </div>
                                 </p:dialog>
                             
@@ -87,7 +89,8 @@
 
 
                         <div class="d-flex justify-content-center mt-3 login_container">
-                            <p:commandButton value="Ingresar nueva canción" action="#{songsController.registrar}" class="btn enter"/>    
+                            <p:commandButton value="Ingresar nueva canción" action="#{songsController.registrar}" class="btn enter" update="message"/>
+                              
                         </div>
 
                     </h:form>

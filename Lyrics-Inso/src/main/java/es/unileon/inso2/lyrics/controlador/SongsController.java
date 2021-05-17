@@ -113,15 +113,27 @@ public class SongsController implements Serializable {
     public String registrar() {
 
         try {
-            this.song.setGroup(this.getGroupByName(selectedGroup));
-            this.song.setStyle(this.getStyleByName(selectedStyle));
-            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
-            this.song.setUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
-            songEJB.create(song);
-
+            //Comprobar nombre no existe
+            Songs comprob = songEJB.getSong(song.getName());
+            if(comprob == null){
+                this.song.setGroup(this.getGroupByName(selectedGroup));
+                this.song.setStyle(this.getStyleByName(selectedStyle));
+                //System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
+                this.song.setUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
+                songEJB.create(song);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrar canción", "Canción registrada con éxito");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            }
+            else{
+                throw new Exception("Nombre de canción ya existe.");
+            }
         } catch (Exception e) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar canción", "Campos incorrectos. Asegurese de que todos los campos están rellenos o cambie el nombre de la canción.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return "";
         }
-        return "publico/principal.lyrics?faces-redirect=true";
+        String xhtml = "/Lyrics-Inso/privado/normal/paginaInitial.lyrics?faces-redirect=true";
+        return xhtml;
     }
 
     public String editarCancion() {
@@ -135,8 +147,15 @@ public class SongsController implements Serializable {
     }
 
     public void reloadStyles() {
-        this.styleEJB.create(auxStyle);
-        this.nameStyles.add(auxStyle.getName());
+        try{
+            this.styleEJB.create(auxStyle);
+            this.nameStyles.add(auxStyle.getName());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrar estilo", "Estilo registrado con éxito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }catch(Exception e){
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar estilo", "Campos incorrectos. El nombre de estilo ya éxiste.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
     }
 
     public UsersFacadeLocal getUsersEJB() {
