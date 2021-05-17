@@ -33,8 +33,17 @@ public class UsuariosController implements Serializable{
         user = new Users();
     }
     public String registrar(){
-        usersEJB.create(user);
-        return "publico/principal.lyrics?faces-redirect=true";
+        Users user2 = usersEJB.getUser(user.getName());
+        if(user2 != null){//Usuario ya existe
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario ya existe.", "Por favor introduzca otro nombre de usuario"));
+            user = user2;
+            return "";
+        }
+        else{//no existe el usuario
+            usersEJB.create(user);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
+            return "publico/principal.lyrics?faces-redirect=true";
+        }
     }
     
     public String validar(){
