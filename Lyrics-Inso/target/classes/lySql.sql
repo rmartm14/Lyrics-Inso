@@ -30,18 +30,17 @@ INSERT INTO `styles` (`style_id`, `name`, `characteristics`) VALUES
 	(3, 'Dance', 'para bailar');
 CREATE TABLE IF NOT EXISTS instruments(
 	instrument_id INTEGER(50) not null AUTO_INCREMENT,
-    style INTEGER(50) not null,
     name varchar(50) not null,
     price float null DEFAULT 0.0,
+    instrument_style varchar(50) not null,
     PRIMARY KEY(instrument_id),
-    FOREIGN KEY(style) REFERENCES styles(style_id) ON DELETE CASCADE,
     UNIQUE(name)
 );
 DELETE FROM `instruments`;
-INSERT INTO `instruments` (`instrument_id`, `style`, `name`, `price`) VALUES
-	(1, '2', 'Piano', '50.0'),
-	(2, '3', 'Pandereta', '20.0'),
-	(3, '1', 'Guitarra', '40.0');
+INSERT INTO `instruments` (`instrument_id`, `name`, `price`, `instrument_style`) VALUES
+	(1, 'Piano', '50.0', 'Cuerda percutida'),
+	(2, 'Pandereta', '20.0', 'Percusion'),
+	(3, 'Guitarra', '40.0', 'Cuerda');
 CREATE TABLE IF NOT EXISTS groups1(
 	group_id INTEGER(50) not null AUTO_INCREMENT,
     name varchar(50) not null,
