@@ -36,8 +36,8 @@ public class Styles implements Serializable{
 
      @JoinTable(
         name = "stylesgroups",
-        joinColumns = @JoinColumn(name = "styles", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="groups1", nullable = false)
+        joinColumns = @JoinColumn(name = "style_id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="group_id", nullable = false)
     )
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Group> groups;
