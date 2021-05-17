@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>Lyrics</title>
+        <style>.affaires .ui-menuitem-text{color:white !important;}</style>
+    </h:head>
+
+    <h:body style="background-color: #d89cf6">
+
+        <div id="top" style="height: 10% !important;">
+            <div class="card">
+                <h:form>
+                    <p:growl id="messages"/>
+                    
+                    <p:menubar style="background-color:white; color: white !important;">
+                        <p:menuitem icon="pi pi-home"  url="/Lyrics-Inso/publico/principal.lyrics" />
+                        <p:submenu label="Canciones" icon="pi pi-folder-open">
+                            <p:menuitem value="Mis canciones" icon="pi pi-star"/>
+                        </p:submenu>
+                        <p:submenu label="Grupos" icon="fa fa-guitar">
+                            <p:menuitem value="Mis grupos favoritos" icon="pi pi-star"/>
+                            <p:menuitem value="Crear Nuevo Grupo" icon="fas fa-plus"/>
+                            <p:menuitem value="Editar Grupo" icon="fas fa-edit"/>
+                            <p:menuitem value="Eliminar Grupo" icon="fas fa-trash-alt"/>
+                        </p:submenu>
+                        <p:submenu label="Artistas" icon="fas fa-microphone-alt">
+                            <p:menuitem value="Crear Nuevo Artista" icon="fas fa-plus"/>
+                            <p:menuitem value="Editar Artista" icon="fas fa-edit"/>
+                            <p:menuitem value="Eliminar Artista" icon="fas fa-trash-alt"/>
+                        </p:submenu>
+                        <p:submenu label="Mi cuenta" icon="pi pi-fw pi-user" style="position: absolute; right: 6px;">
+                            <p:menuitem value="Mis canciones" icon="pi pi-folder-open"/>
+                            <p:menuitem value="Ajustes" icon="pi pi-cog"/>
+                            <p:menuitem value="Cerrar Sesión" icon="pi pi-fw pi-sign-out" action="#{usuariosController.logOut()}"/>
+                        </p:submenu>
+                        <f:facet name="options" >
+                            <div class="ui-input-icon-left p-mr-6" style="margin-right: 160px">
+                                <i class="pi pi-fw pi-search" />
+                                <p:inputText placeholder="Busca una canción nueva"/>
+                            </div>
+
+                        </f:facet>
+
+                    </p:menubar>
+                </h:form>
+            </div>
+        </div>
+        <div style="height: 80% !important">
+            <div id="left">
+                <ui:insert name="left">Left1</ui:insert>
+            </div>
+            <div>
+                <div id="right">
+                    <ui:insert name="right">Right1</ui:insert>
+                </div>
+                <div id="content" class="right_content">
+                    <ui:include src="paginaInitial.xhtml" />
+                </div>
+            </div>
+        </div>
+        <div id="bottom" style="height: 10% !important" >
+            <div class="center_content fixed-bottom">
+                <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-github">GitHub</i> </a>
+                <p:spacer width="20"/>
+                <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-facebook">Facebook</i></a>
+                <p:spacer width="20"/>
+                <i class="pi pi-phone">+34 654852621</i>
+                <p:spacer width="20"/>
+                <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-envelope">lyrics@lyrics.com</i></a>
+            </div>
+            
+        </div>
+
+    </h:body>
+
+</html>

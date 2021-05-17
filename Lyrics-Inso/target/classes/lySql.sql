@@ -1,47 +1,16 @@
-CREATE DATABASE IF NOT EXISTS lyrics;
-USE lyrics;
-
-CREATE TABLE IF NOT EXISTS users (
-    user_id INTEGER(50) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
-    grade FLOAT not null DEFAULT 0.0,
-    fecha_nacimiento datetime not null,
-    role BIT(1) not null,
-    PRIMARY KEY(user_id),
-    UNIQUE(name)
-);
-DELETE FROM `users`;
-INSERT INTO `users` (`user_id`, `name`, `password`, `grade`, `fecha_Nacimiento`, `role`) VALUES
-	(1, 'maria', 'pass', '0.0', '2018-02-10 00:00:00', 1),
-	(2, 'Antonio', 'pass', '0.0', '2018-01-27 00:03:33', 0),
-	(3, 'Gabriel', 'pass', '0.0', '2018-01-31 17:34:31', 0);
-CREATE TABLE IF NOT EXISTS styles(
-	style_id INTEGER(50) not null AUTO_INCREMENT,
-    name varchar(50) not null,
-    characteristics varchar(500) null,
-    PRIMARY KEY(style_id),
-    UNIQUE(name)
-);
-DELETE FROM `styles`;
-INSERT INTO `styles` (`style_id`, `name`, `characteristics`) VALUES
-	(1, 'Pop', 'intenso'),
-	(2, 'Rock', 'para coche'),
-	(3, 'Dance', 'para bailar');
 CREATE TABLE IF NOT EXISTS instruments(
 	instrument_id INTEGER(50) not null AUTO_INCREMENT,
-    style INTEGER(50) not null,
     name varchar(50) not null,
     price float null DEFAULT 0.0,
+	 instrument_style varchar(50) not null,     
     PRIMARY KEY(instrument_id),
-    FOREIGN KEY(style) REFERENCES styles(style_id) ON DELETE CASCADE,
     UNIQUE(name)
 );
 DELETE FROM `instruments`;
-INSERT INTO `instruments` (`instrument_id`, `style`, `name`, `price`) VALUES
-	(1, '2', 'Piano', '50.0'),
-	(2, '3', 'Pandereta', '20.0'),
-	(3, '1', 'Guitarra', '40.0');
+INSERT INTO `instruments` (`instrument_id`, `name`, `price`, `instrument_style`) VALUES
+	(1, 'Piano', '50.0', 'Cuerda percutida'),
+	(2, 'Pandereta', '20.0', 'Percusion'),
+	(3, 'Guitarra', '40.0', 'Cuerda');
 CREATE TABLE IF NOT EXISTS groups1(
 	group_id INTEGER(50) not null AUTO_INCREMENT,
     name varchar(50) not null,

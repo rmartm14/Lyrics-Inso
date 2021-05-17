@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+   <head>
+        <title>Página Principal</title>
+       
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+              integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>  
+	<link rel="stylesheet" href="/styles/mystyles.css" />
+        <link rel="icon" href="./../WEB-INF/favicon-16x16.png"/>
+    </head>
+    <body>
+        
+        <ui:composition template="./../WEB-INF/templates/plantillaTopBot.xhtml" >
+            
+            <ui:define name="left">
+                Recientes
+            </ui:define>
+
+            <ui:define name="right">
+                Recomendados
+            </ui:define>
+
+            <ui:define name="content">
+                Contenido principal
+            </ui:define>
+
+        </ui:composition>
+        
+    </body>
+</html>
