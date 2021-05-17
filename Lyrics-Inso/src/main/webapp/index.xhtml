@@ -26,7 +26,7 @@ and open the template in the editor.
                                             <img src="logo.png" class="brand_logo" alt="Logo"> </img>
 					</div>
 				</div>
-				<div class="d-flex justify-content-center form_container">
+				<div class="justify-content-center form_container">
 					<h:form>
 						<div class="input-group mb-3">
 						
@@ -58,6 +58,9 @@ and open the template in the editor.
 						<div class="d-flex justify-content-center mt-3 login_container">
                                                      <p:commandButton value ="Registrarse" class="btn enter" action="#{usuariosController.registrar()}"/>
                                                 </div>
+                                                <p:messages id="messages" showDetail="true" closable="true">
+                                                        <p:autoUpdate/>
+                                                </p:messages>
 					</h:form>
 				</div>
 			</div>
