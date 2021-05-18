@@ -56,27 +56,18 @@ public class Songs implements Serializable {
     @Column (name="grade")
     private float grade;  
 
-    @JoinTable(
-        name = "songinstr",
-        joinColumns = @JoinColumn(name = "song_id", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="instrument_id", nullable = false)
-    )
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Instruments> instrumentos;
-
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.song_id;
-        hash = 79 * hash + Objects.hashCode(this.user_id);
-        hash = 79 * hash + Objects.hashCode(this.group_id);
-        hash = 79 * hash + Objects.hashCode(this.style);
-        hash = 79 * hash + (this.original ? 1 : 0);
-        hash = 79 * hash + this.visit_counter;
-        hash = 79 * hash + Objects.hashCode(this.name);
-        hash = 79 * hash + Objects.hashCode(this.lyrics);
-        hash = 79 * hash + Float.floatToIntBits(this.grade);
-        hash = 79 * hash + Objects.hashCode(this.instrumentos);
+        hash = 29 * hash + this.song_id;
+        hash = 29 * hash + Objects.hashCode(this.user_id);
+        hash = 29 * hash + Objects.hashCode(this.group_id);
+        hash = 29 * hash + Objects.hashCode(this.style);
+        hash = 29 * hash + (this.original ? 1 : 0);
+        hash = 29 * hash + this.visit_counter;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.lyrics);
+        hash = 29 * hash + Float.floatToIntBits(this.grade);
         return hash;
     }
 
@@ -119,51 +110,7 @@ public class Songs implements Serializable {
         if (!Objects.equals(this.style, other.style)) {
             return false;
         }
-        if (!Objects.equals(this.instrumentos, other.instrumentos)) {
-            return false;
-        }
         return true;
-    }
-
-    
-    public void setSong_id(int song_id) {
-        this.song_id = song_id;
-    }
-
-    public void setUser(Users user) {
-        this.user_id = user;
-    }
-
-    public void setGroup(Group group) {
-        this.group_id = group;
-    }
-
-    public void setStyle(Styles style) {
-        this.style = style;
-    }
-
-    public void setOriginal(boolean original) {
-        this.original = original;
-    }
-
-    public void setVisit_counter(int visit_counter) {
-        this.visit_counter = visit_counter;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLyrics(String lyrics) {
-        this.lyrics = lyrics;
-    }
-
-    public void setGrade(float grade) {
-        this.grade = grade;
-    }
-
-    public void setInstrumentos(List<Instruments> instrumentos) {
-        this.instrumentos = instrumentos;
     }
 
     
@@ -171,41 +118,73 @@ public class Songs implements Serializable {
         return song_id;
     }
 
-    public Users getUser() {
+    public void setSong_id(int song_id) {
+        this.song_id = song_id;
+    }
+
+    public Users getUser_id() {
         return user_id;
     }
 
-    public Group getGroup() {
+    public void setUser_id(Users user_id) {
+        this.user_id = user_id;
+    }
+
+    public Group getGroup_id() {
         return group_id;
+    }
+
+    public void setGroup_id(Group group_id) {
+        this.group_id = group_id;
     }
 
     public Styles getStyle() {
         return style;
     }
 
+    public void setStyle(Styles style) {
+        this.style = style;
+    }
+
     public boolean isOriginal() {
         return original;
+    }
+
+    public void setOriginal(boolean original) {
+        this.original = original;
     }
 
     public int getVisit_counter() {
         return visit_counter;
     }
 
+    public void setVisit_counter(int visit_counter) {
+        this.visit_counter = visit_counter;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLyrics() {
         return lyrics;
     }
 
+    public void setLyrics(String lyrics) {
+        this.lyrics = lyrics;
+    }
+
     public float getGrade() {
         return grade;
     }
 
-    public List<Instruments> getInstrumentos() {
-        return instrumentos;
+    public void setGrade(float grade) {
+        this.grade = grade;
     }
-    
+   
     
 }
