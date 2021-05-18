@@ -108,3 +108,8 @@ a:hover{
     bottom: 15px !important;
     right: 15px !important;
 }
+.dialogbutton2 {
+    position: absolute !important;
+    bottom: 15px !important;
+    left: 15px !important;
+}
