@@ -6,6 +6,7 @@
 package es.unileon.inso2.lyrics.EJB;
 
 import es.unileon.inso2.lyrics.modelo.Songs;
+import es.unileon.inso2.lyrics.modelo.Users;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -31,4 +32,6 @@ public interface SongsFacadeLocal {
     int count();
     
     public Songs getSong(String name);
+    
+    public List<Songs> getSongsByUser(Users user);
 }

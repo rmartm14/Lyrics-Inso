@@ -77,7 +77,10 @@ public class SongsController implements Serializable {
         this.initNameGroups();
         this.initNameStyles();
     }
-
+    
+    public List<Songs> getSongByUser() {
+        return this.songEJB.getSongsByUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
+    }
     public void initNameStyles() {
         for (Styles s : this.allStyles) {
             nameStyles.add(s.getName());
@@ -144,6 +147,16 @@ public class SongsController implements Serializable {
             System.out.println(e.getMessage());
         }
         return "public/principal.lyrics?faces-redirect=true";
+    }
+    
+    public void removeSong(String nombre) {
+        try{
+            Songs delSong = this.songEJB.getSong(nombre);
+            songEJB.remove(delSong);
+        }catch (Exception e){
+            System.out.println("Error al borrar cancion.");
+            System.out.println(e.getMessage());
+        }
     }
 
     public void reloadStyles() {
