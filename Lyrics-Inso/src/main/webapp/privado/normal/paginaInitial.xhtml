@@ -28,14 +28,14 @@
         <ui:composition template="./../../WEB-INF/templates/plantillaTopBot.xhtml">
 
             <ui:define name="left">
-                left
+               <ui:include src="/WEB-INF/templates/SongRanking.xhtml" />
             </ui:define>
 
-            <ui:define name="right">
-                right
+            <ui:define name="right" >
+                <ui:include src="/WEB-INF/templates/PowerRanking.xhtml" />
             </ui:define>
 
-            <ui:define name="content">
+            <ui:define name="content" class="center_content">
                 <div class="p-4 p-md-5 mb-4 text-white rounded" style="background-color: #3e206d;">
 			<div class="col-md-6 px-0">
                             <h1 class="display-4 fst-italic" style="color:white;">Bienvenido a la página de Lyrics de Inso II</h1>
