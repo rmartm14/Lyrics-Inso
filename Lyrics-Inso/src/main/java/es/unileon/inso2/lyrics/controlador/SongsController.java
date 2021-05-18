@@ -116,10 +116,10 @@ public class SongsController implements Serializable {
             //Comprobar nombre no existe
             Songs comprob = songEJB.getSong(song.getName());
             if(comprob == null){
-                this.song.setGroup_id(this.getGroupByName(selectedGroup));
+                this.song.setGroup(this.getGroupByName(selectedGroup));
                 this.song.setStyle(this.getStyleByName(selectedStyle));
                 //System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
-                this.song.setUser_id((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
+                this.song.setUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
                 songEJB.create(song);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrar canción", "Canción registrada con éxito");
                 FacesContext.getCurrentInstance().addMessage(null, message);
