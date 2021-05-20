@@ -28,7 +28,7 @@
         <ui:composition template="./../../WEB-INF/templates/plantillaTopBot.xhtml">
 
             <ui:define name="left">
-               <ui:include src="/WEB-INF/templates/SongRanking.xhtml" />
+               <ui:include src="/WEB-INF/templates/SongRanking.xhtml"/>
             </ui:define>
 
             <ui:define name="right" >
@@ -37,15 +37,16 @@
 
             <ui:define name="content" class="center_content">
                 <div class="p-4 p-md-5 mb-4 text-white rounded" style="background-color: #3e206d;">
-			<div class="col-md-6 px-0">
+			<div class="col-md-5 px-0">
                             <h1 class="display-4 fst-italic" style="color:white;">Bienvenido a la página de Lyrics de Inso II</h1>
 			  <p class="lead my-3">En esta página podrás añadir a tus artistas, grupos y canciones favoritos, además de sus diversas versiones en el caso de que crees tu propia canción.</p>
 			  <p class="lead mb-0">Busca aqui tu canción <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/> </p>
 			</div>
 		</div>
-		  <div class="row mb-2">
-			<div class="col-md-6">
-			  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <hr style="background-color:white;"></hr>
+		  <div class="row mb-2 ml-2 mt-2" > 
+			<div class="col-md-5 ml-4" style="background-color:#fff">
+			  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height:100%">
 				<div class="col p-4 d-flex flex-column position-static">
 				  <strong class="d-inline-block mb-2 text-primary">Grupo</strong>
 				  <h3 class="mb-0">Radiohead</h3>
@@ -53,24 +54,16 @@
 				  <p class="card-text mb-auto">Radiohead es una banda británica de rock alternativo y art rock originaria de Abingdon-on-Thames, Inglaterra, formada en 1985.</p>
 				  <a href="#" class="stretched-link">Canciones de radiohead</a>
 				</div>
-				<div class="col-auto d-none d-lg-block">
-				  <img src="/Lyrics-Inso/WEB-INF/templates/photoInit.jpg" />
-		
-				</div>
 			  </div>
 			</div>
-			<div class="col-md-6">
-				<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+			<div class="col-md-5 ml-5" style="background-color:#fff;">
+				<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height:100%">
 				  <div class="col p-4 d-flex flex-column position-static">
 					<strong class="d-inline-block mb-2 text-secondary">Cancion</strong>
 					<h3 class="mb-0">Karma Police</h3>
 					<div class="mb-1 text-muted">Rock Alternativo</div>
 					<p class="card-text mb-auto">«Karma Police» es una canción del disco OK Computer, de Radiohead.</p>
 					<a href="https://getbootstrap.com/docs/5.0/examples/blog/#" class="stretched-link">Ver letra oficial de la canción</a>
-				  </div>
-				  <div class="col-auto d-none d-lg-block">
-					<img src="/WEB-INF/templates/photoInit.jpg" />
-		  
 				  </div>
 				</div>
 			  </div>

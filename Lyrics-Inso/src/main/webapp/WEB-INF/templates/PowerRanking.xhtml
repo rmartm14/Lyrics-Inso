@@ -6,11 +6,11 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <body background="#dddddd"> 
-        <div style="background-color: #3e206d; color:white;"> 
+        <div style="background-color: #d89cf6; color:white;" > 
             <h5 class="text-center" style="padding-top:5px"> Power Ranking </h5>
             <div >
             <p:dataList value="#{usuariosController.orderedList}" var="user" type="ordered" class="fondo" style="font-size:15px !important;">
-                <p> <b>#{user.name}</b> - #{user.grade} </p> 
+                <p> <b style="color:#d89cf6">#{user.name}</b> - #{user.grade} </p> 
                 
             </p:dataList>
             </div>

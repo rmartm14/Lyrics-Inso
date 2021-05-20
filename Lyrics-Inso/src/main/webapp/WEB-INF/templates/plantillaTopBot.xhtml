@@ -64,8 +64,10 @@
                         </p:submenu>
                         <f:facet name="options" >
                             <div class="ui-input-icon-left p-mr-6" style="margin-right: 160px">
-                                <i class="pi pi-fw pi-search" />
-                                <p:inputText placeholder="Busca una canción nueva"/>
+                                
+                                <p:autoComplete id="acSimple" value="#{songsController.auxtxt}"
+                            completeMethod="#{songsController.completeText}" scrollHeight="250"/>
+                                <p:commandButton action="#{songsController.mostrarCancion}" class="enter" icon="pi pi-fw pi-search"></p:commandButton>
                             </div>
 
                         </f:facet>
@@ -74,22 +76,24 @@
                 </h:form>
             </div>
         </div>
-        <div style="height: 80% !important">
-            <div id="left">
-                <ui:insert name="left">
-                    <ui:include src="PowerRanking.xhtml"/>
+        <div style="height: 80% !important; background-color:#d89cf6;">
+            <div id="left" >
+                <ui:insert name="left2" >
+                    <ui:include src="SongRanking.xhtml"/>
                 </ui:insert>
             </div>
-            <div>
+            <div style="height: 80% !important;">
                 <div id="right">
-                    <ui:insert name="right"><ui:include src="PowerRanking.xhtml"/></ui:insert>
+                    <ui:insert name="right2"
+                               ><ui:include src="PowerRanking.xhtml"/>
+                    </ui:insert>
                 </div>
                 <div id="content" class="right_content">
                     <ui:insert name="content">Content1</ui:insert>
                 </div>
             </div>
         </div>
-        <div id="bottom" style="height: 10% !important" >
+        
             <div class="center_content fixed-bottom">
                 <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-github">GitHub</i> </a>
                 <p:spacer width="20"/>
@@ -100,7 +104,6 @@
                 <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-envelope">lyrics@lyrics.com</i></a>
             </div>
             
-        </div>
 
     </h:body>
 

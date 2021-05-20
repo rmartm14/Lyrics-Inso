@@ -20,8 +20,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -34,7 +36,7 @@ import org.primefaces.event.SelectEvent;
  * @author alwop
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class SongsController implements Serializable {
 
     @EJB
@@ -61,6 +63,9 @@ public class SongsController implements Serializable {
     private List<String> nameGroups;
     
     private List<Songs> orderedSong;
+    private String auxtxt;
+    private Songs auxSong;
+    
     
     @PostConstruct
     public void ini() {
@@ -81,6 +86,7 @@ public class SongsController implements Serializable {
         this.initNameGroups();
         this.initNameStyles();
         this.orderSongByGrade();
+        auxSong = new Songs();
     }
     
     public List<Songs> getSongByUser() {
@@ -305,5 +311,46 @@ public class SongsController implements Serializable {
     public void setSong(Songs song) {
         this.song = song;
     }
+    public List<String> completeText(String query) {
+        String queryLowerCase = query.toLowerCase();
+        List<String> countryList = new ArrayList<>();
+        List<Songs> songs = this.songEJB.findAll();
+        for (Songs country : songs) {
+            countryList.add(country.getName());
+        }
+        List<String> resultList = new ArrayList<>();
+        for(String s: countryList){
+            if(s.contains(query)){
+                resultList.add(s);
+            }
+        }
+        return resultList;
+    }
+    
+    public String mostrarCancion(){
+        auxSong = this.songEJB.getSong(auxtxt);
+        return "/privado/normal/cancion/mostrarCancion.lyrics";
+    }
+
+    public String getAuxtxt() {
+        return auxtxt;
+    }
+
+    public void setAuxtxt(String auxtxt) {
+        this.auxtxt = auxtxt;
+    }
+
+    public Songs getAuxSong() {
+        return auxSong;
+    }
+
+    public void setAuxSong(Songs auxSong) {
+        this.auxSong = auxSong;
+    }
+    
+    
+    
+    
+    
 
 }

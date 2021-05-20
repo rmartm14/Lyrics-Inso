@@ -9,43 +9,45 @@
 
 #bottom {
     position: relative;
-    background-color: #c2dfef;
+    background-color: white;
     padding: 5px;
     margin: 10px 0px 0px 0px;
 }
 
 #left {
     float: left;
-    background-color: #ece3a5;
+    background-color: #d89cf6;
     padding: 5px;
-    width: 180px;
+    width: 170px;
+    height:100%;
 }
 
 #right {
     float: right;
-    background-color: #ece3a5;
+    background-color: #d89cf6;
     padding: 5px;
-    width: 176px;
+    width: 170px;
 }
 
 .center_content {
     
     position: relative;
     text-align: center;
-    background-color: #c2dfef;
+    background-color: white;
     padding: 5px;
 }
 
 .left_content {
-    background-color: #dddddd;
+    background-color: #3e206d;
     padding: 5px;
     margin-left: 170px;
 }
 
 .right_content {
-    background-color: #dddddd;
+    background-color: #3e206d;
     padding: 5px;
     margin: 0px 170px 0px 170px;
+    height:900px;
 }
 
 #top a:link, #top a:visited {
