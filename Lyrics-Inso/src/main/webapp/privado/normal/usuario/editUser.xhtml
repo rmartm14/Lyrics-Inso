@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+
+        <ui:composition template="./../../../WEB-INF/templates/plantillaTopBot.xhtml">
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="right">
+                right
+            </ui:define>
+
+            <ui:define name="content">
+                <div class=" estiloBody">
+                    <h:form id="formCancion">
+                        <p:growl id="message" showDetail="true"/>
+                        <h:panelGrid id="grid" columns="2">
+                            <div class="input-group-append">
+
+                                <span class="input-group-text"><i class="fas fa-music"></i></span>
+                                <p:inputText type="text"  class="form-control input_user" value="#{userOptionsController.user.name}" placeholder="#{userOptionsController.user.name}" autocomplete="Nombre"/>
+                            </div>
+
+                            <div class="input-group-append">
+                                <div>
+                                    <span class="input-group-text"><i class="fas fa-compact-disc"></i></span>
+                                    <p:inputText type="text"  class="form-control input_user" value="#{userOptionsController.user.password}" placeholder="#{userOptionsController.user.password}" autocomplete="Nombre"/>
+                                </div>
+                            </div>
+                            <div class="input-group-append">
+			    <span class="input-group-text"><i class="pi pi-calendar"></i></span>
+                            <p:calendar id="fecha" value="#{userOptionsController.user.fecha_nacimiento}" required="true" placeholder="#{userOptionsController.user.fecha_nacimiento}" />
+			</div>
+                				
+   
+
+                        </h:panelGrid>
+
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <p:commandButton value="Editar Usuario" action="#{userOptionsController.editar}" class="btn enter" update="message"/>
+                        </div>
+
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

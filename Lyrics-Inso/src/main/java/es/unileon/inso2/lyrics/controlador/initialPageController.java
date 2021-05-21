@@ -42,6 +42,7 @@ public class initialPageController implements Serializable {
         auxtxt = "";
         return "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
     }
+    
     public List<String> completeText(String query) {
         String queryLowerCase = query.toLowerCase();
         List<String> countryList = new ArrayList<>();
@@ -73,8 +74,6 @@ public class initialPageController implements Serializable {
     public void setAuxtxt(String auxtxt) {
         this.auxtxt = auxtxt;
     }
-    
-
 
     public Songs getAuxSong() {
         return auxSong;
