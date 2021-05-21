@@ -35,7 +35,7 @@ public class Instruments implements Serializable{
     private String name;
     @Column (name="price")
     private float price;
-    @Column (name="intrument_style")
+    @Column (name="instrument_style")
     private String instrumentstyle;
     
     @JoinTable(
@@ -50,7 +50,7 @@ public class Instruments implements Serializable{
     private List<Songs> songs;
 
     @Override
-    public int hashCode() {
+    public int hashCode() { 
         int hash = 7;
         hash = 97 * hash + this.instrument_id;
         hash = 97 * hash + Objects.hashCode(this.name);

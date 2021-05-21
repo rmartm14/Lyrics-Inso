@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+
+        <ui:composition template="./../../../WEB-INF/templates/plantillaTopBot.xhtml">
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="right">
+                right
+            </ui:define>
+
+            <ui:define name="content">
+                <h1 style="color:white">#{songsController.auxSong.name}</h1>
+                <h5 style="color:#d89cf6">Artist: #{songsController.auxSong.group.name}</h5>
+                <h5 style="color:#d89cf6">Estilo: #{songsController.auxSong.style.name}</h5>
+                <h5 style="color:#d89cf6">Autor: #{songsController.auxSong.user.name}</h5>
+                <p style="width: 20%;color:white;font-size:25px"> 
+                #{songsController.auxSong.lyrics}
+                </p>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

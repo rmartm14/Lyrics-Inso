@@ -2,6 +2,12 @@ body{
     background-color: #d89cf6;
     font-family: verdana;
 }
+fondo{
+  background-color: #d89cf6;  
+}
+letramin{
+    font-size:15px !important;
+}
 .enter{
     background-color: #916dd5 !important;
     color:white ;
