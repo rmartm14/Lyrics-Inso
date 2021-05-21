@@ -23,7 +23,7 @@
                     <h:form>
                     <div class="product card">
                         <h5>Basic</h5>
-                        <p:dataList value="#{songsController.allSongs}" var="product" type="ordered">
+                        <p:dataList value="#{misCancionesController.allSongs}" var="product" type="ordered">
                             <div class="product-list-item">
                             
                                 <div class="product-list-detail">
@@ -33,7 +33,7 @@
                                         class="product-category">#{product.style.name}</span>
                                 </div>
                                 <div class="product-list-action">
-                                    <p:commandButton value="Edit" icon="fas fa-edit"/>
+                                    <p:commandButton value="Edit" icon="fas fa-edit" action="#{misCancionesController.verEditar(product)}"/>
                                    
                                 </div>
                             </div>
