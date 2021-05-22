@@ -119,3 +119,7 @@ a:hover{
     bottom: 15px !important;
     left: 15px !important;
 }
+.comment-input{
+    height: 15% !important;
+    width: 75%;
+}
