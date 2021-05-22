@@ -167,10 +167,15 @@ public class SongsController implements Serializable {
         return "public/principal.lyrics?faces-redirect=true";
     }
     
-    public void removeSong(String nombre) {
+    public void removeSong(String position) {
         try{
-            Songs delSong = this.songEJB.getSong(nombre);
+            System.out.println("Posicion:" + position);
+            int pos = Integer.parseInt(position);
+            String name = this.getSongByUser().get(pos).getName();
+            Songs delSong = this.songEJB.getSong(name);
             songEJB.remove(delSong);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canción eliminada", "Canción eliminada con éxito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }catch (Exception e){
             System.out.println("Error al borrar cancion.");
             System.out.println(e.getMessage());

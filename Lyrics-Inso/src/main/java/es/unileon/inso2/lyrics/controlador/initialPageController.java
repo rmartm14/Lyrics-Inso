@@ -43,6 +43,13 @@ public class initialPageController implements Serializable {
         return "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
     }
     
+    public String mostrarCancion(String name){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().replace("cancion_buscada", this.songEJB.getSong(name));
+        auxSong = (Songs) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cancion_buscada");
+        auxtxt = "";
+        return "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
+    }
+    
     public List<String> completeText(String query) {
         String queryLowerCase = query.toLowerCase();
         List<String> countryList = new ArrayList<>();
