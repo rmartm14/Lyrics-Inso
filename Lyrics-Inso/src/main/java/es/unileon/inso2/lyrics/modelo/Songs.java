@@ -56,27 +56,18 @@ public class Songs implements Serializable {
     @Column (name="grade")
     private float grade;  
 
-    @JoinTable(
-        name = "songinstr",
-        joinColumns = @JoinColumn(name = "song_id", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="instrument_id", nullable = false)
-    )
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Instruments> instrumentos;
-
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.song_id;
-        hash = 79 * hash + Objects.hashCode(this.user_id);
-        hash = 79 * hash + Objects.hashCode(this.group_id);
-        hash = 79 * hash + Objects.hashCode(this.style);
-        hash = 79 * hash + (this.original ? 1 : 0);
-        hash = 79 * hash + this.visit_counter;
-        hash = 79 * hash + Objects.hashCode(this.name);
-        hash = 79 * hash + Objects.hashCode(this.lyrics);
-        hash = 79 * hash + Float.floatToIntBits(this.grade);
-        hash = 79 * hash + Objects.hashCode(this.instrumentos);
+        hash = 71 * hash + this.song_id;
+        hash = 71 * hash + Objects.hashCode(this.user_id);
+        hash = 71 * hash + Objects.hashCode(this.group_id);
+        hash = 71 * hash + Objects.hashCode(this.style);
+        hash = 71 * hash + (this.original ? 1 : 0);
+        hash = 71 * hash + this.visit_counter;
+        hash = 71 * hash + Objects.hashCode(this.name);
+        hash = 71 * hash + Objects.hashCode(this.lyrics);
+        hash = 71 * hash + Float.floatToIntBits(this.grade);
         return hash;
     }
 
@@ -119,11 +110,10 @@ public class Songs implements Serializable {
         if (!Objects.equals(this.style, other.style)) {
             return false;
         }
-        if (!Objects.equals(this.instrumentos, other.instrumentos)) {
-            return false;
-        }
         return true;
     }
+
+    
 
     
     public void setSong_id(int song_id) {
@@ -162,9 +152,7 @@ public class Songs implements Serializable {
         this.grade = grade;
     }
 
-    public void setInstrumentos(List<Instruments> instrumentos) {
-        this.instrumentos = instrumentos;
-    }
+    
 
     
     public int getSong_id() {
@@ -202,10 +190,5 @@ public class Songs implements Serializable {
     public float getGrade() {
         return grade;
     }
-
-    public List<Instruments> getInstrumentos() {
-        return instrumentos;
-    }
-    
     
 }
