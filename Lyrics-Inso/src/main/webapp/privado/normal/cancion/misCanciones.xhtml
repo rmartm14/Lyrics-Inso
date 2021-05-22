@@ -20,10 +20,11 @@
 
             <ui:define name="content">
                 <div class="estiloBody">
-                    <h:form>
+                    <h:form id="idForm">
+                        <p:growl id="message" showDetail="true"/>
                     <div class="product card">
                         <h5 style="color:black; padding:10px;">Mis canciones</h5>
-                        <p:dataList value="#{songsController.getSongByUser()}" var="product" type="ordered">
+                        <p:dataList value="#{songsController.getSongByUser()}" var="product" type="ordered" rowIndexVar="row">
                             <div class="product-list-item mt-2">
                             
                                 <div class="product-list-detail">
@@ -35,15 +36,10 @@
                                     </div>
                                 </div>
                                 <div class="product-list-action mt-2">
-                                    <p:commandButton value="View" icon="fas fa-eye" class="enter mr-2"/>
+                                    <p:commandButton value="View" icon="fas fa-eye" class="enter mr-2" action="#{initialPageController.mostrarCancion(product.name)}"/>
                                     <p:commandButton value="Edit" icon="fas fa-edit" class="enter mr-2"/>
-                                    <p:commandButton value="Remove" icon="fas fa-trash" class="enter mr-2" onclick="PF('removeDia').show()"/>
-                                    <p:dialog widgetVar="removeDia" modal="true" header="Eliminar canción" width="300px" height="120px"> 
-                                        <p> ¿Éstas seguro que quiere eliminar esta canción? </p>
-                                        <p:commandButton value="No" onclick="PF('removeDia').hide()" class="enter mt-2" style="float:left;" />
-                                        <p:commandButton value="Si" onclick="PF('removeDia').hide()" class="enter mt-2" style="float:right;" 
-                                                         action="#{songsController.removeSong(product.name)}" />
-                                    </p:dialog>
+                                    <p:commandButton value="Remove" icon="fas fa-trash" class="enter mr-2" action="#{songsController.removeSong(row)}" update="idForm:message idForm" />
+
                                 </div>
                             </div>
                         </p:dataList>
