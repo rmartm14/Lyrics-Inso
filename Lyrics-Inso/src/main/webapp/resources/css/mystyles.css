@@ -108,3 +108,8 @@ a:hover{
     bottom: 15px !important;
     right: 15px !important;
 }
+
+legend{
+    background-color: #d89cf6 !important
+    
+}
