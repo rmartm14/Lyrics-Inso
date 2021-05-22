@@ -20,21 +20,27 @@
 
             <ui:define name="content">
                 <div class="estiloBody">
-                    <h:form>
+                    <h:form id="idForm">
+                        <p:growl id="message" showDetail="true"/>
                     <div class="product card">
-                        <h5>Basic</h5>
-                        <p:dataList value="#{misCancionesController.allSongs}" var="product" type="ordered">
-                            <div class="product-list-item">
+
+                        <h5 style="color:black; padding:10px;">Mis canciones</h5>
+                        <p:dataList value="#{songsController.getSongByUser()}" var="product" type="ordered" rowIndexVar="row">
+                            <div class="product-list-item mt-2">
                             
                                 <div class="product-list-detail">
-                                    <div class="product-name">#{product.name}</div>
-                                    <div class="product-description">#{product.group.name}</div>
-                                    <i class="pi pi-tag product-category-icon"/><span
-                                        class="product-category">#{product.style.name}</span>
+                                    <div class="product-name"><b> Titulo de la canción: </b> #{product.name}</div>
+                                    <div class="product-description"><b> Nombre del grupo: </b>#{product.group.name}</div>
+                                    <div class="product-description"> <b> Estilo: </b> #{product.style.name} </div>
+                                    <div class="product-description"> <b> Nota: </b> 
+                                         #{product.grade} 
+                                    </div>
                                 </div>
-                                <div class="product-list-action">
-                                    <p:commandButton value="Edit" icon="fas fa-edit" action="#{misCancionesController.verEditar(product)}"/>
-                                   
+                                <div class="product-list-action mt-2">
+                                    <p:commandButton value="View" icon="fas fa-eye" class="enter mr-2" action="#{initialPageController.mostrarCancion(product.name)}"/>
+                                    <p:commandButton value="Edit" icon="fas fa-edit" class="enter mr-2" action="#{misCancionesController.verEditar(product)}"/>
+                                    <p:commandButton value="Remove" icon="fas fa-trash" class="enter mr-2" action="#{songsController.removeSong(row)}" update="idForm:message idForm" />
+
                                 </div>
                             </div>
                         </p:dataList>

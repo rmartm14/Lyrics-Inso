@@ -49,6 +49,7 @@ public class SongsFacade extends AbstractFacade<Songs> implements SongsFacadeLoc
 
         return song;
     }
+
     public List<Songs> getAllSongs(Users us){
         List<Songs> resultado = new ArrayList<Songs>();
         String consulta="FROM Songs u WHERE u.user_id=:param1";
@@ -62,5 +63,21 @@ public class SongsFacade extends AbstractFacade<Songs> implements SongsFacadeLoc
         }
  
         return resultado;
+
+    @Override
+    public List<Songs> getSongsByUser(Users user){
+        String consulta = "FROM Songs s WHERE s.user_id=:param";
+        List<Songs> songs = null;
+        
+        try{
+            Query query = em.createQuery(consulta);
+            query.setParameter("param", user);
+            songs = query.getResultList();
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+        return songs;
+
     }
 }

@@ -16,13 +16,17 @@ import es.unileon.inso2.lyrics.modelo.Users;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -35,7 +39,7 @@ import org.primefaces.event.SelectEvent;
  * @author alwop
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class SongsController implements Serializable {
 
     @EJB
@@ -60,7 +64,11 @@ public class SongsController implements Serializable {
     private List<Group> allGroups;
     private String selectedGroup;
     private List<String> nameGroups;
+    
+    private List<Songs> orderedSong;
 
+    
+    
     @PostConstruct
     public void ini() {
         song = new Songs();
@@ -79,8 +87,12 @@ public class SongsController implements Serializable {
 
         this.initNameGroups();
         this.initNameStyles();
+        this.orderSongByGrade();
     }
-
+    
+    public List<Songs> getSongByUser() {
+        return this.songEJB.getSongsByUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
+    }
     public void initNameStyles() {
         for (Styles s : this.allStyles) {
             nameStyles.add(s.getName());
@@ -102,6 +114,15 @@ public class SongsController implements Serializable {
         }
         return null;
     }
+        public void orderSongByGrade() {
+        Collections.sort(this.songEJB.findAll(), new Comparator<Songs>() {
+            @Override
+            public int compare(Songs o1, Songs o2) {
+                return -Float.compare(o1.getGrade(), o2.getGrade());
+            }
+        });
+        this.orderedSong = allSongs;
+        }
 
     public Group getGroupByName(String name) {
         for (Group s : this.allGroups) {
@@ -157,6 +178,21 @@ public class SongsController implements Serializable {
         }
         return "public/principal.lyrics?faces-redirect=true";
     }
+    
+    public void removeSong(String position) {
+        try{
+            System.out.println("Posicion:" + position);
+            int pos = Integer.parseInt(position);
+            String name = this.getSongByUser().get(pos).getName();
+            Songs delSong = this.songEJB.getSong(name);
+            songEJB.remove(delSong);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canción eliminada", "Canción eliminada con éxito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }catch (Exception e){
+            System.out.println("Error al borrar cancion.");
+            System.out.println(e.getMessage());
+        }
+    }
 
     public void reloadStyles() {
         try{
@@ -168,6 +204,14 @@ public class SongsController implements Serializable {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar estilo", "Campos incorrectos. El nombre de estilo ya éxiste.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+    }
+
+    public List<Songs> getOrderedSong() {
+        return orderedSong;
+    }
+
+    public void setOrderedSong(List<Songs> orderedSong) {
+        this.orderedSong = orderedSong;
     }
 
     public UsersFacadeLocal getUsersEJB() {
@@ -282,5 +326,4 @@ public class SongsController implements Serializable {
     public void setSong(Songs song) {
         this.song = song;
     }
-
 }

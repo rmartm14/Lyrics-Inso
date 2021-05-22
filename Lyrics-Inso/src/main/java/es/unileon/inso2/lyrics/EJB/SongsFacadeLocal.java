@@ -32,5 +32,9 @@ public interface SongsFacadeLocal {
     int count();
     
     public Songs getSong(String name);
+
     public List<Songs> getAllSongs(Users us);
+   
+    public List<Songs> getSongsByUser(Users user);
+
 }
