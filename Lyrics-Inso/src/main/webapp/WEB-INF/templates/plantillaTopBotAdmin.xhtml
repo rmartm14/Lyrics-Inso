@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+   <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+              integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>  
+	<link rel="stylesheet" href="./styles/mystyles.css" />
+        <link rel="icon" href="./favicon-16x16.png"/>
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputStylesheet library="css" name="mystyles.css"/>
+        <title>Lyrics</title>
+        <style>.affaires .ui-menuitem-text{color:white !important;} 
+                        img {
+				max-width:350px;
+				max-height:450px;
+				width:auto;
+				height:auto;
+			}
+			body{
+				background-color:#d89cf6;
+                        }
+        </style>
+    </h:head>
+
+    <h:body>
+
+        <div id="top" style="height: 10% !important;">
+            <div class="card">
+                <h:form>
+                    <p:growl id="messages"/>
+                    
+                    <p:menubar style="background-color:white; color: white !important;">
+                        <p:menuitem icon="pi pi-home"  url="/Lyrics-Inso/privado/administrador/inicio.lyrics" />
+                        <p:submenu label="Canciones" icon="pi pi-folder-open">
+                            <p:menuitem value="Canciones" icon="pi pi-star" url="/Lyrics-Inso/privado/administrador/cancion/allCanciones.lyrics"/>
+                        </p:submenu>
+                        <p:submenu label="Grupos" icon="fa fa-guitar">
+                            <p:menuitem value="Grupos" icon="pi pi-star" url="/Lyrics-Inso/privado/administrador/grupo/allGrupos.lyrics"/>
+                        </p:submenu>
+
+                        <p:submenu label="#{usuariosController.currentUserName}" icon="pi pi-fw pi-user" style="position: absolute; right: 6px;">
+                            <p:menuitem value="Ajustes de cuenta" icon="pi pi-cog" url="/Lyrics-Inso/privado/administrador/usuario/editUser.lyrics"/>
+                            <p:menuitem value="Cerrar Sesión" icon="pi pi-fw pi-sign-out" action="#{usuariosController.logOut()}"/>
+                        </p:submenu>
+                        <f:facet name="options" >
+                            <div class="ui-input-icon-left p-mr-6" style="margin-right: 160px">
+                                
+                                <p:autoComplete id="acSimple" value="#{initialPageController.auxtxt}"
+                            completeMethod="#{initialPageController.completeText}" scrollHeight="250"/>
+                                <p:commandButton action="#{initialPageController.mostrarCancion}" class="enter" icon="pi pi-fw pi-search" > </p:commandButton>
+                            </div>
+
+                        </f:facet>
+
+                    </p:menubar>
+                </h:form>
+            </div>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+        <div id="bottom">
+            <div class="center_content fixed-bottom">
+                <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-github">GitHub</i> </a>
+                <p:spacer width="20"/>
+                <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-facebook">Facebook</i></a>
+                <p:spacer width="20"/>
+                <i class="pi pi-phone">+34 654852621</i>
+                <p:spacer width="20"/>
+                <a href="https://github.com/rmartm14/Lyrics-Inso"><i class="pi pi-envelope">lyrics@lyrics.com</i></a>
+            </div>
+        </div>
+
+    </h:body>
+
+</html>
