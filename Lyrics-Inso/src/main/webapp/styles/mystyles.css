@@ -98,3 +98,7 @@ body{
                 a:hover{
                     color: #916dd5;
                 }
+                .fieldsetStyle{
+                    background-color: #d89cf6 !important;
+                    margin-top: 1000px!important;
+                }

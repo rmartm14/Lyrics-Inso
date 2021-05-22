@@ -186,5 +186,3 @@ INSERT INTO `comments` (`comment_id`, `user_id`, `foro_id`,`commentContent`, `fe
 	(2, 2, 3, 'Creo que hay algunas letras mal puestas', '2019-05-10 12:00:00'),
 	(3, 1, 4, 'La odio le doy 0', '2019-06-14 7:00:00'),
 	(4, 3, 1, 'Siempre quise la cancion gracias', '2019-07-10 09:00:00');
-
-

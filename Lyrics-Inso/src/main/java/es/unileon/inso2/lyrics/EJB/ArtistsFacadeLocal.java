@@ -30,4 +30,6 @@ public interface ArtistsFacadeLocal {
 
     int count();
     
+    public Artists getArtist(String name);
+    
 }

@@ -8,7 +8,7 @@
 
     <body>
 
-       
+
         <ui:composition template="./../../../WEB-INF/templates/plantillaTopBot.xhtml">
 
             <ui:define name="left">
@@ -21,46 +21,93 @@
 
             <ui:define name="content">
                 <div class=" estiloBody">
-                    <h:form>
-                        <h:panelGrid id="grid" columns="2">
-                                <div class="input-group-append">
-                                    
-                                    <span class="input-group-text"><i class="fas fa-music"></i></span>
-                                    <p:inputText type="text"  class="form-control input_user" value="#{usuariosController.user.name}" placeholder="Nombre de la canción" autocomplete="Grupo"/>
-                                </div>
+                    <h:form id="formCancion">
+                        <p:growl id="message" showDetail="true"/>
+                        <h:panelGrid id="grid" style="width:30%" >
+                            <p:row>
+                                <p:column  >
+                                    <div>
+                                        <span class="input-group-text"><i class="fas fa-music"></i></span>
+                                    </div>
+                                </p:column>
+                                <p:column >
+                                    <div>
+                                        <p:inputText type="text"  class="form-control input_user" value="#{editarCancionController.cancion.name}" placeholder="#{editarCancionController.cancion.name}" autocomplete="Nombre"/>
+                                    </div>
+                                </p:column>
 
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-users"></i></span>
-                                </div>
+                            </p:row>
+                            <p:row >
+                                <p:column>
+                                        <span class="input-group-text"><i class="fas fa-users"></i></span>
 
-                                <p:inputText type="text"  class="form-control input_user" value="#{usuariosController.user.name}" placeholder="Grupo" autocomplete="Grupo"/>
-        
-           
+                                        <p:selectOneMenu id="group" value="#{editarCancionController.selectedGroup}" style="width:100%">
+                                            <f:selectItem itemLabel="#{editarCancionController.cancion.group.name}" itemValue=""/>
+                                            <f:selectItems value="#{editarCancionController.nameGroups}"/>
+                                        </p:selectOneMenu>
 
-                                <div class="input-group-append">
+                                </p:column>
+
+                            </p:row>
+                            <p:row>
+                                <p:column >
                                     <span class="input-group-text"><i class="fas fa-compact-disc"></i></span>
-                                </div>
-                                <p:inputText type="text"  class="form-control input_user" value="#{usuariosController.user.name}" placeholder="Estilo musical" autocomplete="Grupo"/>
+                                </p:column>
+                                <p:column >
+                                    <p:selectOneMenu id="style" value="#{editarCancionController.selectedStyle}" style="width:100%">
+                                        <f:selectItem itemLabel="#{editarCancionController.cancion.style.name}" itemValue=""/>
+                                        <f:selectItems value="#{editarCancionController.nameStyles}"/>
+                                    </p:selectOneMenu>
+                                </p:column>
 
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <p:commandButton value="Añadir Estilo" onclick="PF('dig').show()" class="enter"/>
+                                </p:column>
+                            </p:row>
                         </h:panelGrid>
-                        <div class="input-group mb-3 "  >
-                                                        
+                        <p:dialog widgetVar="dig" modal="true" header="Crear nuevo Estilo" width="600px" height="300px"> 
+                            <p:panelGrid columns="2" class="mt-4">
+                                <p:outputLabel value="Nombre estilo" for="@next"/>
+                                <p:inputText value="#{songsController.auxStyle.name}" placeholder="Nombre del Estilo"/>
+                                <p:outputLabel value="Caracteristicas del estilo" for="@next" style="margin-right: 10px"/>
+                                <p:inputTextarea maxlength="300" counter="display" counterTemplate="Quedan {0} carácteres." 
+                                                 value="#{songsController.auxStyle.characteristics}"/>
+
+
+                            </p:panelGrid>
+                            <div class="text-center justyify-content-center">
+                                <p:commandButton value="Crear nuevo estilo" styleClass="dialogbutton enter" action="#{songsController.reloadStyles}" 
+                                                 onclick="PF('dig').hide()" update=":formCancion:style :formCancion:message"/>
+
+                            </div>
+                        </p:dialog>
+
+
+                        <div class="input-group mb-3 mt-2"  >
+
                             <p:outputLabel value="¿Es original?"/>
-                            <p:selectOneRadio id="console" value="#{radioView.console}" unselectable="true">
-                                <f:selectItem itemLabel="Sí" itemValue="0"/>
-                                <f:selectItem itemLabel="No" itemValue="1"/>
->
+                            <p:selectOneRadio id="console" value="#{editarCancionController.cancion.original}" >
+                                <f:selectItem itemLabel="Sí" itemValue="1"/>
+                                <f:selectItem itemLabel="No" itemValue="0"/>
+
                             </p:selectOneRadio>
-                            
+
                         </div>
                         <p> Letra </p>
-                         <p:inputTextarea rows="20" cols="177" maxlength="1000" counter="display" counterTemplate="Quedan {0} carácteres." style="width: 100%"/>
-                          <h:outputText id="display" class="p-d-block" />
+                        <p:inputTextarea rows="20" cols="167" maxlength="1000" counter="display" 
+                                         counterTemplate="Quedan {0} carácteres." style="width: 100%; height:30%;" 
+                                         value="#{editarCancionController.cancion.lyrics}"/>
+                        <h:outputText id="display" class="p-d-block"/>
+
                         <div class="d-flex justify-content-center mt-3 login_container">
-                            <p:commandButton value="Editar canción" action="#{usuariosController.registrar()}" />    
+                            <p:commandButton value="Actualizar canción" action="#{editarCancionController.actualizar()}" class="btn enter" update="message"/>
+
                         </div>
+
                     </h:form>
-		</div>
+                </div>
             </ui:define>
 
         </ui:composition>

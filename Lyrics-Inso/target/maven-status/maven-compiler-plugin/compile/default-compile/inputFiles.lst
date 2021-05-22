@@ -1,3 +1,4 @@
+
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\GroupFacadeLocal.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\CommentsFacade.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\controlador\GroupController.java
@@ -9,7 +10,9 @@ C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\AbstractFacade.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\ArtistsFacadeLocal.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\InstrumentsFacadeLocal.java
+
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\controlador\UserOptionsController.java
+
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\modelo\Songs.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\ForosFacadeLocal.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\controlador\InstrumentsController.java
@@ -18,9 +21,11 @@ C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\modelo\Comments.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\modelo\Styles.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\modelo\Users.java
+
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\ForosFacade.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\modelo\Instruments.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\controlador\initialPageController.java
+
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\InstrumentsFacade.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\SongsFacade.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\UsersFacade.java
@@ -33,3 +38,4 @@ C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\EJB\GroupFacade.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\controlador\StylesController.java
 C:\Users\Sam\Documents\NetBeansProjects\Lyrics-Inso\Lyrics-Inso\src\main\java\es\unileon\inso2\lyrics\controlador\ForoController.java
+
