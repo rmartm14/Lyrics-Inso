@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -20,24 +21,70 @@
             <ui:define name="content">
 
                 <h:form id="formGrupo1">
-                    <p:panelGrid id="panel" columns="2" class="mt-4">
-                        <p:outputLabel value="Nombre del grupo" for="@next"/>
-                        <p:inputText value="#{songsController.group.name}" placeholder="Nombre del Grupo"/>
-
-                        <p:repeat id= "repeat" value="#{groupController.artistas}" var="artista">
+                    <p:growl id="message" showDetail="true"/>
+                    <p:fieldset legend="Información Grupo">
+                        <p:panelGrid id="panel1" columns="3" class="mt-4">
+                            <p:outputLabel value="Nombre del grupo" for="@next"/>
+                            <p:inputText value="#{groupController.group.name}" placeholder="Nombre del Grupo"/>
+                        </p:panelGrid>
+                    </p:fieldset>
+                    <p:fieldset legend="Estilos del Grupo">
+                        <p:repeat id= "repeat1" value="#{groupController.estilos}" var="estilo" >
+                            
+                                <p:selectOneMenu id="style" value="#{estilo.name}" style="margin-right: 10px">
+                                    <f:selectItem itemLabel="Elige tu estilo" itemValue=""/>
+                                    <f:selectItems value="#{groupController.nameStyles}"/>
+                                </p:selectOneMenu>
+                            
+                        </p:repeat>
+                        <div>
+                            <p:commandButton value="Más estilos" styleClass="enter" action="#{groupController.addStyleIntoList()}" update="formGrupo1" style="margin-top: 5px"/>
+                        </div>
+                        
+                    </p:fieldset>
+                    <p:fieldset legend="Integrantes del Grupo">
+                        <p:repeat id= "repeat2" value="#{groupController.artistas}" var="artista">
                             <div class="artista">
-                                <p:outputLabel value="Nombre artista" for="@next" style="margin-right: 10px"/>
-                                <p:inputText value="#{artista.name}" placeholder="Nombre del Artista"/>
+                                <p:panelGrid id="panel2" columns="7" class="mt-4">
+                                    <p:outputLabel value="Nombre artista" for="@next" style="margin-right: 10px"/>
+                                    <p:inputText value="#{artista.name}" placeholder="Nombre del Artista" style="margin-right: 10px"/>
+                                    <div>
+
+                                        <p:repeat id= "repeat3" value="#{artista.instruments}" var="instrumento">
+                                            <div class="instrumento">
+                                                <p:panelGrid id="panel1" columns="2" class="mt-4">
+                                                    <p:selectOneMenu id="style" value="#{instrumento.name}" style="margin-right: 10px" >
+                                                        <f:selectItem itemLabel="Elige el Instrumento que toca" itemValue=""/>
+                                                        <f:selectItems value="#{groupController.nameInstrument}"/>
+                                                    </p:selectOneMenu>
+                                                    <p:commandButton value="Eliminar Instrumento" styleClass="enter" action="#{groupController.dropInstrumentOutList(artista, instrumento)}" update="formGrupo1"/>
+                                                </p:panelGrid>
+
+                                            </div>
+
+                                        </p:repeat>
+                                    </div>
+                                
+
+                                <p:commandButton value="Más Instrumentos" styleClass="enter" action="#{groupController.addInstrumentIntoList(artista)}" update="formGrupo1" style="margin-top: 5px"/>
+                            
+
+
+
+                            <p:commandButton value="Eliminar Artista" styleClass="enter" action="#{groupController.dropArtistOutList(artista)}" update="formGrupo1"/>
+                            </p:panelGrid>
 
                             </div>
+
                         </p:repeat>
 
-                    </p:panelGrid>
+                        <p:commandButton value="Más integrantes" styleClass="enter" action="#{groupController.addArtistIntoList()}" update="formGrupo1" style="margin-top: 5px"/>
 
-                    <p:commandButton value="Más integrantes" styleClass="enter" action="#{groupController.addArtistIntoList()}" update="formGrupo1"/>
+                    </p:fieldset>
+
 
                     <div class="text-center justyify-content-center">
-                        <p:commandButton value="Crear nuevo grupo" styleClass=" enter" action="#{songsController.reloadStyles}" />
+                        <p:commandButton value="Crear nuevo grupo" action="#{groupController.registrar()}" class="btn enter" update="message" style="margin-top: 5px"/>
 
                     </div>
                 </h:form>

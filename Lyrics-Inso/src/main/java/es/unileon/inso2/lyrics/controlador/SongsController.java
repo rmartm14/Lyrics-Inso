@@ -13,11 +13,14 @@ import es.unileon.inso2.lyrics.modelo.Group;
 import es.unileon.inso2.lyrics.modelo.Songs;
 import es.unileon.inso2.lyrics.modelo.Styles;
 import es.unileon.inso2.lyrics.modelo.Users;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -110,7 +113,7 @@ public class SongsController implements Serializable {
         return null;
     }
 
-    public String registrar() {
+    public void registrar() {
 
         try {
             //Comprobar nombre no existe
@@ -123,6 +126,15 @@ public class SongsController implements Serializable {
                 songEJB.create(song);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrar canción", "Canción registrada con éxito");
                 FacesContext.getCurrentInstance().addMessage(null, message);
+                
+                String xhtml = "/Lyrics-Inso/privado/normal/paginaInitial.lyrics?faces-redirect=true";
+
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(xhtml);
+                    //return xhtml;
+                } catch (IOException ex) {
+                    Logger.getLogger(SongsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             else{
                 throw new Exception("Nombre de canción ya existe.");
@@ -131,10 +143,9 @@ public class SongsController implements Serializable {
         } catch (Exception e) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar canción", "Campos incorrectos. Asegurese de que todos los campos están rellenos o cambie el nombre de la canción.");
             FacesContext.getCurrentInstance().addMessage(null, message);
-            return "";
+
         }
-        String xhtml = "/Lyrics-Inso/privado/normal/paginaInitial.lyrics?faces-redirect=true";
-        return xhtml;
+        
     }
 
     public String editarCancion() {

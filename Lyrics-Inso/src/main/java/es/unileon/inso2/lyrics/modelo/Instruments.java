@@ -35,7 +35,7 @@ public class Instruments implements Serializable{
     private String name;
     @Column (name="price")
     private float price;
-    @Column (name="intrument_style")
+    @Column (name="instrument_style")
     private String instrumentstyle;
     
     @JoinTable(
