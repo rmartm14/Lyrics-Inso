@@ -40,7 +40,11 @@
 			<div class="col-md-5 px-0">
                             <h1 class="display-4 fst-italic" style="color:white;">Bienvenido a la página de Lyrics de Inso II</h1>
 			  <p class="lead my-3">En esta página podrás añadir a tus artistas, grupos y canciones favoritos, además de sus diversas versiones en el caso de que crees tu propia canción.</p>
-			  <p class="lead mb-0">Busca aqui tu canción <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/> </p>
+                          <h:form>
+                          <p class="lead mb-0">Busca aqui tu canción  <p:autoComplete id="acSimple" value="#{initialPageController.auxtxt}"
+                            completeMethod="#{initialPageController.completeText}" scrollHeight="250"/>
+                                <p:commandButton action="#{initialPageController.mostrarCancion}" class="enter" icon="pi pi-fw pi-search" > </p:commandButton> </p>
+                          </h:form>
 			</div>
 		</div>
                 <hr style="background-color:white;"></hr>
