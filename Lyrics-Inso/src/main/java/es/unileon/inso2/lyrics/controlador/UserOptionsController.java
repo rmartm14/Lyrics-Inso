@@ -40,32 +40,51 @@ public class UserOptionsController implements Serializable{
         return "/privado/normal/usuario/editUser.lyrics?faces-redirect=true";
     }
     
-    public void editar(){
-        this.userEJB.edit(user);
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrar canción", "Usuario editado con exito");
-        FacesContext.getCurrentInstance().addMessage(null, message);  
+        public void editar() {
+        try {
+            //Comprobar nombre no existe
+            user.setName(user.getName().toLowerCase());
+            Users comprob = userEJB.getUser(user.getName());
+
+            //System.out.println(comprob.getName() +" "+ user.getName());
+            if (comprob == null || comprob.getName().equalsIgnoreCase(user.getName())) {
+                this.userEJB.edit(user);
+
+            } else {
+                throw new Exception("Nombre de usuario ya existe.");
+            }
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizando información de usuario", "Usuario actualizado con exito");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Actualizar usuario", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+
+        }
+
     }
-    
+
     public void editarPass() {
         int flag = this.comprobarPass();
-        
+
         //Completamente comprobado
-        if (flag == 0){
+        if (flag == 0) {
             this.user.setPassword(newVal);
             this.editar();
-            oldVal = newVal= newValConfirm = "";
-            
+            oldVal = newVal = newValConfirm = "";
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizando de contraseña", "Actualización exitosa.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
         //Falla la pass actual-> flag 1
-        if(flag == 1){
+        if (flag == 1) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en contraseña", "La contraseña actual no coincide");
-            FacesContext.getCurrentInstance().addMessage(null, message);  
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
         //Falla la pass comprobada -> flag 2
-        if(flag == 2){
+        if (flag == 2) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en contraseña", "Las nuevas contraseñas no coinciden.");
-            FacesContext.getCurrentInstance().addMessage(null, message);  
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
     
