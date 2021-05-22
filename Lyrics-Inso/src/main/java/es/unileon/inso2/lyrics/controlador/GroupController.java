@@ -162,7 +162,7 @@ public class GroupController implements Serializable {
                 throw new Exception("El nombre del Grupo ya existe");
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "Campos incorrectos. Asegurese de que todos los campos están rellenos o cambie el nombre del grupo.");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "Campos incorrectos. Asegurese de que todos los campos están rellenos o no estan creados dentro de la aplicación.");
             FacesContext.getCurrentInstance().addMessage(null, message);
 
         }
