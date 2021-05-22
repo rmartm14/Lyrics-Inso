@@ -85,6 +85,11 @@ public class UsuariosController implements Serializable{
         //System.out.println("Saliendo");
         return "/login.xhtml?faces-redirect=true";
     }
+
+    public String getCurrentUserName() {
+        Users current = (Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        return current.getName();
+    }
     
     public void orderUserByGrade() {
         List<Users> allUsers = this.usersEJB.findAll();
@@ -96,6 +101,7 @@ public class UsuariosController implements Serializable{
           });
         System.out.println(allUsers.toString());
         this.orderedList = allUsers;
+
     }
     public UsersFacadeLocal getUsersEJB() {
         return usersEJB;
