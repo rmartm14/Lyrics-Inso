@@ -53,18 +53,6 @@ public class UsuariosController implements Serializable{
         }
     }
     
-    public void orderUserByGrade() {
-        List<Users> allUsers = this.usersEJB.findAll();
-        Collections.sort(allUsers, new Comparator<Users>() {
-            @Override
-            public int compare(Users o1, Users o2) {
-                return -Float.compare(o1.getGrade(), o2.getGrade());
-            }
-          });
-        System.out.println(allUsers.toString());
-        this.orderedList = allUsers;
-    }
-    
     public String validar(){
         String xhtml="";
         Users copiaUser = user;
@@ -91,14 +79,29 @@ public class UsuariosController implements Serializable{
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
         return xhtml;
     }
+    
     public String logOut(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         //System.out.println("Saliendo");
         return "/login.xhtml?faces-redirect=true";
     }
+
     public String getCurrentUserName() {
         Users current = (Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return current.getName();
+    }
+    
+    public void orderUserByGrade() {
+        List<Users> allUsers = this.usersEJB.findAll();
+        Collections.sort(allUsers, new Comparator<Users>() {
+            @Override
+            public int compare(Users o1, Users o2) {
+                return -Float.compare(o1.getGrade(), o2.getGrade());
+            }
+          });
+        System.out.println(allUsers.toString());
+        this.orderedList = allUsers;
+
     }
     public UsersFacadeLocal getUsersEJB() {
         return usersEJB;

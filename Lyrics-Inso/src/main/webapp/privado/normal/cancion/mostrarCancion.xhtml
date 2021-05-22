@@ -20,12 +20,12 @@
             </ui:define>
 
             <ui:define name="content">
-                <h1 style="color:white">#{songsController.auxSong.name}</h1>
-                <h5 style="color:#d89cf6">Artist: #{songsController.auxSong.group.name}</h5>
-                <h5 style="color:#d89cf6">Estilo: #{songsController.auxSong.style.name}</h5>
-                <h5 style="color:#d89cf6">Autor: #{songsController.auxSong.user.name}</h5>
+                <h1 style="color:white">#{initialPageController.auxSong.name}</h1>
+                <h5 style="color:#d89cf6">Artist: #{initialPageController.auxSong.group.name}</h5>
+                <h5 style="color:#d89cf6">Estilo: #{initialPageController.auxSong.style.name}</h5>
+                <h5 style="color:#d89cf6">Autor: #{initialPageController.auxSong.user.name}</h5>
                 <p style="width: 20%;color:white;font-size:25px"> 
-                #{songsController.auxSong.lyrics}
+                #{initialPageController.auxSong.lyrics}
                 </p>
                 
             </ui:define>
