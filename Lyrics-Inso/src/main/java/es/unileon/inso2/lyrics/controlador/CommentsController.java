@@ -8,6 +8,7 @@ package es.unileon.inso2.lyrics.controlador;
 import es.unileon.inso2.lyrics.EJB.CommentsFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.ForosFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.SongsFacadeLocal;
+import es.unileon.inso2.lyrics.EJB.UsersFacadeLocal;
 import es.unileon.inso2.lyrics.modelo.Comments;
 import es.unileon.inso2.lyrics.modelo.Foros;
 import es.unileon.inso2.lyrics.modelo.Songs;
@@ -36,6 +37,8 @@ public class CommentsController implements Serializable{
     private SongsFacadeLocal songsEJB;
     @EJB
     private ForosFacadeLocal forosEJB;
+    @EJB
+    private UsersFacadeLocal userEJB;
     
     private Comments comment;
     private Foros foro;
@@ -46,19 +49,38 @@ public class CommentsController implements Serializable{
     public void ini(){
         comment = new Comments();
         song = (Songs) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cancion_buscada");
+       
+    }
+    
+    public void actualizarSong(){
+         song = (Songs) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cancion_buscada");;
+    }
+    
+    public Foros getSongForo(){
+        this.actualizarSong();
+            List<Foros> allforos = this.forosEJB.findAll();
+            Foros foro = null;
+            for(Foros f: allforos){
+                if(f.getSong().getSong_id() == this.song.getSong_id()){
+                    return f;
+                }
+            }  
+            return foro;
     }
     public void setCommentForo(){
+        this.actualizarSong();
             List<Foros> allforos = this.forosEJB.findAll();
             for(Foros f: allforos){
                 if(f.getSong().getSong_id() == this.song.getSong_id()){
                     comment.setForo(f);
                     break;
-                }
+                } 
             }
     }
     
     public List<Comments> getSongComments(){
-        List<Comments> allComments = this.commentsEJB.findAll();
+        this.actualizarSong();
+        List<Comments> allComments = this.commentsEJB.findAll(); 
         List<Comments> finalComments = new ArrayList<>();
         for(Comments c: allComments){
             if(c.getForo().getSong().getSong_id() == this.song.getSong_id()){
@@ -67,7 +89,14 @@ public class CommentsController implements Serializable{
         }
         return finalComments;
     }
+     
+    public float getSongGrade() {
+        this.actualizarSong();
+        return song.getGrade();
+    }
+    
     public void comentar(){
+        this.actualizarSong();
         try {
             this.setCommentForo();
             comment.setUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
@@ -78,6 +107,33 @@ public class CommentsController implements Serializable{
         } catch (Exception e) {
         }
     }
+    
+    public void addGrade(int num){
+        this.actualizarSong();
+        Users user = this.song.getUser();
+        float grades = findUserGrade(user);
+        
+        this.song.setGrade(this.song.getGrade()+num);
+        this.songsEJB.edit(song);
+        
+        user.setGrade(grades);
+        this.userEJB.edit(user);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Puntuación Registrada", "Puntuación Registrada con éxito");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    private float findUserGrade(Users user) {
+        this.actualizarSong();
+        float grade = 0;
+        for(Songs s: this.songsEJB.findAll()){
+            if(s.getUser().getUser_id() == user.getUser_id()){
+                grade = grade + s.getGrade();
+            }
+        }
+        return grade;
+    }
+    
+    
    
     //Getters y Setters
 
@@ -128,5 +184,6 @@ public class CommentsController implements Serializable{
     public void setSong(Songs song) {
         this.song = song;
     }
-    
+
+
 }

@@ -19,17 +19,18 @@
                 right
             </ui:define>
 
-            <ui:define name="content">
+            <ui:define name="content" >
+                <div class="ml-4 mr-4 p-2">
                 <h1 style="color:white">#{initialPageController.auxSong.name}</h1>
                 <h5 style="color:#d89cf6">Artist: #{initialPageController.auxSong.group.name}</h5>
                 <h5 style="color:#d89cf6">Estilo: #{initialPageController.auxSong.style.name}</h5>
                 <h5 style="color:#d89cf6">Autor: #{initialPageController.auxSong.user.name}</h5>
-                <p style="width: 20%;color:white;font-size:25px"> 
+                <p style="width: 40%;color:white;font-size:25px"> 
                     #{initialPageController.auxSong.lyrics}
                 </p>
-
+                </div>
                 <p:separator style="background-color:white" />
-                <div class="text-white ml-4">
+                <div class="text-white ml-4 mr-4 p-2">
                     <h:form id="form">
                         <p:growl id="message" showDetail="true"/>
                         <h5> Comentarios </h5>
@@ -40,22 +41,28 @@
                         <div class="input-group mt-4">
                             <p:commandButton action="#{commentsController.comentar}" value="Comentar" class="enter" update="form message"/>
                         </div> 
+
+
+                        <p:separator style="background-color:white" />
+                        <h5 class="text-white"> Valorar la canción </h5>
+                        <p> Puntuación actual: #{commentsController.getSongGrade()} puntos! </p>
+                        <p:commandButton action="#{commentsController.addGrade(1)}" icon="fa fa-plus"  class="mr-2 enter" update="message"/>
+                        <p:commandButton action="#{commentsController.addGrade(-1)}" icon="fa fa-minus" class="enter" update="message"/>
+                        <p:separator style="background-color:white" />
+
+                        <h5> Comentarios de la canción: </h5>
+                        <p:repeat var="product" value="#{commentsController.getSongComments()}" class="">
+                            <div class="card mt-1" style="color:#3e206d;">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fa fa-user mr-1"></i>#{product.user.name}</h5>
+                                    <p class="card-text">#{product.comment}</p>
+                                </div>
+                            </div>
+
+                        </p:repeat>
                     </h:form>
                 </div>
-                <p:separator style="background-color:white" />
-                <div class="text-white ml-4"> 
-                    <h5> Comentarios de la canción: </h5>
-                    <p:repeat var="product" value="#{commentsController.getSongComments()}">
-                        <div class="card text-primary" >
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fa fa-user mr-1"></i>#{product.user.name}</h5>
-                                <p class="card-text">#{product.comment}</p>
-                            </div>
-                        </div>
-
-                    </p:repeat>
-                </div>
-
+                
 
             </ui:define>
 

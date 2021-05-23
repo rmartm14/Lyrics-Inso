@@ -37,16 +37,20 @@ public class initialPageController implements Serializable {
     }
     
     public String mostrarCancion(){
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().replace("cancion_buscada", this.songEJB.getSong(auxtxt));
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cancion_buscada", new Songs());
+        
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cancion_buscada", this.songEJB.getSong(auxtxt));
         auxSong = (Songs) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cancion_buscada");
-        auxtxt = "";
+        System.out.println(auxSong.getName());
+        auxtxt = ""; 
         return "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
     }
     
     public String mostrarCancion(String name){
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().replace("cancion_buscada", this.songEJB.getSong(name));
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cancion_buscada", this.songEJB.getSong(name));
         auxSong = (Songs) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cancion_buscada");
         auxtxt = "";
+        System.out.println(auxSong.getName()); 
         return "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
     }
     
