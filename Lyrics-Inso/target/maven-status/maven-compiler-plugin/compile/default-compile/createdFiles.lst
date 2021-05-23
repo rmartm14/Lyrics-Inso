@@ -7,6 +7,7 @@ es\unileon\inso2\lyrics\controlador\UsuariosController.class
 es\unileon\inso2\lyrics\controlador\GroupController.class
 es\unileon\inso2\lyrics\EJB\UsersFacade.class
 es\unileon\inso2\lyrics\modelo\Songs.class
+es\unileon\inso2\lyrics\controlador\UserOptionsController.class
 es\unileon\inso2\lyrics\modelo\Artists.class
 es\unileon\inso2\lyrics\EJB\InstrumentsFacadeLocal.class
 es\unileon\inso2\lyrics\controlador\StylesController.class
@@ -16,6 +17,7 @@ es\unileon\inso2\lyrics\modelo\Group_.class
 es\unileon\inso2\lyrics\controlador\ArtistisController.class
 es\unileon\inso2\lyrics\modelo\Instruments_.class
 es\unileon\inso2\lyrics\modelo\Instruments.class
+es\unileon\inso2\lyrics\controlador\misCancionesController.class
 es\unileon\inso2\lyrics\EJB\AbstractFacade.class
 es\unileon\inso2\lyrics\EJB\ForosFacade.class
 es\unileon\inso2\lyrics\EJB\ArtistsFacadeLocal.class
@@ -25,16 +27,20 @@ es\unileon\inso2\lyrics\EJB\CommentsFacadeLocal.class
 es\unileon\inso2\lyrics\EJB\SongsFacade.class
 es\unileon\inso2\lyrics\controlador\SongsController.class
 es\unileon\inso2\lyrics\EJB\GroupFacade.class
+es\unileon\inso2\lyrics\controlador\initialPageController.class
 es\unileon\inso2\lyrics\EJB\StylesFacade.class
 es\unileon\inso2\lyrics\modelo\Styles_.class
 es\unileon\inso2\lyrics\modelo\Users.class
+es\unileon\inso2\lyrics\controlador\SongsController$1.class
 es\unileon\inso2\lyrics\EJB\InstrumentsFacade.class
 es\unileon\inso2\lyrics\modelo\Songs_.class
 es\unileon\inso2\lyrics\EJB\SongsFacadeLocal.class
+es\unileon\inso2\lyrics\controlador\UsuariosController$1.class
 es\unileon\inso2\lyrics\modelo\Comments_.class
 es\unileon\inso2\lyrics\modelo\Users_.class
 es\unileon\inso2\lyrics\EJB\ForosFacadeLocal.class
 es\unileon\inso2\lyrics\controlador\ForoController.class
+es\unileon\inso2\lyrics\controlador\editarCancionController.class
 es\unileon\inso2\lyrics\EJB\CommentsFacade.class
 es\unileon\inso2\lyrics\modelo\Foros.class
 es\unileon\inso2\lyrics\EJB\UsersFacadeLocal.class

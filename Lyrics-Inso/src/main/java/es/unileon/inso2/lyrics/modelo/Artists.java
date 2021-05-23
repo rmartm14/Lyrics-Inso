@@ -32,7 +32,7 @@ public class Artists {
     @Column (name="name")
     private String name;
     
-    @JoinColumn(name="groups1")
+    @JoinColumn(name="group_id")
     @ManyToOne
     private Group group;
     

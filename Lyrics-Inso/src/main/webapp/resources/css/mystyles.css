@@ -115,11 +115,18 @@ a:hover{
     bottom: 15px !important;
     right: 15px !important;
 }
+
+legend{
+    background-color: #d89cf6 !important
+    
+}
+
 .dialogbutton2 {
     position: absolute !important;
     bottom: 15px !important;
     left: 15px !important;
 }
+
 .comment-input{
     height: 15% !important;
     width: 75%;

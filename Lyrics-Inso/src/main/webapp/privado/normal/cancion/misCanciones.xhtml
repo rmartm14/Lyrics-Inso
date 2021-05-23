@@ -23,6 +23,7 @@
                     <h:form id="idForm">
                         <p:growl id="message" showDetail="true"/>
                     <div class="product card">
+
                         <h5 style="color:black; padding:10px;">Mis canciones</h5>
                         <p:dataList value="#{songsController.getSongByUser()}" var="product" type="ordered" rowIndexVar="row">
                             <div class="product-list-item mt-2">
@@ -37,7 +38,7 @@
                                 </div>
                                 <div class="product-list-action mt-2">
                                     <p:commandButton value="View" icon="fas fa-eye" class="enter mr-2" action="#{initialPageController.mostrarCancion(product.name)}"/>
-                                    <p:commandButton value="Edit" icon="fas fa-edit" class="enter mr-2"/>
+                                    <p:commandButton value="Edit" icon="fas fa-edit" class="enter mr-2" action="#{misCancionesController.verEditar(product)}"/>
                                     <p:commandButton value="Remove" icon="fas fa-trash" class="enter mr-2" action="#{songsController.removeSong(row)}" update="idForm:message idForm" />
 
                                 </div>
