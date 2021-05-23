@@ -34,7 +34,7 @@ public class Styles implements Serializable{
     @Column (name="characteristics")
     private String characteristics;
 
-     @JoinTable(
+    @JoinTable(
         name = "stylesgroups",
         joinColumns = @JoinColumn(name = "style_id", nullable = false),
         inverseJoinColumns = @JoinColumn(name="group_id", nullable = false)

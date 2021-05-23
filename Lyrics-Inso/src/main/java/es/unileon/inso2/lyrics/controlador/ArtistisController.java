@@ -7,9 +7,15 @@ package es.unileon.inso2.lyrics.controlador;
 
 import es.unileon.inso2.lyrics.EJB.ArtistsFacadeLocal;
 import es.unileon.inso2.lyrics.modelo.Artists;
+import es.unileon.inso2.lyrics.modelo.Group;
+import es.unileon.inso2.lyrics.modelo.Instruments;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -19,21 +25,26 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class ArtistisController implements Serializable{
+public class ArtistisController implements Serializable {
+
     @EJB
     private ArtistsFacadeLocal artistEJB;
     private Artists artist;
-    
+
     @PostConstruct
-    public void ini(){
+    public void ini() {
         artist = new Artists();
     }
-    public void registrar(){
+
+    public void registrar() {
         try {
-            artistEJB.create(artist);
+            artistEJB.create(artist);       
+            
         } catch (Exception e) {
-        }    
+            
+        }
     }
+
     //Getters y Setters
     public ArtistsFacadeLocal getArtistEJB() {
         return artistEJB;
@@ -50,7 +61,5 @@ public class ArtistisController implements Serializable{
     public void setArtist(Artists artist) {
         this.artist = artist;
     }
-    
-    
-    
+
 }

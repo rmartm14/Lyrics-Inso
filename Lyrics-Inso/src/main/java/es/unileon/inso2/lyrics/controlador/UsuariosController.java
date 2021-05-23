@@ -40,6 +40,7 @@ public class UsuariosController implements Serializable{
         this.orderUserByGrade();
     }
     public String registrar(){
+        user.setName(user.getName().toLowerCase());
         Users user2 = usersEJB.getUser(user.getName());
         if(user2 != null){//Usuario ya existe
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario ya existe.", "Por favor introduzca otro nombre de usuario"));
