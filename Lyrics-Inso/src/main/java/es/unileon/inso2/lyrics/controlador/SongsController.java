@@ -5,10 +5,12 @@
  */
 package es.unileon.inso2.lyrics.controlador;
 
+import es.unileon.inso2.lyrics.EJB.ForosFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.GroupFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.SongsFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.StylesFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.UsersFacadeLocal;
+import es.unileon.inso2.lyrics.modelo.Foros;
 import es.unileon.inso2.lyrics.modelo.Group;
 import es.unileon.inso2.lyrics.modelo.Songs;
 import es.unileon.inso2.lyrics.modelo.Styles;
@@ -50,6 +52,8 @@ public class SongsController implements Serializable {
     private StylesFacadeLocal styleEJB;
     @EJB
     private UsersFacadeLocal usersEJB;
+    @EJB
+    private ForosFacadeLocal forosEJB;
 
     private Songs song;
     private Group group;
@@ -145,6 +149,9 @@ public class SongsController implements Serializable {
                 //System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
                 this.song.setUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
                 songEJB.create(song);
+                Foros foro = new Foros();
+                foro.setSong(song);
+                forosEJB.create(foro);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrar canción", "Canción registrada con éxito");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 
