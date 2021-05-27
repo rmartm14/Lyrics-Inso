@@ -63,6 +63,7 @@ public class SongsFacade extends AbstractFacade<Songs> implements SongsFacadeLoc
         }
  
         return resultado;
+    }
 
     @Override
     public List<Songs> getSongsByUser(Users user){

@@ -35,6 +35,9 @@
                                     <div class="product-description"> <b> Nota: </b> 
                                          #{product.grade} 
                                     </div>
+                                    <div class="product-description"> <b> Visitas: </b> 
+                                         #{product.visit_counter} 
+                                    </div>
                                 </div>
                                 <div class="product-list-action mt-2">
                                     <p:commandButton value="View" icon="fas fa-eye" class="enter mr-2" action="#{initialPageController.mostrarCancion(product.name)}"/>

@@ -9,7 +9,7 @@
         <div style="color:white;height:480px;"> 
             <h5 class="text-center" style="padding-top:5px"> Song Ranking </h5>
             <div >
-            <p:dataList value="#{songsController.orderedSong}" var="song" type="ordered" class="fondo" style="font-size:15px !important;">
+                <p:dataList value="#{songRankingController.orderedList}" var="song" type="ordered" class="fondo" style="font-size:15px !important;">
                 <p> <b style="color:#d89cf6">#{song.name}</b> - #{song.grade} </p> 
                 
             </p:dataList>
