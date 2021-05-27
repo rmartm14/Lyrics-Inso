@@ -6,6 +6,7 @@
 package es.unileon.inso2.lyrics.EJB;
 
 import es.unileon.inso2.lyrics.modelo.Artists;
+import es.unileon.inso2.lyrics.modelo.Group;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -48,5 +49,19 @@ public class ArtistsFacade extends AbstractFacade<Artists> implements ArtistsFac
         }
 
         return art;
+    }
+    @Override
+    public List<Artists> getArtistsByGroup(Group group){
+        String consulta = "FROM Artists a WHERE a.group_id=:param";
+        List<Artists> arti = null;
+        try{
+            Query query = em.createQuery(consulta);
+            query.setParameter("param", group);
+            arti = query.getResultList();
+        }
+        catch(Exception e){
+            System.err.println(e);
+        }
+        return arti;
     }
 }

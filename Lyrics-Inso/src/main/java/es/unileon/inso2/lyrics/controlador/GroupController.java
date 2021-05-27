@@ -49,7 +49,7 @@ public class GroupController implements Serializable {
     private List<Styles> estilos;
     private List<Instruments> instrumentos;
 
-    private List<List<Instruments>> listaInstrumentos;
+   
 
     private ArtistisController controladorArt = new ArtistisController();
 
@@ -90,6 +90,10 @@ public class GroupController implements Serializable {
         for (Styles s : this.allStyles) {
             nameStyles.add(s.getName());
         }
+    }
+    
+    public List<Group> getAllGroups(){
+        return this.groupEJB.findAll();
     }
 
     public void registrar() {
@@ -223,14 +227,6 @@ public class GroupController implements Serializable {
 
     public void setInstrumentos(List<Instruments> instrumentos) {
         this.instrumentos = instrumentos;
-    }
-
-    public List<List<Instruments>> getListaInstrumentos() {
-        return listaInstrumentos;
-    }
-
-    public void setListaInstrumentos(List<List<Instruments>> listaInstrumentos) {
-        this.listaInstrumentos = listaInstrumentos;
     }
 
     public List<Styles> getEstilos() {

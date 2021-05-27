@@ -6,6 +6,7 @@
 package es.unileon.inso2.lyrics.EJB;
 
 import es.unileon.inso2.lyrics.modelo.Artists;
+import es.unileon.inso2.lyrics.modelo.Group;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -31,5 +32,7 @@ public interface ArtistsFacadeLocal {
     int count();
     
     public Artists getArtist(String name);
+    
+    public List<Artists> getArtistsByGroup(Group group);
     
 }
