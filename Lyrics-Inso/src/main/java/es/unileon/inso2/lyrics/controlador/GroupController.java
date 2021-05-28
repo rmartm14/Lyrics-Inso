@@ -219,6 +219,14 @@ public class GroupController implements Serializable {
         }
         return null;
     }
+    public void removeGroup(Group group){
+        try {
+            groupEJB.remove(group);
+        } catch (Exception e) {
+            System.out.println("Error al borrar grupo.");
+            System.out.println(e.getMessage());
+        }
+    }
     //Getters y Setters
 
     public List<Instruments> getInstrumentos() {

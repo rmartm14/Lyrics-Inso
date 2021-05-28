@@ -75,6 +75,17 @@ public class EditarGrupoController implements Serializable{
         try {
             Group comprobar = groupEJB.getGroup(group.getName());
             if (comprobar == null) {
+                List<Styles> grestilos = new ArrayList<Styles>();
+                for (Styles staux : estilos) {
+
+                    for (Styles streal : allStyles) {
+                        if (staux.getName().equals(streal.getName())) {
+                            grestilos.add(streal);
+                            break;
+                        }
+                    }
+                }
+                this.group.setStyles(grestilos);
                 
             }else if(comprobar.getName() == this.nameGroup){
                 
