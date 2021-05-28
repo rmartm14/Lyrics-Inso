@@ -186,6 +186,37 @@ public class SongsController implements Serializable {
         try{
             System.out.println("Posicion:" + position);
             int pos = Integer.parseInt(position);
+            String name = this.allSongs.get(pos).getName();
+            Songs delSong = this.songEJB.getSong(name);
+            songEJB.remove(delSong);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canción eliminada", "Canción eliminada con éxito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            this.allSongs = this.songEJB.findAll();
+        }catch (Exception e){
+            System.out.println("Error al borrar cancion.");
+            System.out.println(e.getMessage());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error borrando", "Error eliminando canción.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+    public void removeSongByName(String name){
+        try{
+            Songs delSong = this.songEJB.getSong(name);
+            songEJB.remove(delSong);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canción eliminada", "Canción eliminada con éxito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            this.allSongs = this.songEJB.findAll();
+        }catch(Exception e){
+            System.out.println("Error al borrar cancion por nombre.");
+            System.out.println(e.getMessage());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error borrando", "Error eliminando canción.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+    public void removeSongAll(String position) {
+        try{
+            System.out.println("Posicion:" + position);
+            int pos = Integer.parseInt(position);
             String name = this.getSongByUser().get(pos).getName();
             Songs delSong = this.songEJB.getSong(name);
             songEJB.remove(delSong);

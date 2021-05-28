@@ -64,7 +64,6 @@ public class SongsFacade extends AbstractFacade<Songs> implements SongsFacadeLoc
  
         return resultado;
     }
-
     @Override
     public List<Songs> getSongsByUser(Users user){
         String consulta = "FROM Songs s WHERE s.user_id=:param";

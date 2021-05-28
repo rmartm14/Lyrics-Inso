@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../../WEB-INF/templates/plantillaTopBotAdmin.xhtml">
+
+            <ui:define name="content">
+                <div class="estiloBody">
+                    <h:form id="idForm">
+                        <p:growl id="message" showDetail="true"/>
+                        <div class="product card">
+
+                            <h5 style="color:black; padding:10px;">Mis canciones</h5>
+                            <p:dataList value="#{songsController.allSongs}" var="cancion" type="ordered" rowIndexVar="row">
+                                <div class="product-list-item mt-2">
+
+                                    <div class="product-list-detail">
+                                        <div class="product-name"><b> Titulo de la canción: </b> #{cancion.name}</div>
+                                        <div class="product-description"><b> Nombre del grupo: </b>#{cancion.group.name}</div>
+                                        <div class="product-description"> <b> Estilo: </b> #{cancion.style.name} </div>
+                                        <div class="product-description"> <b> Nota: </b> 
+                                            #{cancion.grade} 
+                                        </div>
+                                    </div>
+                                    <div class="product-list-action mt-2">
+                                        <p:commandButton value="Remove" icon="fas fa-trash" class="enter mr-2" action="#{songsController.removeSong(row)}" update="idForm:message idForm" />
+
+                                    </div>
+                                </div>
+                            </p:dataList>
+                        </div>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
