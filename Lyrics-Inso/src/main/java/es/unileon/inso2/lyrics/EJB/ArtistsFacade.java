@@ -52,7 +52,7 @@ public class ArtistsFacade extends AbstractFacade<Artists> implements ArtistsFac
     }
     @Override
     public List<Artists> getArtistsByGroup(Group group){
-        String consulta = "FROM Artists a WHERE a.group_id=:param";
+        String consulta = "FROM Artists a WHERE a.group=:param";
         List<Artists> arti = null;
         try{
             Query query = em.createQuery(consulta);

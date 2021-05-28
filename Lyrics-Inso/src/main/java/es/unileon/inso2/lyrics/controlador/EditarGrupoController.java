@@ -119,10 +119,15 @@ public class EditarGrupoController implements Serializable{
         artista.getInstruments().add(instrumento);
     }
     
+    public void addStyleIntoList() {
+        Styles estilo = new Styles();
+        this.estilos.add(estilo);
+    }
+    
     public void dropArtistOutList(Artists artist) {
 
         this.artistas.remove(this.artistas.indexOf(artist));
-
+        artistEJB.remove(artist);
     }
 
     public void dropStyleOutList(Styles estilo) {
