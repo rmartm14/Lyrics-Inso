@@ -7,6 +7,7 @@ package es.unileon.inso2.lyrics.controlador;
 
 import es.unileon.inso2.lyrics.EJB.SongsFacadeLocal;
 import es.unileon.inso2.lyrics.modelo.Songs;
+import es.unileon.inso2.lyrics.modelo.Users;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,16 +38,24 @@ public class initialPageController implements Serializable {
     }
     
     public String mostrarCancion(){
+        Users user = (Users)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().replace("cancion_buscada", this.songEJB.getSong(auxtxt));
         auxSong = (Songs) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cancion_buscada");
         auxtxt = "";
+        if(user.isRole()==true){//si es admin
+            return "/privado/administrador/cancion/mostrarCancionAdmin.lyrics?faces-redirect=true";
+        }
         return "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
     }
     
     public String mostrarCancion(String name){
+        Users user = (Users)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().replace("cancion_buscada", this.songEJB.getSong(name));
         auxSong = (Songs) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cancion_buscada");
         auxtxt = "";
+        if(user.isRole()==true){//si es admin
+            return "/privado/administrador/cancion/mostrarCancionAdmin.lyrics?faces-redirect=true";
+        }
         return "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
     }
     
