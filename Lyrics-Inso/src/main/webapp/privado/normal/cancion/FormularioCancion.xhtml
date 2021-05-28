@@ -88,11 +88,12 @@
                         <div class="input-group mb-3 mt-2"  >
 
                             <p:outputLabel value="¿Es original?"/>
-                            <p:selectOneRadio id="console" value="#{songsController.song.original}" >
+                            <p:selectOneMenu id="console" value="#{songsController.original}" >
+                                <f:selectItem itemLabel="Original" itemValue="" />
                                 <f:selectItem itemLabel="Sí" itemValue="1"/>
                                 <f:selectItem itemLabel="No" itemValue="0"/>
 
-                            </p:selectOneRadio>
+                            </p:selectOneMenu>
 
                         </div>
                         <p> Letra </p>
