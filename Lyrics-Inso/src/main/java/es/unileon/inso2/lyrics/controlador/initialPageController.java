@@ -37,26 +37,51 @@ public class initialPageController implements Serializable {
         auxtxt = "";
     }
     
-    public String mostrarCancion(){
-        Users user = (Users)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().replace("cancion_buscada", this.songEJB.getSong(auxtxt));
+    public String mostrarCancion() {
+        String ruta = "";
+      
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cancion_buscada", new Songs());
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cancion_buscada", this.songEJB.getSong(auxtxt));
+        
         auxSong = (Songs) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cancion_buscada");
+        auxSong.setVisit_counter(auxSong.getVisit_counter()+1);
+        
+        this.songEJB.edit(auxSong);
+        
         auxtxt = "";
-        if(user.isRole()==true){//si es admin
-            return "/privado/administrador/cancion/mostrarCancionAdmin.lyrics?faces-redirect=true";
+      
+        Users user = (Users)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        //If que comprueba si el usuario es admin
+        if(user.isRole() == true){ 
+            ruta = "/privado/administrador/cancion/mostrarCancionAdmin.lyrics?faces-redirect=true";
         }
-        return "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
+        else{
+            ruta   =  "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
+        }
+        return ruta;
     }
     
     public String mostrarCancion(String name){
+        String ruta = "";
+      
         Users user = (Users)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().replace("cancion_buscada", this.songEJB.getSong(name));
+      
         auxSong = (Songs) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cancion_buscada");
+        auxSong.setVisit_counter(auxSong.getVisit_counter()+1);
+        
+        this.songEJB.edit(auxSong); 
+        
         auxtxt = "";
+        
         if(user.isRole()==true){//si es admin
-            return "/privado/administrador/cancion/mostrarCancionAdmin.lyrics?faces-redirect=true";
+            ruta = "/privado/administrador/cancion/mostrarCancionAdmin.lyrics?faces-redirect=true";
         }
-        return "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
+        else{
+            ruta = "/privado/normal/cancion/mostrarCancion.lyrics?faces-redirect=true";
+        }
+        
+        return ruta;
     }
     
     public List<String> completeText(String query) {

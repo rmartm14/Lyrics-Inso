@@ -5,10 +5,12 @@
  */
 package es.unileon.inso2.lyrics.controlador;
 
+import es.unileon.inso2.lyrics.EJB.ForosFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.GroupFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.SongsFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.StylesFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.UsersFacadeLocal;
+import es.unileon.inso2.lyrics.modelo.Foros;
 import es.unileon.inso2.lyrics.modelo.Group;
 import es.unileon.inso2.lyrics.modelo.Songs;
 import es.unileon.inso2.lyrics.modelo.Styles;
@@ -50,6 +52,8 @@ public class SongsController implements Serializable {
     private StylesFacadeLocal styleEJB;
     @EJB
     private UsersFacadeLocal usersEJB;
+    @EJB
+    private ForosFacadeLocal forosEJB;
 
     private Songs song;
     private Group group;
@@ -66,6 +70,7 @@ public class SongsController implements Serializable {
     private List<String> nameGroups;
     
     private List<Songs> orderedSong;
+    private boolean original;
 
     
     
@@ -84,10 +89,12 @@ public class SongsController implements Serializable {
         
         nameStyles = new ArrayList<String>();
         nameGroups = new ArrayList<String>();
+        
+        original = true;
 
         this.initNameGroups();
         this.initNameStyles();
-        this.orderSongByGrade();
+        
     }
     
     public List<Songs> getSongByUser() {
@@ -114,15 +121,7 @@ public class SongsController implements Serializable {
         }
         return null;
     }
-        public void orderSongByGrade() {
-        Collections.sort(this.songEJB.findAll(), new Comparator<Songs>() {
-            @Override
-            public int compare(Songs o1, Songs o2) {
-                return -Float.compare(o1.getGrade(), o2.getGrade());
-            }
-        });
-        this.orderedSong = allSongs;
-        }
+
 
     public Group getGroupByName(String name) {
         for (Group s : this.allGroups) {
@@ -142,9 +141,13 @@ public class SongsController implements Serializable {
             if(comprob == null){
                 this.song.setGroup(this.getGroupByName(selectedGroup));
                 this.song.setStyle(this.getStyleByName(selectedStyle));
+                this.song.setOriginal(original);
                 //System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
                 this.song.setUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
                 songEJB.create(song);
+                Foros foro = new Foros();
+                foro.setSong(song);
+                forosEJB.create(foro);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrar canción", "Canción registrada con éxito");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 
@@ -357,4 +360,21 @@ public class SongsController implements Serializable {
     public void setSong(Songs song) {
         this.song = song;
     }
+
+    public ForosFacadeLocal getForosEJB() {
+        return forosEJB;
+    }
+
+    public void setForosEJB(ForosFacadeLocal forosEJB) {
+        this.forosEJB = forosEJB;
+    }
+
+    public boolean isOriginal() {
+        return original;
+    }
+
+    public void setOriginal(boolean original) {
+        this.original = original;
+    }
+    
 }
