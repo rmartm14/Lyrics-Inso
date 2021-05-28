@@ -10,7 +10,7 @@
             <h5 class="text-center" style="padding-top:5px"> Song Ranking </h5>
             <div >
                 <h:form>
-                <p:dataList value="#{songRankingController.orderedList}" var="song" type="ordered" class="fondo" style="font-size:15px !important;">
+                    <p:dataList value="#{songRankingController.orderedList}" var="song" type="ordered" class="fondo" style="font-size:15px !important;" rows="10">
                     <p:commandLink action="#{initialPageController.mostrarCancion(song.name)}" >
                 <p> <b style="color:#d89cf6">#{song.name}</b> - #{song.grade} </p> 
                 </p:commandLink>
