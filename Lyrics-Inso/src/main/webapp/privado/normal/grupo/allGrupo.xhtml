@@ -29,15 +29,16 @@ and open the template in the editor.
                     <div class="product card">
 
                         <h5 style="color:black; padding:10px;">Grupos</h5>
-                        <p:dataList value="#{groupController.getAllGroups()}" var="group" type="ordered" rowIndexVar="row">
+                        <p:dataList value="#{allGroupsController.allGroup}" var="group" type="ordered" rowIndexVar="row">
                             <div class="product-list-item mt-2">
                             
                                 <div class="product-list-detail">
                                     <div class="product-name"><b> Nombre del Grupo: </b> #{group.name}</div>
                                 </div>
                                 <div class="product-list-action mt-2">
+                                    <p:commandButton value="View" icon="fas fa-eye" class="enter mr-2"/>
                                     <p:commandButton value="Edit" icon="fas fa-edit" class="enter mr-2" action="#{allGroupsController.verEditarGrupo(group)}"/>
-                                    <!--<p:commandButton value="Remove" icon="fas fa-trash" class="enter mr-2" action="#{groupController.removeGroup(group)}" update="idForm:message idForm" />-->
+                                    <!--<p:commandButton value="Remove" icon="fas fa-trash" class="enter mr-2" action="{groupController.removeGroup(group)}" update="idForm:message idForm" />-->
                                 </div>
                             </div>
                         </p:dataList>

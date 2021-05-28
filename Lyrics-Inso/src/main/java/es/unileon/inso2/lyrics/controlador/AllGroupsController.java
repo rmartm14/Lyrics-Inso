@@ -34,12 +34,14 @@ public class AllGroupsController implements Serializable{
     }
 
     private List<Group> cargarGrupos() {
+        System.out.println("Cargo los grupos");
         List<Group> grupos = new ArrayList<Group>();
         grupos = groupEJB.findAll();
         return grupos;
     }
     
     public String verEditarGrupo(Group group){
+        System.out.println("Entro en ver EDITAR");
         String xhtml = "editGrupo.lyrics?faces-redirect=true";
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("grupoEditar", group);
         return xhtml;

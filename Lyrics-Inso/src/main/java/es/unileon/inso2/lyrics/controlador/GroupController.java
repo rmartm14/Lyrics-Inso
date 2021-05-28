@@ -200,9 +200,14 @@ public class GroupController implements Serializable {
 
     }
 
-    public void dropStyleOutList(Styles estilo) {
-
-        this.estilos.remove(this.estilos.indexOf(estilo));
+    public void dropStyleOutList() {
+        try {
+           this.estilos.remove(estilos.size()-1); 
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "No exiten estilos para eliinar");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        
 
     }
 

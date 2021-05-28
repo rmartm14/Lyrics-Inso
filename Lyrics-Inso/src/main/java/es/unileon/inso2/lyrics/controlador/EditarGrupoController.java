@@ -44,6 +44,7 @@ public class EditarGrupoController implements Serializable{
     
     private List<Artists> artistas;
     private List<Styles> estilos;
+    private List<Styles> estilosAntiguos;
     private List<Instruments> instrumentos;
     
     private List<Styles> allStyles;
@@ -66,6 +67,7 @@ public class EditarGrupoController implements Serializable{
         group =(Group) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("grupoEditar");
         nameGroup = group.getName();
         estilos = group.getStyles();
+        estilosAntiguos=group.getStyles();
         artistas = artistEJB.getArtistsByGroup(group);
         
         
@@ -86,13 +88,38 @@ public class EditarGrupoController implements Serializable{
                     }
                 }
                 this.group.setStyles(grestilos);
+                groupEJB.edit(group);
                 
             }else if(comprobar.getName() == this.nameGroup){
+                List<Styles> grestilos = new ArrayList<Styles>();
+                for (Styles staux : estilos) {
+
+                    for (Styles streal : allStyles) {
+                        if (staux.getName().equals(streal.getName())) {
+                            grestilos.add(streal);
+                            break;
+                        }
+                    }
+                }
                 
+                this.group.setStyles(grestilos);
+                groupEJB.edit(group);
+                //elimianamos la relacion de los antiguos estilos con el grupo
+                for (Styles estilo : estilosAntiguos) {
+                    estilo.getGroups().remove(group);
+                    styleEJB.edit(estilo);
+                }
+                //Rellenar la lista de group en cada estilo
+                for (Styles est : grestilos) {
+                    est.getGroups().add(group);
+                    styleEJB.edit(est);
+
+                }
             }else{
                 throw new Exception("Nombre de grupo ya existe.");
             }
         } catch (Exception e) {
+            
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Actualizar Grupo", "Campos incorrectos. Asegurese de que todos los campos están rellenos o cambie el nombre del grupo.");
             FacesContext.getCurrentInstance().addMessage(null, message);
             return "";
