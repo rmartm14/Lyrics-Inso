@@ -122,15 +122,14 @@ public class EditarGrupoController implements Serializable{
                         System.out.println(instrumento.getName());
                         for (Instruments instreal : allInstruments) {
                                 if (instrumento.getName().equals(instreal.getName())) {
-                                    System.out.println(instrumento.getName());
+
                                     listInstruments.add(instreal);
 
                                 }
                             }
 
                     }
-                    System.out.println(listInstruments.size());
-                    System.out.println(listInstruments.get(0).getName());
+
                     artista.setInstruments(listInstruments);
                     //si ya existia, actualizar
                     if(artista.getArtist_id() !=0){
@@ -140,19 +139,18 @@ public class EditarGrupoController implements Serializable{
                     //Sino añadir
                     else{
                         //Rellenar la lista de artistas en cada instrumento
-                        /*System.out.println(artista.getName());
-                        artista.setGroup(group);
-                        System.out.println(artista.getGroup().getName());
-                        System.out.println(artista.getInstruments().get(0));
-                        artistEJB.create(artista);
-                        System.out.println("creacion");*/
-                        Artists artista1 = new Artists();
-                        artista1.setName("FRan");
-                        artista1.setGroup(group);
-                        //artista.setName("Introduzca un nombre de artista");
 
-                        artista1.setInstruments(listInstruments);
-                        artistEJB.create(artista1);
+                        artista.setGroup(group);
+                        artista.setInstruments(new ArrayList<Instruments>());
+
+                        artistEJB.create(artista);
+                        System.out.println("creacion");
+                        
+                        artista = artistEJB.getArtist(artista.getName());
+                        artista.setInstruments(listInstruments);
+                        artistEJB.edit(artista);
+                        System.out.println("fin");
+
                         
                     }
                 }
