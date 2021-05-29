@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body background="#dddddd"> 
+        <div style="background-color: #d89cf6; color:white;" > 
+            <h5 class="text-center" style="padding-top:5px">Ranking de usuarios</h5>
+            <div >
+            <p:dataList value="#{usuariosController.orderedList}" var="user" type="ordered" class="fondo" style="font-size:15px !important;" rows="10">
+                <p> <b style="color:#d89cf6">#{user.name}</b> - #{user.grade} </p> 
+                
+            </p:dataList>
+            </div>
+        </div>
+    </body>
+</html>

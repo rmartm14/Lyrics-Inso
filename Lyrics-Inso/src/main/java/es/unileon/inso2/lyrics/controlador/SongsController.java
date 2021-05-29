@@ -5,21 +5,30 @@
  */
 package es.unileon.inso2.lyrics.controlador;
 
+import es.unileon.inso2.lyrics.EJB.ForosFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.GroupFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.SongsFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.StylesFacadeLocal;
 import es.unileon.inso2.lyrics.EJB.UsersFacadeLocal;
+import es.unileon.inso2.lyrics.modelo.Foros;
 import es.unileon.inso2.lyrics.modelo.Group;
 import es.unileon.inso2.lyrics.modelo.Songs;
 import es.unileon.inso2.lyrics.modelo.Styles;
 import es.unileon.inso2.lyrics.modelo.Users;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -32,7 +41,7 @@ import org.primefaces.event.SelectEvent;
  * @author alwop
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class SongsController implements Serializable {
 
     @EJB
@@ -43,6 +52,8 @@ public class SongsController implements Serializable {
     private StylesFacadeLocal styleEJB;
     @EJB
     private UsersFacadeLocal usersEJB;
+    @EJB
+    private ForosFacadeLocal forosEJB;
 
     private Songs song;
     private Group group;
@@ -57,7 +68,12 @@ public class SongsController implements Serializable {
     private List<Group> allGroups;
     private String selectedGroup;
     private List<String> nameGroups;
+    
+    private List<Songs> orderedSong;
+    private boolean original;
 
+    
+    
     @PostConstruct
     public void ini() {
         song = new Songs();
@@ -70,12 +86,15 @@ public class SongsController implements Serializable {
         allStyles = this.styleEJB.findAll();
         allGroups = this.groupEJB.findAll();
         allSongs = this.songEJB.findAll();
-
+        
         nameStyles = new ArrayList<String>();
         nameGroups = new ArrayList<String>();
+        
+        original = true;
 
         this.initNameGroups();
         this.initNameStyles();
+        
     }
     
     public List<Songs> getSongByUser() {
@@ -103,6 +122,7 @@ public class SongsController implements Serializable {
         return null;
     }
 
+
     public Group getGroupByName(String name) {
         for (Group s : this.allGroups) {
             if (s.getName().equals(name)) {
@@ -113,7 +133,7 @@ public class SongsController implements Serializable {
         return null;
     }
 
-    public String registrar() {
+    public void registrar() {
 
         try {
             //Comprobar nombre no existe
@@ -121,22 +141,35 @@ public class SongsController implements Serializable {
             if(comprob == null){
                 this.song.setGroup(this.getGroupByName(selectedGroup));
                 this.song.setStyle(this.getStyleByName(selectedStyle));
+                this.song.setOriginal(original);
                 //System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
                 this.song.setUser((Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"));
                 songEJB.create(song);
+                Foros foro = new Foros();
+                foro.setSong(song);
+                forosEJB.create(foro);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrar canción", "Canción registrada con éxito");
                 FacesContext.getCurrentInstance().addMessage(null, message);
+                
+                String xhtml = "/Lyrics-Inso/privado/normal/paginaInitial.lyrics?faces-redirect=true";
+
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(xhtml);
+                    //return xhtml;
+                } catch (IOException ex) {
+                    Logger.getLogger(SongsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             else{
                 throw new Exception("Nombre de canción ya existe.");
             }
+            
         } catch (Exception e) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar canción", "Campos incorrectos. Asegurese de que todos los campos están rellenos o cambie el nombre de la canción.");
             FacesContext.getCurrentInstance().addMessage(null, message);
-            return "";
+
         }
-        String xhtml = "/Lyrics-Inso/privado/normal/paginaInitial.lyrics?faces-redirect=true";
-        return xhtml;
+        
     }
 
     public String editarCancion() {
@@ -149,10 +182,52 @@ public class SongsController implements Serializable {
         return "public/principal.lyrics?faces-redirect=true";
     }
     
-    public void removeSong(String nombre) {
+    public void removeSong(String position) {
         try{
-            Songs delSong = this.songEJB.getSong(nombre);
+            System.out.println("Posicion:" + position);
+            int pos = Integer.parseInt(position);
+            String name = this.allSongs.get(pos).getName();
+            Songs delSong = this.songEJB.getSong(name);
             songEJB.remove(delSong);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canción eliminada", "Canción eliminada con éxito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            this.allSongs = this.songEJB.findAll();
+        }catch (Exception e){
+            System.out.println("Error al borrar cancion.");
+            System.out.println(e.getMessage());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error borrando", "Error eliminando canción.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+    public String removeSongByName(String name){
+        String ruta ="";
+        try{
+            Songs delSong = this.songEJB.getSong(name);
+            songEJB.remove(delSong);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canción eliminada", "Canción eliminada con éxito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            this.allSongs = this.songEJB.findAll();
+        }catch(Exception e){
+            System.out.println("Error al borrar cancion por nombre.");
+            System.out.println(e.getMessage());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error borrando", "Error eliminando canción.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        Users user = (Users)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        if(user.isRole()==true){//si es admin
+            ruta = "/privado/administrador/inicio.lyrics?faces-redirect=true";
+        }
+        return ruta;
+    }
+    public void removeSongAll(String position) {
+        try{
+            System.out.println("Posicion:" + position);
+            int pos = Integer.parseInt(position);
+            String name = this.getSongByUser().get(pos).getName();
+            Songs delSong = this.songEJB.getSong(name);
+            songEJB.remove(delSong);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canción eliminada", "Canción eliminada con éxito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }catch (Exception e){
             System.out.println("Error al borrar cancion.");
             System.out.println(e.getMessage());
@@ -169,6 +244,14 @@ public class SongsController implements Serializable {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar estilo", "Campos incorrectos. El nombre de estilo ya éxiste.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+    }
+
+    public List<Songs> getOrderedSong() {
+        return orderedSong;
+    }
+
+    public void setOrderedSong(List<Songs> orderedSong) {
+        this.orderedSong = orderedSong;
     }
 
     public UsersFacadeLocal getUsersEJB() {
@@ -284,4 +367,20 @@ public class SongsController implements Serializable {
         this.song = song;
     }
 
+    public ForosFacadeLocal getForosEJB() {
+        return forosEJB;
+    }
+
+    public void setForosEJB(ForosFacadeLocal forosEJB) {
+        this.forosEJB = forosEJB;
+    }
+
+    public boolean isOriginal() {
+        return original;
+    }
+
+    public void setOriginal(boolean original) {
+        this.original = original;
+    }
+    
 }

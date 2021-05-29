@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body background="#fff"> 
+        <div style="color:white;height:480px;"> 
+            <h5 class="text-center" style="padding-top:5px">Ranking de canciones</h5>
+            <div >
+                <h:form>
+                    <p:dataList value="#{songRankingController.orderedList}" var="song" type="ordered" class="fondo" style="font-size:15px !important;" rows="10">
+                    <p:commandLink action="#{initialPageController.mostrarCancion(song.name)}" >
+                <p> <b style="color:#d89cf6">#{song.name}</b> - #{song.grade} </p> 
+                </p:commandLink>
+                
+            </p:dataList>
+                </h:form>
+            </div>
+        </div>
+    </body>
+</html>

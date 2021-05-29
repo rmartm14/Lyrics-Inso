@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../../WEB-INF/templates/plantillaTopBot.xhtml">
+
+            <ui:define name="left">
+                left2
+            </ui:define>
+
+            <ui:define name="right">
+                right2
+            </ui:define>
+
+            <ui:define name="content">
+                <div class=" estiloBody">
+                    <h:form id="formGrupo1">
+                        <p:growl id="message" showDetail="true"/>
+
+                        <p:fieldset legend="Información Grupo" >
+                            <p:panelGrid id="panel1" columns="3" class="mt-4">
+                                <p:outputLabel value="Nombre del grupo" for="@next"/>
+                                <p:inputText value="#{editarGrupoController.group.name}" placeholder="#{editarGrupoController.group.name}" disabled="true"/>
+                            </p:panelGrid>
+                        </p:fieldset>
+
+                        <p:fieldset legend="Estilos del Grupo" class=" mt-3">
+                            <p:repeat id= "repeat1" value="#{editarGrupoController.estilos}" var="estilo" >
+
+                                <p:selectOneMenu id="style" value="#{estilo.name}" style="margin-right: 10px" disabled="true">
+                                    <f:selectItem itemLabel="Elige tu estilo" itemValue=""/>
+                                    <f:selectItems value="#{editarGrupoController.nameStyles}"/>
+                                </p:selectOneMenu>
+
+                            </p:repeat>
+
+                        </p:fieldset>
+                        <p:fieldset legend="Integrantes del Grupo" class=" mt-3">
+                            <p:repeat id= "repeat2" value="#{editarGrupoController.artistas}" var="artista">
+                                <div class="artista">
+                                    <p:panelGrid id="panel2" columns="3" class="mt-4">
+                                        <p:outputLabel value="Nombre artista" for="@next" style="margin-right: 10px"/>
+                                        <p:inputText value="#{artista.name}" placeholder="#{artista.name}" style="margin-right: 10px" disabled="true"/>
+
+
+                                        <p:repeat id= "repeat3" value="#{artista.instruments}" var="instrumento">
+                                            <div class="instrumento">
+                                                <p:panelGrid id="panel1" columns="2" class="mt-4" style="border:none!important">
+                                                    <p:selectOneMenu id="style" value="#{instrumento.name}" style="margin-right: 10px" disabled="true">
+                                                        <f:selectItem itemLabel="#{instrumento.name}" itemValue=""/>
+                                                        <f:selectItems value="#{editarGrupoController.nameInstrument}"/>
+                                                    </p:selectOneMenu>
+                                                   
+                                                </p:panelGrid>
+
+                                            </div>
+
+                                        </p:repeat>
+
+                                    </p:panelGrid>
+
+                                </div>
+
+                            </p:repeat>
+
+
+                        </p:fieldset>
+
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

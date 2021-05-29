@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../../WEB-INF/templates/plantillaTopBotAdmin.xhtml">
+
+            <ui:define name="content">
+                <div class="estiloBody">
+                    <h3 class="mb-2"> Editar datos de usuario </h3>
+                    <p:separator style="background-color:white" />
+                    <h:form id="formCancion">
+                        <p:growl id="message" showDetail="true"/>
+                        <div class="form-row mt-2" >
+                            <div class="col-3">
+                                <p:outputLabel for="@next" value="Nombre de usuario"/>
+                                <p:inputText type="text" class="form-control" placeholder="#{userOptionsController.user.name}" value="#{userOptionsController.user.name}"/>
+                            </div>
+
+                        </div>
+                        <div class="form-row mt-4 mb-4">
+                            <p:outputLabel for="@next" value="Fecha de nacimiento" class="mt-2 ml-1 mr-3"/> 
+                            <p:calendar id="fecha" value="#{userOptionsController.user.fecha_nacimiento}" required="true" placeholder="#{userOptionsController.user.fecha_nacimiento}" />
+                        </div>
+                        <p:separator style="background-color:white" />
+                        <p:commandButton value="Cambiar datos personales" action="#{userOptionsController.editar()}" class="enter mb-3" update="message"/>
+                        <h3> Cambiar contraseña </h3>
+                        <p:separator style="background-color:white" />
+                        <div class="form-row mt-2 mb-2">
+                            <div class="col-5">
+                                Contraseña actual
+                                <p:inputText type="password" class="form-control" placeholder="" value="#{userOptionsController.oldVal}" />
+                            </div>
+                            <div class="col">
+                                Nueva contraseña
+                                <p:inputText type="password" class="form-control" placeholder="" value="#{userOptionsController.newVal}" />
+                            </div>
+                            <div class="col">
+                                Confirmar nueva contraseña
+                                <p:inputText type="password" class="form-control" placeholder="" value="#{userOptionsController.newValConfirm}" />
+                            </div>
+                        </div>
+                        <p:separator style="background-color:white"  />
+                        <p:commandButton value="Cambiar datos personales" action="#{userOptionsController.editarPass()}" class="enter" update="message formCancion"/>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

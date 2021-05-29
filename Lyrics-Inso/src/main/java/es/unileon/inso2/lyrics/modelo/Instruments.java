@@ -35,29 +35,20 @@ public class Instruments implements Serializable{
     private String name;
     @Column (name="price")
     private float price;
-    @Column (name="intrument_style")
+    @Column (name="instrument_style")
     private String instrumentstyle;
     
-    @JoinTable(
-        name = "instruartist",
-        joinColumns = @JoinColumn(name = "instrument_id", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="artist_id", nullable = false)
-    )
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Artists> artists;          
-
-    @ManyToMany(mappedBy = "instrumentos")
-    private List<Songs> songs;
+    @ManyToMany(mappedBy = "instruments")
+    private List<Artists> artists;       
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.instrument_id;
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Float.floatToIntBits(this.price);
-        hash = 97 * hash + Objects.hashCode(this.instrumentstyle);
-        hash = 97 * hash + Objects.hashCode(this.artists);
-        hash = 97 * hash + Objects.hashCode(this.songs);
+        int hash = 3;
+        hash = 67 * hash + this.instrument_id;
+        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 67 * hash + Float.floatToIntBits(this.price);
+        hash = 67 * hash + Objects.hashCode(this.instrumentstyle);
+        hash = 67 * hash + Objects.hashCode(this.artists);
         return hash;
     }
 
@@ -88,11 +79,10 @@ public class Instruments implements Serializable{
         if (!Objects.equals(this.artists, other.artists)) {
             return false;
         }
-        if (!Objects.equals(this.songs, other.songs)) {
-            return false;
-        }
         return true;
     }
+
+    
 
     public int getInstrument_id() {
         return instrument_id;
@@ -134,15 +124,5 @@ public class Instruments implements Serializable{
         this.artists = artists;
     }
 
-    public List<Songs> getSongs() {
-        return songs;
-    }
-
-    public void setSongs(List<Songs> songs) {
-        this.songs = songs;
-    }
-
-    
-    
     
 }

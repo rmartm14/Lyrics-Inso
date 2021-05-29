@@ -29,5 +29,7 @@ public interface ForosFacadeLocal {
     List<Foros> findRange(int[] range);
 
     int count();
+
+    public Foros findForoBySongId(int song_id);
     
 }

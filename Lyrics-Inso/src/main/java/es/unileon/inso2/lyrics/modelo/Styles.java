@@ -33,22 +33,17 @@ public class Styles implements Serializable{
     private String name;
     @Column (name="characteristics")
     private String characteristics;
-
-     @JoinTable(
-        name = "stylesgroups",
-        joinColumns = @JoinColumn(name = "style_id", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="group_id", nullable = false)
-    )
-    @ManyToMany(cascade = CascadeType.ALL)
+    
+    @ManyToMany(mappedBy = "styles")
     private List<Group> groups;
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + this.style_id;
-        hash = 13 * hash + Objects.hashCode(this.name);
-        hash = 13 * hash + Objects.hashCode(this.characteristics);
-        hash = 13 * hash + Objects.hashCode(this.groups);
+        int hash = 7;
+        hash = 29 * hash + this.style_id;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.characteristics);
+        hash = 29 * hash + Objects.hashCode(this.groups);
         return hash;
     }
 
@@ -79,6 +74,7 @@ public class Styles implements Serializable{
         return true;
     }
 
+    
     public int getStyle_id() {
         return style_id;
     }
@@ -110,6 +106,6 @@ public class Styles implements Serializable{
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
- 
+
     
 }

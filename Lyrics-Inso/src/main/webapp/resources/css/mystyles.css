@@ -2,9 +2,16 @@ body{
     background-color: #d89cf6;
     font-family: verdana;
 }
+fondo{
+  background-color: #d89cf6;  
+}
+letramin{
+    font-size:15px !important;
+}
 .enter{
     background-color: #916dd5 !important;
     color:white ;
+    border-color:white !important;
 }
 .enter:hover{
     background-color: #f0e3ff !important;
@@ -108,8 +115,19 @@ a:hover{
     bottom: 15px !important;
     right: 15px !important;
 }
+
+legend{
+    background-color: #d89cf6 !important
+    
+}
+
 .dialogbutton2 {
     position: absolute !important;
     bottom: 15px !important;
     left: 15px !important;
+}
+
+.comment-input{
+    height: 15% !important;
+    width: 75%;
 }

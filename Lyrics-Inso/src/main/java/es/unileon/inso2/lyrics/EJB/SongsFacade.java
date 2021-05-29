@@ -7,6 +7,7 @@ package es.unileon.inso2.lyrics.EJB;
 
 import es.unileon.inso2.lyrics.modelo.Songs;
 import es.unileon.inso2.lyrics.modelo.Users;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -48,6 +49,21 @@ public class SongsFacade extends AbstractFacade<Songs> implements SongsFacadeLoc
 
         return song;
     }
+
+    public List<Songs> getAllSongs(Users us){
+        List<Songs> resultado = new ArrayList<Songs>();
+        String consulta="FROM Songs u WHERE u.user_id=:param1";
+        try{
+            Query query=em.createQuery(consulta);
+            query.setParameter("param1", us);
+            resultado = query.getResultList();
+            
+        }catch(Exception e){
+            System.err.println("Usuario o contra no válidas"+ e);
+        }
+ 
+        return resultado;
+    }
     @Override
     public List<Songs> getSongsByUser(Users user){
         String consulta = "FROM Songs s WHERE s.user_id=:param";
@@ -62,5 +78,7 @@ public class SongsFacade extends AbstractFacade<Songs> implements SongsFacadeLoc
             System.err.println(e);
         }
         return songs;
+
     }
 }
+

@@ -5,6 +5,7 @@
  */
 package es.unileon.inso2.lyrics.modelo;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,21 +23,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name="comments")
-public class Comments {
+public class Comments implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int comment_id;
     
-    @JoinColumn(name="users")
+    @JoinColumn(name="user_id")
     @ManyToOne
     private Users user;
     
-    @JoinColumn(name="foro")
+    @JoinColumn(name="foro_id")
     @ManyToOne
     private Foros foro;
     
-    @Column (name="comment")
+    @Column (name="commentContent")
     private String comment;
+    
 
     @Override
     public int hashCode() {

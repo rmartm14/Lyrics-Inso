@@ -32,8 +32,8 @@ public class GroupFacade extends AbstractFacade<Group> implements GroupFacadeLoc
     }
 
     @Override
-    public Group find(String name) {
-        String consulta="FROM Groups1 u WHERE u.name=:param1";
+    public Group getGroup(String name) {
+        String consulta="FROM Group u WHERE u.name=:param1";
        
         Group group = null;
         try{

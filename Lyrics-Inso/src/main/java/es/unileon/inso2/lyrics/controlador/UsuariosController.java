@@ -9,6 +9,10 @@ package es.unileon.inso2.lyrics.controlador;
 import es.unileon.inso2.lyrics.EJB.UsersFacadeLocal;
 import es.unileon.inso2.lyrics.modelo.Users;
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -28,11 +32,15 @@ public class UsuariosController implements Serializable{
     private UsersFacadeLocal usersEJB;
     private Users user;
     
+    private List<Users> orderedList;
+    
     @PostConstruct
     public void init(){
         user = new Users();
+        this.orderUserByGrade();
     }
     public String registrar(){
+        user.setName(user.getName().toLowerCase());
         Users user2 = usersEJB.getUser(user.getName());
         if(user2 != null){//Usuario ya existe
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario ya existe.", "Por favor introduzca otro nombre de usuario"));
@@ -42,7 +50,7 @@ public class UsuariosController implements Serializable{
         else{//no existe el usuario
             usersEJB.create(user);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
-            return "publico/principal.lyrics?faces-redirect=true";
+            return "privado/normal/paginaInitial.lyrics?faces-redirect=true";
         }
     }
     
@@ -56,7 +64,6 @@ public class UsuariosController implements Serializable{
             System.err.println("ERROR validando al usuario " + e);
         
         }
-        //System.out.println(usuarios.getIdUsuario());
         if(user == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la entrada de datos.", "El nombre de usuario y/o la contraseña son incorrectos"));
             //System.out.println("Saliendo");
@@ -65,17 +72,41 @@ public class UsuariosController implements Serializable{
             //System.out.println("Usuario denegado");
         }
         else{
-            xhtml = "privado/normal/paginaInitial.lyrics?faces-redirect=true";
-            //System.out.println("Usuario correcto");
+            //comprobar rol
+            if(user.isRole() == true){//admin
+                xhtml = "privado/administrador/inicio.lyrics?faces-redirect=true";
+            }
+            else{//normal
+                xhtml = "privado/normal/paginaInitial.lyrics?faces-redirect=true";
+            }
         }
         //Almacenar de forma global el usuario
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
         return xhtml;
     }
+    
     public String logOut(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         //System.out.println("Saliendo");
         return "/login.xhtml?faces-redirect=true";
+    }
+
+    public String getCurrentUserName() {
+        Users current = (Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        return current.getName();
+    }
+    
+    public void orderUserByGrade() {
+        List<Users> allUsers = this.usersEJB.findAll();
+        Collections.sort(allUsers, new Comparator<Users>() {
+            @Override
+            public int compare(Users o1, Users o2) {
+                return -Float.compare(o1.getGrade(), o2.getGrade());
+            }
+          });
+        System.out.println(allUsers.toString());
+        this.orderedList = allUsers;
+
     }
     public UsersFacadeLocal getUsersEJB() {
         return usersEJB;
@@ -91,6 +122,14 @@ public class UsuariosController implements Serializable{
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    public List<Users> getOrderedList() {
+        return orderedList;
+    }
+
+    public void setOrderedList(List<Users> orderedList) {
+        this.orderedList = orderedList;
     }
     
 }
