@@ -11,6 +11,7 @@ letramin{
 .enter{
     background-color: #916dd5 !important;
     color:white ;
+    border-color:white !important;
 }
 .enter:hover{
     background-color: #f0e3ff !important;
@@ -126,3 +127,7 @@ legend{
     left: 15px !important;
 }
 
+.comment-input{
+    height: 15% !important;
+    width: 75%;
+}

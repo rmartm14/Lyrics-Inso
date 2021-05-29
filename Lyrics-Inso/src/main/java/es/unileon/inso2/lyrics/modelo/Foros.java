@@ -25,7 +25,7 @@ public class Foros {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int foro_id;
     
-    @JoinColumn(name="songs")
+    @JoinColumn(name="song_id")
     @OneToOne
     private Songs song;
 

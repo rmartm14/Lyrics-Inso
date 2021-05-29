@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author alwop
+ * @author rafam
  */
 @Local
 public interface CommentsFacadeLocal {

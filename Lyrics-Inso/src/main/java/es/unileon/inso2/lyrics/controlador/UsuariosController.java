@@ -50,7 +50,7 @@ public class UsuariosController implements Serializable{
         else{//no existe el usuario
             usersEJB.create(user);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
-            return "publico/principal.lyrics?faces-redirect=true";
+            return "privado/normal/paginaInitial.lyrics?faces-redirect=true";
         }
     }
     
@@ -64,7 +64,6 @@ public class UsuariosController implements Serializable{
             System.err.println("ERROR validando al usuario " + e);
         
         }
-        //System.out.println(usuarios.getIdUsuario());
         if(user == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en la entrada de datos.", "El nombre de usuario y/o la contraseña son incorrectos"));
             //System.out.println("Saliendo");
@@ -73,8 +72,13 @@ public class UsuariosController implements Serializable{
             //System.out.println("Usuario denegado");
         }
         else{
-            xhtml = "privado/normal/paginaInitial.lyrics?faces-redirect=true";
-            //System.out.println("Usuario correcto");
+            //comprobar rol
+            if(user.isRole() == true){//admin
+                xhtml = "privado/administrador/inicio.lyrics?faces-redirect=true";
+            }
+            else{//normal
+                xhtml = "privado/normal/paginaInitial.lyrics?faces-redirect=true";
+            }
         }
         //Almacenar de forma global el usuario
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);

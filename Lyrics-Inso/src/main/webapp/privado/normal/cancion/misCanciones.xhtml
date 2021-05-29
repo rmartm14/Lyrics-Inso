@@ -30,10 +30,14 @@
                             
                                 <div class="product-list-detail">
                                     <div class="product-name"><b> Titulo de la canción: </b> #{product.name}</div>
+                                    <div class="product-description"> <b> Original: </b> #{product.original} </div>
                                     <div class="product-description"><b> Nombre del grupo: </b>#{product.group.name}</div>
                                     <div class="product-description"> <b> Estilo: </b> #{product.style.name} </div>
                                     <div class="product-description"> <b> Nota: </b> 
                                          #{product.grade} 
+                                    </div>
+                                    <div class="product-description"> <b> Visitas: </b> 
+                                         #{product.visit_counter} 
                                     </div>
                                 </div>
                                 <div class="product-list-action mt-2">

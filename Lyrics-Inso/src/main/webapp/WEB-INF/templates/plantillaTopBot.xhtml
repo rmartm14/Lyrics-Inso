@@ -47,7 +47,7 @@
                             <p:menuitem value="Mis grupos favoritos" icon="pi pi-star" url="/Lyrics-Inso/privado/normal/grupo/allGrupo.lyrics"/>
                             <p:menuitem value="Crear Nuevo Grupo" icon="fas fa-plus" url="/Lyrics-Inso/privado/normal/grupo/FormularioGrupo.lyrics"/>
                         </p:submenu>
-                        <p:menuitem value="Ranking" icon="fas fa-list" /> 
+                        <p:menuitem value="Busqueda con filtros" icon="fas fa-list" url="/Lyrics-Inso/privado/normal/filtering.lyrics"/> 
 
                         <p:submenu label="#{usuariosController.currentUserName}" icon="pi pi-fw pi-user" style="position: absolute; right: 6px;">
                             <p:menuitem value="Ajustes de cuenta" icon="pi pi-cog" url="/Lyrics-Inso/privado/normal/usuario/editUser.lyrics"/>
@@ -81,6 +81,7 @@
                 </div>
                 <div id="content" class="right_content">
                     <ui:insert name="content">Content1</ui:insert>
+                    <div class="mb-4 p-4"> </div>
                 </div>
             </div>
         </div>
