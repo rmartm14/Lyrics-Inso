@@ -7,14 +7,17 @@ package es.unileon.inso2.lyrics.modelo;
 
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
  
 
@@ -36,16 +39,54 @@ public class Artists {
     @ManyToOne
     private Group group;
     
-    @ManyToMany(mappedBy = "artists")
+    
+    @JoinTable(
+        name = "instruartist",
+        joinColumns = @JoinColumn(name = "artist_id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="instrument_id", nullable = false)
+    )
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Instruments> instruments;
+
+    public int getArtist_id() {
+        return artist_id;
+    }
+
+    public void setArtist_id(int artist_id) {
+        this.artist_id = artist_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public List<Instruments> getInstruments() {
+        return instruments;
+    }
+
+    public void setInstruments(List<Instruments> instruments) {
+        this.instruments = instruments;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.artist_id;
-        hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Objects.hashCode(this.group);
-        hash = 29 * hash + Objects.hashCode(this.instruments);
+        int hash = 5;
+        hash = 97 * hash + this.artist_id;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.group);
+        hash = 97 * hash + Objects.hashCode(this.instruments);
         return hash;
     }
 
@@ -76,36 +117,5 @@ public class Artists {
         return true;
     }
 
-    public void setArtist_id(int artist_id) {
-        this.artist_id = artist_id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    public void setInstruments(List<Instruments> instruments) {
-        this.instruments = instruments;
-    }
-
-    public int getArtist_id() {
-        return artist_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public List<Instruments> getInstruments() {
-        return instruments;
-    }
-        
+    
 }

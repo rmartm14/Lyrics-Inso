@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+
+        <ui:composition template="./../../../WEB-INF/templates/plantillaTopBot.xhtml">
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="right">
+                right
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="estiloBody">
+                    <h:form id="idForm">
+                        <p:growl id="message" showDetail="true"/>
+                    <div class="product card">
+
+                        <h5 style="color:black; padding:10px;">Grupos</h5>
+                        <p:dataList value="#{allGroupsController.allGroup}" var="group" type="ordered" rowIndexVar="row">
+                            <div class="product-list-item mt-2">
+                            
+                                <div class="product-list-detail">
+                                    <div class="product-name"><b> Nombre del Grupo: </b> #{group.name}</div>
+                                </div>
+                                <div class="product-list-action mt-2">
+                                    <p:commandButton value="View" icon="fas fa-eye" class="enter mr-2" action="#{allGroupsController.verMostrarGrupo(group)}"/>
+                                    <p:commandButton value="Edit" icon="fas fa-edit" class="enter mr-2" action="#{allGroupsController.verEditarGrupo(group)}"/>
+                                    <!--<p:commandButton value="Remove" icon="fas fa-trash" class="enter mr-2" action="#{groupController.removeGroup(group)}" update="idForm:message idForm" />-->
+                                </div>
+                            </div>
+                        </p:dataList>
+                    </div>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+    
+</html>

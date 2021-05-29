@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS instruments(
 	instrument_id INTEGER(50) not null AUTO_INCREMENT,
     name varchar(50) not null,
     price float null DEFAULT 0.0,
-    instrument_style varchar(50) not null,
+    instrument_style varchar(50) null,
     PRIMARY KEY(instrument_id),
     UNIQUE(name)
 );
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS artists (
     group_id INTEGER(50) not null,
     PRIMARY KEY(artist_id),
     FOREIGN KEY(group_id) REFERENCES groups1(group_id) ON DELETE CASCADE,
-    UNIQUE(name)
+    UNIQUE(NAME)
 );
 DELETE FROM `artists`;
 INSERT INTO `artists` (`artist_id`, `name`,`group_id`) VALUES

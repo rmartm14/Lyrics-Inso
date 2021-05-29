@@ -49,8 +49,6 @@ public class GroupController implements Serializable {
     private List<Styles> estilos;
     private List<Instruments> instrumentos;
 
-    private List<List<Instruments>> listaInstrumentos;
-
     private ArtistisController controladorArt = new ArtistisController();
 
     private List<Styles> allStyles;
@@ -92,6 +90,10 @@ public class GroupController implements Serializable {
         }
     }
 
+    public List<Group> getAllGroups() {
+        return this.groupEJB.findAll();
+    }
+
     public void registrar() {
         try {
             //Creacion del grupo
@@ -103,22 +105,21 @@ public class GroupController implements Serializable {
 
                     for (Styles streal : allStyles) {
                         if (staux.getName().equals(streal.getName())) {
-                            grestilos.add(streal);
-                            break;
+                            if (!grestilos.contains(streal)) {//si no tiene el estilo
+                                grestilos.add(streal);
+                            }
                         }
                     }
                 }
 
-                this.group.setStyles(grestilos);
+                //this.group.setStyles(grestilos);
                 groupEJB.create(group);
 
-                //Rellenar la lista de group en cada estilo
-                for (Styles est : grestilos) {
-                    est.getGroups().add(group);
-                    styleEJB.edit(est);
+                group = groupEJB.getGroup(group.getName());
 
-                }
-                
+                group.setStyles(grestilos);
+                groupEJB.edit(group);
+
                 //Creacion de los artistas despues de haber creado el grupo
                 for (Artists ar : artistas) {
                     List<Instruments> instrart = new ArrayList<Instruments>();
@@ -130,25 +131,23 @@ public class GroupController implements Serializable {
                                 if (instaux.getName().equals(instreal.getName())) {
 
                                     instrart.add(instreal);
-                                    break;
+
                                 }
                             }
 
                         }
-                        ar.setInstruments(instrart);
                         ar.setGroup(group);
-                        artistEJB.create(ar);
-                        
-                        //Rellenar la lista de artistas en cada instrumento
-                        for (Instruments inst : instrart) {
-                            inst.getArtists().add(ar);
-                            instrumentEJB.edit(inst);
-                        }
 
-                    } else {
-                        throw new Exception("El nombre de uno de los Artistas ya existe");
+                        ar.setInstruments(new ArrayList<Instruments>());
+                        artistEJB.create(ar);
+
+                        ar = artistEJB.getArtist(ar.getName());
+                        ar.setInstruments(instrart);
+                        artistEJB.edit(ar);
+
                     }
                 }
+
                 String xhtml = "/Lyrics-Inso/privado/normal/paginaInitial.lyrics?faces-redirect=true";
 
                 try {
@@ -157,12 +156,13 @@ public class GroupController implements Serializable {
                 } catch (IOException ex) {
                     Logger.getLogger(SongsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             } else {
                 throw new Exception("El nombre del Grupo ya existe");
+
             }
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "Campos incorrectos. Asegurese de que todos los campos están rellenos o no estan creados dentro de la aplicación.");
+            System.out.println(e.toString());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "Campos incorrectos. Asegurese de que todos los campos están rellenos o no estan creados dentro de la aplicación." + e.toString());
             FacesContext.getCurrentInstance().addMessage(null, message);
 
         }
@@ -182,6 +182,7 @@ public class GroupController implements Serializable {
     public void addStyleIntoList() {
         Styles estilo = new Styles();
         this.estilos.add(estilo);
+        //Remover estilo de las opciones
     }
 
     public void addInstrumentIntoList(Artists artista) {
@@ -196,9 +197,13 @@ public class GroupController implements Serializable {
 
     }
 
-    public void dropStyleOutList(Styles estilo) {
-
-        this.estilos.remove(this.estilos.indexOf(estilo));
+    public void dropStyleOutList() {
+        try {
+            this.estilos.remove(estilos.size() - 1);
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "No exiten estilos para eliminar");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
 
     }
 
@@ -215,6 +220,27 @@ public class GroupController implements Serializable {
         }
         return null;
     }
+
+    public void removeGroup(Group group) {
+        try {
+            group.setStyles(new ArrayList<Styles>());
+            groupEJB.edit(group);
+            groupEJB.remove(group);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Eliminar Grupo", "Grupo eliminado con exito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (Exception e) {
+            System.out.println("Error al borrar grupo.");
+            System.out.println(e.getMessage());
+        }
+        String xhtml = "/Lyrics-Inso/privado/normal/paginaInitial.lyrics?faces-redirect=true";
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect(xhtml);
+            //return xhtml;
+        } catch (IOException ex) {
+            Logger.getLogger(SongsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     //Getters y Setters
 
     public List<Instruments> getInstrumentos() {
@@ -223,14 +249,6 @@ public class GroupController implements Serializable {
 
     public void setInstrumentos(List<Instruments> instrumentos) {
         this.instrumentos = instrumentos;
-    }
-
-    public List<List<Instruments>> getListaInstrumentos() {
-        return listaInstrumentos;
-    }
-
-    public void setListaInstrumentos(List<List<Instruments>> listaInstrumentos) {
-        this.listaInstrumentos = listaInstrumentos;
     }
 
     public List<Styles> getEstilos() {

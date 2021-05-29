@@ -39,6 +39,7 @@ public class misCancionesController implements Serializable{
 
     }
     public List<Songs> cargarCanciones(){
+        
         List<Songs> canciones = new ArrayList<Songs>();
         Users user =(Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         canciones = songEJB.getAllSongs(user);
