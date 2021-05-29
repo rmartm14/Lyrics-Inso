@@ -34,13 +34,14 @@
                             <p:repeat id= "repeat1" value="#{editarGrupoController.estilos}" var="estilo" >
 
                                 <p:selectOneMenu id="style" value="#{estilo.name}" style="margin-right: 10px">
-                                    <f:selectItem itemLabel="#{estilo.name}" itemValue=""/>
+                                    <f:selectItem itemLabel="Elige tu estilo" itemValue=""/>
                                     <f:selectItems value="#{editarGrupoController.nameStyles}"/>
                                 </p:selectOneMenu>
 
                             </p:repeat>
                             <div>
                                 <p:commandButton value="Más estilos" styleClass="enter" action="#{editarGrupoController.addStyleIntoList()}" update="formGrupo1" style="margin-top: 5px"/>
+                                <p:commandButton value="Menos estilos" styleClass="enter" action="#{editarGrupoController.dropStyleOutList()}" update="formGrupo1" style="margin-top: 5px; margin-left: 5px"/>
                             </div>
 
                         </p:fieldset>

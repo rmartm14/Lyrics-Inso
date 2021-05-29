@@ -86,8 +86,9 @@ public class EditarGrupoController implements Serializable{
 
                     for (Styles streal : allStyles) {
                         if (staux.getName().equals(streal.getName())) {
-                            grestilos.add(streal);
-                            break;
+                            if(!grestilos.contains(streal)){//si no tiene el estilo
+                                grestilos.add(streal);
+                            }
                         }
                     }
                 }
@@ -102,8 +103,9 @@ public class EditarGrupoController implements Serializable{
 
                     for (Styles streal : allStyles) {
                         if (staux.getName().equals(streal.getName())) {
-                            grestilos.add(streal);
-                            break;
+                            if(!grestilos.contains(streal)){//si no tiene el estilo
+                                grestilos.add(streal);
+                            }
                         }
                     }
                 }
@@ -210,10 +212,13 @@ public class EditarGrupoController implements Serializable{
         }
     }
 
-    public void dropStyleOutList(Styles estilo) {
-
-        this.estilos.remove(this.estilos.indexOf(estilo));
-
+    public void dropStyleOutList() {
+        try {
+           this.estilos.remove(estilos.size()-1); 
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "No exiten estilos para eliminar");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
     }
 
     public void dropInstrumentOutList(Artists artist, Instruments instrumento) {

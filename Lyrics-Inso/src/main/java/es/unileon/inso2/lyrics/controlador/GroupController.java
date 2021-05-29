@@ -107,8 +107,9 @@ public class GroupController implements Serializable {
 
                     for (Styles streal : allStyles) {
                         if (staux.getName().equals(streal.getName())) {
-                            grestilos.add(streal);
-
+                            if(!grestilos.contains(streal)){//si no tiene el estilo
+                                grestilos.add(streal);
+                            }
                         }
                     }
                 }
@@ -188,6 +189,7 @@ public class GroupController implements Serializable {
     public void addStyleIntoList() {
         Styles estilo = new Styles();
         this.estilos.add(estilo);
+            //Remover estilo de las opciones
     }
 
     public void addInstrumentIntoList(Artists artista) {
@@ -206,7 +208,7 @@ public class GroupController implements Serializable {
         try {
            this.estilos.remove(estilos.size()-1); 
         } catch (Exception e) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "No exiten estilos para eliinar");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "No exiten estilos para eliminar");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
         
