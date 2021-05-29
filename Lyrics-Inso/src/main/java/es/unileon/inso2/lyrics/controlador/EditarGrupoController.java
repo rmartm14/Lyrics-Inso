@@ -117,7 +117,7 @@ public class EditarGrupoController implements Serializable{
 
                 //Recorrer lista artistas
                 for(Artists artista : this.artistas){
-                    System.out.println(artista.getName());
+
                     //Crear lista instrumentos
                     List<Instruments> listInstruments = new ArrayList<Instruments>();
                     for(Instruments instrumento: artista.getInstruments()){
@@ -136,15 +136,26 @@ public class EditarGrupoController implements Serializable{
                     //si ya existia, actualizar
                     if(artista.getArtist_id() !=0){
                         System.out.println("editar");
-                        artistEJB.edit(artista);
+                        Artists artAux = artistEJB.findByID(artista.getArtist_id());
+                        String nombreAntiguo = "";
+                        if(artAux !=null){
+                               nombreAntiguo = artAux.getName();
+                        }
+                        if(artista.getName().compareToIgnoreCase(nombreAntiguo) == 0){ //Nombre artista igual al antiguo
+                            artistEJB.edit(artista);
+                        }
+                        else if(artistEJB.getArtist(artista.getName()) ==null){//Nuevo nombre que no esta en la bbdd
+                            artistEJB.edit(artista);
+                        }
+                        
                     }
                     //Sino añadir
                     else{
                         //Rellenar la lista de artistas en cada instrumento
-
-                        artista.setGroup(group);
+                        if(artistEJB.getArtist(artista.getName()) == null){//nombre artista no existe
+                            artista.setGroup(group);
                         artista.setInstruments(new ArrayList<Instruments>());
-
+                        
                         artistEJB.create(artista);
                         System.out.println("creacion");
                         
@@ -152,6 +163,10 @@ public class EditarGrupoController implements Serializable{
                         artista.setInstruments(listInstruments);
                         artistEJB.edit(artista);
                         System.out.println("fin");
+                        }
+                        else{
+                            throw new Exception("El nombre del artista "+ artista.getName()+ " ya existe en la base de datos");
+                        }
 
                         
                     }
@@ -161,7 +176,7 @@ public class EditarGrupoController implements Serializable{
             }
         } catch (Exception e) {
             
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Actualizar Grupo", "Campos incorrectos. Asegurese de que todos los campos están rellenos o cambie el nombre del grupo.");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Actualizar Grupo", "Campos incorrectos. Asegurese de que todos los campos están rellenos o cambie el nombre del grupo."+ e.toString());
             FacesContext.getCurrentInstance().addMessage(null, message);
             return "";
         }

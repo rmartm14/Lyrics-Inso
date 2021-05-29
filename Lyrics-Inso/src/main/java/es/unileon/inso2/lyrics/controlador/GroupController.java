@@ -150,8 +150,6 @@ public class GroupController implements Serializable {
                         artistEJB.edit(ar);
                         
 
-                    } else {
-                        throw new Exception("El nombre de uno de los Artistas ya existe");
                     }
                 }
                 
@@ -169,7 +167,7 @@ public class GroupController implements Serializable {
             } 
         } catch (Exception e) {
             System.out.println(e.toString());           
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "Campos incorrectos. Asegurese de que todos los campos están rellenos o no estan creados dentro de la aplicación.");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "Campos incorrectos. Asegurese de que todos los campos están rellenos o no estan creados dentro de la aplicación."+e.toString());
             FacesContext.getCurrentInstance().addMessage(null, message);
 
         }

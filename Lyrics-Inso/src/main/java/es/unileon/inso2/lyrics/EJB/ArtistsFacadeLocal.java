@@ -34,5 +34,7 @@ public interface ArtistsFacadeLocal {
     public Artists getArtist(String name);
     
     public List<Artists> getArtistsByGroup(Group group);
+
+    public Artists findByID(int artist_id);
     
 }
