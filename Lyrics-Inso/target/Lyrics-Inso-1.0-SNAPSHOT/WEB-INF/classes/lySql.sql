@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS instruments(
 	instrument_id INTEGER(50) not null AUTO_INCREMENT,
     name varchar(50) not null,
     price float null DEFAULT 0.0,
-    instrument_style varchar(50) not null,
+    instrument_style varchar(50) null,
     PRIMARY KEY(instrument_id),
     UNIQUE(name)
 );

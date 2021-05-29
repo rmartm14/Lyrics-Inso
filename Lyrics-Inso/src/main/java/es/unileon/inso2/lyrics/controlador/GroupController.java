@@ -108,20 +108,20 @@ public class GroupController implements Serializable {
                     for (Styles streal : allStyles) {
                         if (staux.getName().equals(streal.getName())) {
                             grestilos.add(streal);
-                            break;
+
                         }
                     }
                 }
 
-                this.group.setStyles(grestilos);
+                //this.group.setStyles(grestilos);
+
                 groupEJB.create(group);
 
-                //Rellenar la lista de group en cada estilo
-                for (Styles est : grestilos) {
-                    est.getGroups().add(group);
-                    styleEJB.edit(est);
+                group = groupEJB.getGroup(group.getName());
 
-                }
+                group.setStyles(grestilos);
+                groupEJB.edit(group);
+
                 
                 //Creacion de los artistas despues de haber creado el grupo
                 for (Artists ar : artistas) {
@@ -134,25 +134,26 @@ public class GroupController implements Serializable {
                                 if (instaux.getName().equals(instreal.getName())) {
 
                                     instrart.add(instreal);
-                                    break;
+                                    
                                 }
                             }
 
                         }
-                        ar.setInstruments(instrart);
                         ar.setGroup(group);
+
+                        ar.setInstruments(new ArrayList<Instruments>());
                         artistEJB.create(ar);
+
+                        ar = artistEJB.getArtist(ar.getName());
+                        ar.setInstruments(instrart);
+                        artistEJB.edit(ar);
                         
-                        //Rellenar la lista de artistas en cada instrumento
-                        for (Instruments inst : instrart) {
-                            inst.getArtists().add(ar);
-                            instrumentEJB.edit(inst);
-                        }
 
                     } else {
                         throw new Exception("El nombre de uno de los Artistas ya existe");
                     }
                 }
+                
                 String xhtml = "/Lyrics-Inso/privado/normal/paginaInitial.lyrics?faces-redirect=true";
 
                 try {
@@ -161,11 +162,12 @@ public class GroupController implements Serializable {
                 } catch (IOException ex) {
                     Logger.getLogger(SongsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-            } else {
-                throw new Exception("El nombre del Grupo ya existe");
-            }
+            }else{
+                        throw new Exception("El nombre del Grupo ya existe");
+            
+            } 
         } catch (Exception e) {
+            System.out.println(e.toString());           
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registrar Grupo", "Campos incorrectos. Asegurese de que todos los campos están rellenos o no estan creados dentro de la aplicación.");
             FacesContext.getCurrentInstance().addMessage(null, message);
 

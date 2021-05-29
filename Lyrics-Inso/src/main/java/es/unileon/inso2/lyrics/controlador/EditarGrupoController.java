@@ -55,6 +55,10 @@ public class EditarGrupoController implements Serializable{
     
     @PostConstruct
     public void init(){
+        //Inicializacion
+        estilos = new ArrayList<Styles>();
+        estilosAntiguos  =new ArrayList<Styles>();
+        allStyles = new ArrayList<Styles>();
         
         allStyles = this.styleEJB.findAll();
         nameStyles = new ArrayList<String>();
@@ -69,7 +73,7 @@ public class EditarGrupoController implements Serializable{
         estilos = group.getStyles();
         estilosAntiguos=group.getStyles();
         artistas = artistEJB.getArtistsByGroup(group);
-        
+
         
     }
     
@@ -91,7 +95,9 @@ public class EditarGrupoController implements Serializable{
                 groupEJB.edit(group);
                 
             }else if(comprobar.getName() == this.nameGroup){
+                System.out.println("Nombre grupo igual");
                 List<Styles> grestilos = new ArrayList<Styles>();
+                
                 for (Styles staux : estilos) {
 
                     for (Styles streal : allStyles) {
@@ -104,16 +110,51 @@ public class EditarGrupoController implements Serializable{
                 
                 this.group.setStyles(grestilos);
                 groupEJB.edit(group);
-                //elimianamos la relacion de los antiguos estilos con el grupo
-                for (Styles estilo : estilosAntiguos) {
-                    estilo.getGroups().remove(group);
-                    styleEJB.edit(estilo);
-                }
-                //Rellenar la lista de group en cada estilo
-                for (Styles est : grestilos) {
-                    est.getGroups().add(group);
-                    styleEJB.edit(est);
+                
+                System.out.println("Cargado en grupos los estilos");
 
+                //Recorrer lista artistas
+                for(Artists artista : this.artistas){
+                    System.out.println(artista.getName());
+                    //Crear lista instrumentos
+                    List<Instruments> listInstruments = new ArrayList<Instruments>();
+                    for(Instruments instrumento: artista.getInstruments()){
+                        System.out.println(instrumento.getName());
+                        for (Instruments instreal : allInstruments) {
+                                if (instrumento.getName().equals(instreal.getName())) {
+                                    System.out.println(instrumento.getName());
+                                    listInstruments.add(instreal);
+
+                                }
+                            }
+
+                    }
+                    System.out.println(listInstruments.size());
+                    System.out.println(listInstruments.get(0).getName());
+                    artista.setInstruments(listInstruments);
+                    //si ya existia, actualizar
+                    if(artista.getArtist_id() !=0){
+                        System.out.println("editar");
+                        artistEJB.edit(artista);
+                    }
+                    //Sino añadir
+                    else{
+                        //Rellenar la lista de artistas en cada instrumento
+                        /*System.out.println(artista.getName());
+                        artista.setGroup(group);
+                        System.out.println(artista.getGroup().getName());
+                        System.out.println(artista.getInstruments().get(0));
+                        artistEJB.create(artista);
+                        System.out.println("creacion");*/
+                        Artists artista1 = new Artists();
+                        artista1.setName("FRan");
+                        artista1.setGroup(group);
+                        //artista.setName("Introduzca un nombre de artista");
+
+                        artista1.setInstruments(listInstruments);
+                        artistEJB.create(artista1);
+                        
+                    }
                 }
             }else{
                 throw new Exception("Nombre de grupo ya existe.");
@@ -165,7 +206,10 @@ public class EditarGrupoController implements Serializable{
     public void dropArtistOutList(Artists artist) {
 
         this.artistas.remove(this.artistas.indexOf(artist));
-        artistEJB.remove(artist);
+        //Comprobar si existe el artista, artista nuevos no tienen id
+        if(artist.getArtist_id() != 0){
+            artistEJB.remove(artist);
+        }
     }
 
     public void dropStyleOutList(Styles estilo) {

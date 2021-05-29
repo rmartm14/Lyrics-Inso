@@ -38,22 +38,17 @@ public class Instruments implements Serializable{
     @Column (name="instrument_style")
     private String instrumentstyle;
     
-    @JoinTable(
-        name = "instruartist",
-        joinColumns = @JoinColumn(name = "instrument_id", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="artist_id", nullable = false)
-    )
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Artists> artists;          
+    @ManyToMany(mappedBy = "instruments")
+    private List<Artists> artists;       
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + this.instrument_id;
-        hash = 79 * hash + Objects.hashCode(this.name);
-        hash = 79 * hash + Float.floatToIntBits(this.price);
-        hash = 79 * hash + Objects.hashCode(this.instrumentstyle);
-        hash = 79 * hash + Objects.hashCode(this.artists);
+        int hash = 3;
+        hash = 67 * hash + this.instrument_id;
+        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 67 * hash + Float.floatToIntBits(this.price);
+        hash = 67 * hash + Objects.hashCode(this.instrumentstyle);
+        hash = 67 * hash + Objects.hashCode(this.artists);
         return hash;
     }
 
@@ -127,6 +122,7 @@ public class Instruments implements Serializable{
 
     public void setArtists(List<Artists> artists) {
         this.artists = artists;
-    }   
+    }
+
     
 }
