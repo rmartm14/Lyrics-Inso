@@ -46,7 +46,12 @@ public class AllGroupsController implements Serializable{
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("grupoEditar", group);
         return xhtml;
     }
-
+    public String verMostrarGrupo(Group group){
+        System.out.println("Entro en ver mostrarGrupo");
+        String xhtml = "verGrupo.lyrics?faces-redirect=true";
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("grupoEditar", group);
+        return xhtml;
+    }
     public GroupFacadeLocal getGroupEJB() {
         return groupEJB;
     }
