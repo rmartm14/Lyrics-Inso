@@ -19,7 +19,6 @@
                     <p style="width: 40%;color:white;font-size:25px"> 
                         #{initialPageController.auxSong.lyrics}
                     </p>
-                    <p:commandButton value="Eliminar" icon="fas fa-trash" class="enter mr-2" action="#{songsController.removeSongByName(initialPageController.auxSong.name)}" update="idForm:message idForm" />
                 </div>
 
 
@@ -61,7 +60,6 @@
                         </p:repeat>
                     </h:form>
                 </div>
-                
             </ui:define>
 
         </ui:composition>

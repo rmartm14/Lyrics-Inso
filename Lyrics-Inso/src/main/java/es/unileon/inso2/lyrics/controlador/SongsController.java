@@ -199,7 +199,8 @@ public class SongsController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-    public void removeSongByName(String name){
+    public String removeSongByName(String name){
+        String ruta ="";
         try{
             Songs delSong = this.songEJB.getSong(name);
             songEJB.remove(delSong);
@@ -212,6 +213,11 @@ public class SongsController implements Serializable {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error borrando", "Error eliminando canción.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+        Users user = (Users)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        if(user.isRole()==true){//si es admin
+            ruta = "/privado/administrador/inicio.lyrics?faces-redirect=true";
+        }
+        return ruta;
     }
     public void removeSongAll(String position) {
         try{

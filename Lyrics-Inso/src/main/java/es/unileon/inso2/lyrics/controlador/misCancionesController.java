@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -52,7 +53,24 @@ public class misCancionesController implements Serializable{
         return xhtml;
         
     }
-
+public void removeSong(String position) {
+        try{
+            System.out.println("Posicion:" + position);
+            int pos = Integer.parseInt(position);
+            String name = this.allSongs.get(pos).getName();
+            Songs delSong = this.songEJB.getSong(name);
+            songEJB.remove(delSong);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Canción eliminada", "Canción eliminada con éxito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            Users user =(Users) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+            allSongs = songEJB.getAllSongs(user);
+        }catch (Exception e){
+            System.out.println("Error al borrar cancion.");
+            System.out.println(e.getMessage());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Error borrando", "Error eliminando canción.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
 
     public SongsFacadeLocal getSongEJB() {
         return songEJB;

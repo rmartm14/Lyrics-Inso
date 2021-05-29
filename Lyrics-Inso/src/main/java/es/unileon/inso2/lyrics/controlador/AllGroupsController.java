@@ -7,11 +7,13 @@ package es.unileon.inso2.lyrics.controlador;
 
 import es.unileon.inso2.lyrics.EJB.GroupFacadeLocal;
 import es.unileon.inso2.lyrics.modelo.Group;
+import es.unileon.inso2.lyrics.modelo.Styles;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -51,6 +53,20 @@ public class AllGroupsController implements Serializable{
         String xhtml = "verGrupo.lyrics?faces-redirect=true";
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("grupoEditar", group);
         return xhtml;
+    }
+        public void removeGroup(Group group) {
+        try {
+            group.setStyles(new ArrayList<Styles>());
+            groupEJB.edit(group);
+            groupEJB.remove(group);
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Eliminar Grupo", "Grupo eliminado con exito.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            this.allGroup = this.groupEJB.findAll();
+        } catch (Exception e) {
+            System.out.println("Error al borrar grupo.");
+            System.out.println(e.getMessage());
+        }
+        
     }
     public GroupFacadeLocal getGroupEJB() {
         return groupEJB;

@@ -50,15 +50,7 @@
                             <p:menuitem value="Ajustes de cuenta" icon="pi pi-cog" url="/Lyrics-Inso/privado/administrador/usuario/editarAdmin.lyrics"/>
                             <p:menuitem value="Cerrar Sesión" icon="pi pi-fw pi-sign-out" action="#{usuariosController.logOut()}"/>
                         </p:submenu>
-                        <f:facet name="options" >
-                            <div class="ui-input-icon-left p-mr-6" style="margin-right: 160px">
-                                
-                                <p:autoComplete id="acSimple" value="#{initialPageController.auxtxt}"
-                            completeMethod="#{initialPageController.completeText}" scrollHeight="250"/>
-                                <p:commandButton action="#{initialPageController.mostrarCancion()}" class="enter" icon="pi pi-fw pi-search" > </p:commandButton>
-                            </div>
 
-                        </f:facet>
 
                     </p:menubar>
                 </h:form>
